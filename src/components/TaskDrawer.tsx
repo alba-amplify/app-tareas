@@ -400,7 +400,7 @@ export default function TaskDrawer({
                 setCopied(true);
                 setTimeout(() => setCopied(false), 1500);
               }}
-              className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70 whitespace-nowrap"
+              className="text-xs px-3 py-1 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70 whitespace-nowrap"
             >
               {copied ? "✓ Copiado" : "🔗 Enlace"}
             </button>
@@ -509,7 +509,7 @@ export default function TaskDrawer({
               <button
                 onClick={save}
                 disabled={saving}
-                className="bg-paprika hover:bg-paprika-dark text-white text-sm font-semibold px-5 py-2 rounded-full disabled:opacity-60"
+                className="bg-paprika hover:bg-paprika-dark text-white text-sm font-medium px-5 py-2 rounded-xl disabled:opacity-60"
               >
                 {saving ? "Guardando…" : saved ? "Guardado ✓" : "Guardar cambios"}
               </button>
@@ -584,10 +584,10 @@ export default function TaskDrawer({
                       <button
                         key={emoji}
                         onClick={() => toggleReaction(c.id, emoji)}
-                        className={`text-xs px-2 py-0.5 rounded-full border ${
+                        className={`text-xs px-2 py-0.5 rounded-[10px] border ${
                           info.mine
                             ? "border-paprika bg-paprika/10"
-                            : "border-black/10 hover:bg-black/[0.04]"
+                            : "border-biscuit bg-white hover:border-faint"
                         }`}
                       >
                         {emoji} {info.count}
@@ -598,7 +598,7 @@ export default function TaskDrawer({
                         onClick={() =>
                           setPickerFor((p) => (p === c.id ? null : c.id))
                         }
-                        className="text-xs px-2 py-0.5 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/50"
+                        className="text-xs px-2 py-0.5 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/50"
                       >
                         ＋
                       </button>
@@ -673,7 +673,7 @@ export default function TaskDrawer({
               <button
                 type="button"
                 onClick={() => setInputPicker((v) => !v)}
-                className="w-9 h-9 rounded-full border border-black/10 hover:bg-black/[0.04] text-lg flex items-center justify-center"
+                className="w-9 h-9 rounded-[10px] border border-biscuit bg-white hover:border-faint text-lg flex items-center justify-center"
                 aria-label="Emojis"
               >
                 😀
@@ -702,12 +702,12 @@ export default function TaskDrawer({
               onKeyDown={onCommentKeyDown}
               rows={1}
               placeholder="Comentario…  (Enter = salto de línea · Cmd/Ctrl+Enter = enviar · **negrita**)"
-              className="flex-1 resize-none rounded-2xl border border-black/10 bg-black/[0.02] px-4 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15 max-h-32"
+              className="flex-1 resize-none rounded-2xl border border-biscuit bg-white px-4 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15 max-h-32"
             />
             <button
               type="submit"
               disabled={sending || !body.trim()}
-              className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-5 py-2 rounded-full text-sm disabled:opacity-60"
+              className="bg-paprika hover:bg-paprika-dark text-white font-medium px-5 py-2 rounded-xl text-sm disabled:opacity-60"
             >
               {sending ? "…" : "Enviar"}
             </button>

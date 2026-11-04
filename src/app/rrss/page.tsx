@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import Header from "@/components/Header";
-import Nav from "@/components/Nav";
 import SocialCalendar from "@/components/SocialCalendar";
 import type { Profile, SocialPost } from "@/lib/types";
 
@@ -41,10 +40,9 @@ export default async function RRSSPage({
     .map(({ id, full_name }) => ({ id, full_name }));
 
   return (
-    <div className="min-h-screen">
+    <div className="app-shell min-h-screen">
       <Header profile={profile} />
-      <Nav />
-      <main className="w-full px-6 lg:px-10 py-6">
+      <main className="w-full px-4 sm:px-6 lg:px-8 py-6 lg:py-7">
         <SocialCalendar
           posts={(posts as SocialPost[]) ?? []}
           openPostId={openPostId}

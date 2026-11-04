@@ -37,8 +37,8 @@ export default function ChangePasswordForm() {
     "w-full rounded-xl border border-black/10 bg-black/[0.02] px-3 py-2 text-ink outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15";
 
   return (
-    <div className="max-w-md bg-white rounded-2xl border border-black/[0.06] shadow-soft p-6">
-      <h2 className="text-lg font-bold text-ink tracking-tight">
+    <div className="max-w-md bg-white rounded-3xl border border-transparent hover:border-biscuit shadow-soft p-6">
+      <h2 className="text-lg font-display font-medium text-ink tracking-tight">
         Cambiar contraseña
       </h2>
       <p className="text-sm text-ink/50 mt-1 mb-4">
@@ -83,7 +83,7 @@ export default function ChangePasswordForm() {
         <button
           type="submit"
           disabled={loading}
-          className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-5 py-2 rounded-full disabled:opacity-60"
+          className="bg-paprika hover:bg-paprika-dark text-white font-medium px-5 py-2 rounded-xl disabled:opacity-60"
         >
           {loading ? "Guardando…" : "Cambiar contraseña"}
         </button>

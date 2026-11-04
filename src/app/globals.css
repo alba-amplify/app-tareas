@@ -3,14 +3,48 @@
 @tailwind utilities;
 
 :root {
-  --background: #faf8f3; /* crema casi blanco */
-  --foreground: #2a2320; /* ink */
+  --background: #f9f6f0; /* lienzo arena */
+  --foreground: #2a1d14; /* cacao */
+  --sidebar-w: 264px;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Inter Tight", Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* Contenido desplazado a la derecha de la barra lateral en escritorio */
+@media (min-width: 1024px) {
+  .app-shell {
+    padding-left: var(--sidebar-w);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #a8231d;
+  outline-offset: 2px;
+}
+
+input,
+select,
+textarea {
+  accent-color: #a8231d;
+}
+
+::selection {
+  background: #f5e27a;
+  color: #2a1d14;
 }

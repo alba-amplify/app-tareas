@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import Header from "@/components/Header";
-import Nav from "@/components/Nav";
 import ResourceBoard from "@/components/ResourceBoard";
 import type { Profile, Resource } from "@/lib/types";
 
@@ -28,10 +27,9 @@ export default async function UpdatesPage() {
     .order("created_at", { ascending: true });
 
   return (
-    <div className="min-h-screen">
+    <div className="app-shell min-h-screen">
       <Header profile={profile} />
-      <Nav />
-      <main className="w-full px-6 lg:px-10 py-6">
+      <main className="w-full px-4 sm:px-6 lg:px-8 py-6 lg:py-7">
         <ResourceBoard
           board="updates"
           resources={(resources as Resource[]) ?? []}

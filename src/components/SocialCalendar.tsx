@@ -191,31 +191,31 @@ export default function SocialCalendar({
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-ink tracking-tight">
+          <h1 className="font-display text-[28px] leading-tight font-medium text-ink">
             Calendario RRSS
           </h1>
-          <p className="text-ink/50 text-sm mt-1">
+          <p className="text-muted text-sm mt-1">
             Planificación mensual del contenido de redes sociales.
           </p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
-          <div className="inline-flex rounded-full border border-black/[0.07] bg-white p-1 shadow-soft mr-1">
+          <div className="inline-flex rounded-2xl border border-biscuit bg-crumpet p-1 mr-1">
             <button
               onClick={() => setMode("calendario")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3.5 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                 mode === "calendario"
-                  ? "bg-paprika text-white"
-                  : "text-ink/60 hover:text-ink"
+                  ? "bg-cacao text-[#F9F6F0] shadow-soft"
+                  : "text-muted hover:text-ink"
               }`}
             >
               Calendario
             </button>
             <button
               onClick={() => setMode("kanban")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3.5 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                 mode === "kanban"
-                  ? "bg-paprika text-white"
-                  : "text-ink/60 hover:text-ink"
+                  ? "bg-cacao text-[#F9F6F0] shadow-soft"
+                  : "text-muted hover:text-ink"
               }`}
             >
               Kanban
@@ -223,13 +223,13 @@ export default function SocialCalendar({
           </div>
           <button
             onClick={() => openNew(dateKey(year, month, 1), "publicacion")}
-            className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-4 py-2 rounded-full text-sm shadow-soft whitespace-nowrap"
+            className="bg-paprika hover:bg-paprika-dark text-white font-medium px-4 py-2 rounded-xl text-sm shadow-soft whitespace-nowrap"
           >
             + Publicación
           </button>
           <button
             onClick={() => openNew(dateKey(year, month, 1), "story")}
-            className="bg-ink hover:bg-ink/80 text-white font-semibold px-4 py-2 rounded-full text-sm shadow-soft whitespace-nowrap"
+            className="bg-cacao hover:bg-cacao-hover text-[#F9F6F0] font-medium px-4 py-2 rounded-xl text-sm shadow-soft whitespace-nowrap"
           >
             + Story
           </button>
@@ -242,22 +242,22 @@ export default function SocialCalendar({
       <div className="flex items-center gap-3 mb-4">
         <button
           onClick={prevMonth}
-          className="w-9 h-9 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink"
+          className="w-9 h-9 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink"
         >
           ‹
         </button>
-        <h2 className="text-lg font-bold text-ink tracking-tight min-w-[180px] text-center">
+        <h2 className="text-lg font-display font-medium text-ink tracking-tight min-w-[180px] text-center">
           {MONTHS[month]} {year}
         </h2>
         <button
           onClick={nextMonth}
-          className="w-9 h-9 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink"
+          className="w-9 h-9 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink"
         >
           ›
         </button>
         <button
           onClick={goToday}
-          className="text-sm px-3 py-1.5 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+          className="text-sm px-3 py-1.5 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70"
         >
           Hoy
         </button>
@@ -331,23 +331,23 @@ export default function SocialCalendar({
       {mode === "kanban" && (
       <div>
         <div className="flex flex-wrap items-center gap-3 mb-4">
-          <div className="inline-flex rounded-full border border-black/[0.07] bg-white p-1 shadow-soft">
+          <div className="inline-flex rounded-2xl border border-biscuit bg-crumpet p-1">
             <button
               onClick={() => setKanbanGroup("estado")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3.5 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                 kanbanGroup === "estado"
-                  ? "bg-ink text-white"
-                  : "text-ink/60 hover:text-ink"
+                  ? "bg-cacao text-[#F9F6F0] shadow-soft"
+                  : "text-muted hover:text-ink"
               }`}
             >
               Por estado
             </button>
             <button
               onClick={() => setKanbanGroup("dias")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3.5 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                 kanbanGroup === "dias"
-                  ? "bg-ink text-white"
-                  : "text-ink/60 hover:text-ink"
+                  ? "bg-cacao text-[#F9F6F0] shadow-soft"
+                  : "text-muted hover:text-ink"
               }`}
             >
               Por días
@@ -357,7 +357,7 @@ export default function SocialCalendar({
             <div className="flex items-center gap-2">
               <button
                 onClick={prevMonth}
-                className="w-8 h-8 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink"
+                className="w-8 h-8 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink"
               >
                 ‹
               </button>
@@ -366,13 +366,13 @@ export default function SocialCalendar({
               </span>
               <button
                 onClick={nextMonth}
-                className="w-8 h-8 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink"
+                className="w-8 h-8 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink"
               >
                 ›
               </button>
               <button
                 onClick={goToday}
-                className="text-sm px-3 py-1.5 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                className="text-sm px-3 py-1.5 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70"
               >
                 Hoy
               </button>
@@ -458,7 +458,7 @@ export default function SocialCalendar({
                     <button
                       key={p.id}
                       onClick={() => openEdit(p)}
-                      className="w-full text-left bg-white rounded-2xl border border-black/[0.06] p-4 shadow-soft hover:shadow-card transition-shadow"
+                      className="w-full text-left bg-white rounded-3xl border border-transparent hover:border-biscuit p-4 shadow-soft hover:shadow-card transition-shadow"
                     >
                       <div className="flex items-center gap-1.5 mb-1 flex-wrap">
                         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-ink text-white">
@@ -735,7 +735,7 @@ function PostModal({
         }`}
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-black/[0.06]">
-          <h2 className="text-xl font-bold text-ink tracking-tight">
+          <h2 className="text-xl font-display font-medium text-ink tracking-tight">
             {isEdit ? "Editar publicación" : "Nueva publicación"}
           </h2>
           <div className="flex items-center gap-2">
@@ -749,7 +749,7 @@ function PostModal({
                   setCopied(true);
                   setTimeout(() => setCopied(false), 1500);
                 }}
-                className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70 whitespace-nowrap"
+                className="text-xs px-3 py-1 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70 whitespace-nowrap"
               >
                 {copied ? "✓ Copiado" : "🔗 Enlace"}
               </button>
@@ -947,14 +947,14 @@ function PostModal({
               <button
                 type="button"
                 onClick={close}
-                className="px-5 py-2 rounded-full border border-black/10 text-ink/70 hover:bg-black/[0.04]"
+                className="px-5 py-2 rounded-[10px] border border-biscuit bg-white text-ink/70 hover:border-faint"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={pending}
-                className="px-5 py-2 rounded-full bg-paprika hover:bg-paprika-dark text-white font-semibold disabled:opacity-60"
+                className="px-5 py-2 rounded-xl bg-paprika hover:bg-paprika-dark text-white font-medium disabled:opacity-60"
               >
                 {pending ? "Guardando…" : isEdit ? "Guardar" : "Crear"}
               </button>
@@ -1019,13 +1019,13 @@ function PostModal({
                     onKeyDown={onCKeyDown}
                     rows={1}
                     placeholder="Comentario…  (@ para mencionar · Cmd/Ctrl+Enter enviar)"
-                    className="flex-1 resize-none rounded-2xl border border-black/10 bg-black/[0.02] px-4 py-2 text-ink text-sm outline-none focus:border-paprika max-h-32"
+                    className="flex-1 resize-none rounded-2xl border border-biscuit bg-white px-4 py-2 text-ink text-sm outline-none focus:border-paprika max-h-32"
                   />
                   <button
                     type="button"
                     onClick={sendComment}
                     disabled={csending || !cbody.trim()}
-                    className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-5 py-2 rounded-full text-sm disabled:opacity-60"
+                    className="bg-paprika hover:bg-paprika-dark text-white font-medium px-5 py-2 rounded-xl text-sm disabled:opacity-60"
                   >
                     {csending ? "…" : "Enviar"}
                   </button>

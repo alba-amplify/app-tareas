@@ -88,12 +88,12 @@ export default function ResourceBoard({
     <div>
       <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-ink tracking-tight">{title}</h1>
-          <p className="text-ink/50 text-sm mt-1">{subtitle}</p>
+          <h1 className="font-display text-[28px] leading-tight font-medium text-ink">{title}</h1>
+          <p className="text-muted text-sm mt-1">{subtitle}</p>
         </div>
         <button
           onClick={openNew}
-          className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-5 py-2 rounded-full text-sm shadow-soft transition-colors"
+          className="bg-paprika hover:bg-paprika-dark text-white font-medium px-5 py-2 rounded-xl text-sm shadow-soft transition-colors"
         >
           + Nueva tarjeta
         </button>
@@ -104,10 +104,10 @@ export default function ResourceBoard({
           <button
             key={c || "all"}
             onClick={() => setCat(c)}
-            className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${
+            className={`px-3 py-1.5 text-[13px] rounded-lg border transition-colors ${
               cat === c
-                ? "bg-paprika text-white border-paprika"
-                : "border-black/10 text-ink/60 hover:text-ink"
+                ? "bg-cacao text-[#F9F6F0] border-transparent"
+                : "border-biscuit bg-white text-muted hover:text-ink"
             }`}
           >
             {c || "Todas"}
@@ -126,9 +126,9 @@ export default function ResourceBoard({
           <div
             key={r.id}
             onClick={() => setPreview(r)}
-            className="bg-white rounded-2xl border border-black/[0.06] p-5 shadow-soft hover:shadow-card transition-shadow flex flex-col cursor-pointer"
+            className="bg-white rounded-3xl border border-transparent hover:border-biscuit p-5 shadow-soft hover:shadow-card transition-shadow flex flex-col cursor-pointer"
           >
-            <h3 className="font-bold text-ink text-lg leading-snug">{r.title}</h3>
+            <h3 className="font-medium text-ink text-[17px] leading-snug">{r.title}</h3>
             {r.category && (
               <span className="inline-block self-start mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/[0.05] text-ink/60">
                 {r.category}
@@ -210,7 +210,7 @@ export default function ResourceBoard({
             >
               <button
                 onClick={() => openEdit(r)}
-                className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                className="text-xs px-3 py-1 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70"
               >
                 ✎ Editar
               </button>
@@ -221,7 +221,7 @@ export default function ResourceBoard({
                   )
                 }
                 disabled={pending}
-                className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                className="text-xs px-3 py-1 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70"
               >
                 ⧉ Duplicar
               </button>
@@ -288,7 +288,7 @@ function ResourcePreview({
       >
         <div className="flex items-start justify-between gap-3 p-6 border-b border-black/[0.06]">
           <div>
-            <h2 className="text-2xl font-bold text-ink tracking-tight">
+            <h2 className="text-2xl font-display font-medium text-ink tracking-tight">
               {resource.title}
             </h2>
             {resource.description && (
@@ -298,7 +298,7 @@ function ResourcePreview({
           <div className="flex items-center gap-2 flex-shrink-0">
             <button
               onClick={onEdit}
-              className="text-sm px-3 py-1.5 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+              className="text-sm px-3 py-1.5 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70"
             >
               ✎ Editar
             </button>
@@ -536,7 +536,7 @@ function ResourceModal({
         className="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-6 my-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-xl font-bold text-ink mb-4 tracking-tight">
+        <h2 className="text-xl font-display font-medium text-ink mb-4 tracking-tight">
           {isEdit ? "Editar tarjeta" : "Nueva tarjeta"}
         </h2>
 
@@ -599,7 +599,7 @@ function ResourceModal({
                 <img
                   src={imageUrl}
                   alt=""
-                  className="w-full max-h-56 object-contain rounded-xl border border-black/10 bg-black/[0.02]"
+                  className="w-full max-h-56 object-contain rounded-xl border border-biscuit bg-white"
                 />
                 <button
                   type="button"
@@ -610,7 +610,7 @@ function ResourceModal({
                 </button>
               </div>
             ) : (
-              <label className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full border border-black/10 hover:bg-black/[0.04] cursor-pointer text-ink/70">
+              <label className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-[10px] border border-biscuit bg-white hover:border-faint cursor-pointer text-ink/70">
                 {uploading ? "Subiendo…" : "📷 Subir imagen"}
                 <input
                   type="file"
@@ -699,7 +699,7 @@ function ResourceModal({
                               <input
                                 value={c}
                                 onChange={(e) => setColumn(i, e.target.value)}
-                                className="w-28 rounded-md border border-black/10 bg-black/[0.02] px-2 py-1 text-xs font-semibold text-ink outline-none focus:border-paprika"
+                                className="w-28 rounded-md border border-biscuit bg-white px-2 py-1 text-xs font-semibold text-ink outline-none focus:border-paprika"
                                 placeholder={`Col ${i + 1}`}
                               />
                               <button
@@ -732,7 +732,7 @@ function ResourceModal({
                               <input
                                 value={cell}
                                 onChange={(e) => setCell(ri, ci, e.target.value)}
-                                className="w-28 rounded-md border border-black/10 bg-black/[0.02] px-2 py-1 text-xs text-ink outline-none focus:border-paprika"
+                                className="w-28 rounded-md border border-biscuit bg-white px-2 py-1 text-xs text-ink outline-none focus:border-paprika"
                               />
                             </td>
                           ))}
@@ -768,14 +768,14 @@ function ResourceModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2 rounded-full border border-black/10 text-ink/70 hover:bg-black/[0.04]"
+              className="px-5 py-2 rounded-[10px] border border-biscuit bg-white text-ink/70 hover:border-faint"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={pending}
-              className="px-5 py-2 rounded-full bg-paprika hover:bg-paprika-dark text-white font-semibold disabled:opacity-60"
+              className="px-5 py-2 rounded-xl bg-paprika hover:bg-paprika-dark text-white font-medium disabled:opacity-60"
             >
               {pending ? "Guardando…" : isEdit ? "Guardar" : "Crear tarjeta"}
             </button>

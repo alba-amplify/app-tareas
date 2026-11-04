@@ -17,13 +17,13 @@ export type StatusColumn = {
 
 // Columnas del panel, en orden. El color usa la paleta Amplify.
 export const STATUS_COLUMNS: StatusColumn[] = [
-  { key: "retrasadas", label: "Retrasadas", color: "#B53324" },
-  { key: "hoy", label: "Para hoy", color: "#E5A657" },
-  { key: "manana", label: "Para mañana", color: "#DFBC94" },
-  { key: "pasado", label: "Para pasado mañana", color: "#c9a36a" },
-  { key: "mas3", label: "Para +3 días", color: "#8a9a5b" },
-  { key: "finalizadas", label: "Finalizadas", color: "#5f8a5f" },
-  { key: "updates", label: "Updates", color: "#8a94a6" },
+  { key: "retrasadas", label: "Retrasadas", color: "#A8231D" },
+  { key: "hoy", label: "Para hoy", color: "#C08A2E" },
+  { key: "manana", label: "Para mañana", color: "#E0C25A" },
+  { key: "pasado", label: "Para pasado mañana", color: "#C2577A" },
+  { key: "mas3", label: "Para +3 días", color: "#4E6FB0" },
+  { key: "finalizadas", label: "Finalizadas", color: "#3D6B47" },
+  { key: "updates", label: "Updates", color: "#7A5C48" },
 ];
 
 // Convierte una fecha 'YYYY-MM-DD' a un timestamp local a medianoche.

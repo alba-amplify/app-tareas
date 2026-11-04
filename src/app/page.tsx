@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import Header from "@/components/Header";
-import Nav from "@/components/Nav";
 import Board from "@/components/Board";
 import type { Profile, TaskWithAssignee } from "@/lib/types";
 
@@ -58,15 +57,14 @@ export default async function Home({
     }));
 
   return (
-    <div className="min-h-screen">
+    <div className="app-shell min-h-screen">
       <Header profile={profile} />
-      <Nav />
-      <main className="w-full px-6 lg:px-10 py-6">
+      <main className="w-full px-4 sm:px-6 lg:px-8 py-6 lg:py-7">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-ink tracking-tight">
+          <h1 className="font-display text-[28px] leading-tight font-medium text-ink">
             Tablero de tareas
           </h1>
-          <p className="text-ink/50 text-sm mt-1">
+          <p className="text-muted text-sm mt-1">
             Las tareas se colocan solas según su fecha límite.
           </p>
         </div>

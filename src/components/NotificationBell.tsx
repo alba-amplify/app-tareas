@@ -62,12 +62,24 @@ export default function NotificationBell() {
     <div className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="relative w-9 h-9 rounded-full border border-black/10 hover:bg-black/[0.04] flex items-center justify-center text-lg"
+        className="relative w-[38px] h-[38px] rounded-xl border border-biscuit bg-white hover:border-faint grid place-items-center text-ink"
         aria-label="Notificaciones"
       >
-        🔔
+        <svg
+          viewBox="0 0 24 24"
+          className="w-[18px] h-[18px]"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={1.7}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M6 9a6 6 0 1 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9" />
+          <path d="M10 20a2.2 2.2 0 0 0 4 0" />
+        </svg>
         {unread > 0 && (
-          <span className="absolute -top-1 -right-1 bg-paprika text-white text-[10px] font-bold min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center">
+          <span className="absolute -top-1.5 -right-1.5 bg-sun text-cacao text-[10.5px] font-semibold min-w-[18px] h-[18px] px-1 rounded-full ring-2 ring-cream flex items-center justify-center">
             {unread}
           </span>
         )}
@@ -79,7 +91,7 @@ export default function NotificationBell() {
             className="fixed inset-0 z-40"
             onClick={() => setOpen(false)}
           />
-          <div className="fixed sm:absolute top-16 sm:top-auto left-3 right-3 sm:left-auto sm:right-0 sm:mt-2 sm:w-80 bg-white rounded-2xl border border-black/10 shadow-card z-50 overflow-hidden">
+          <div className="fixed sm:absolute top-16 sm:top-auto left-3 right-3 sm:left-auto sm:right-0 sm:mt-2 sm:w-80 bg-white rounded-2xl border border-biscuit shadow-card z-50 overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b border-black/[0.06]">
               <span className="font-semibold text-ink text-sm">
                 Notificaciones
@@ -104,7 +116,7 @@ export default function NotificationBell() {
                   key={n.id}
                   onClick={() => openNotification(n)}
                   className={`w-full text-left px-4 py-3 border-b border-black/[0.04] hover:bg-black/[0.02] ${
-                    !n.read ? "bg-paprika/5" : ""
+                    !n.read ? "bg-paprika-soft/60" : ""
                   }`}
                 >
                   <p className="text-sm text-ink">

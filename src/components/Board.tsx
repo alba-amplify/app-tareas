@@ -38,9 +38,9 @@ type Props = {
 };
 
 const PRIORITY_STYLE: Record<Priority, string> = {
-  alta: "bg-paprika/10 text-paprika",
-  media: "bg-honeycomb/20 text-honeycomb-dark",
-  baja: "bg-black/[0.05] text-ink/50",
+  alta: "bg-bad-soft text-bad",
+  media: "bg-warn-soft text-warn",
+  baja: "bg-sand text-muted",
 };
 
 function formatDate(d: string | null) {
@@ -140,46 +140,46 @@ export default function Board({
       {/* Barra de controles */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
         <div className="flex flex-wrap gap-3">
-          <div className="inline-flex rounded-full border border-black/[0.07] bg-white p-1 shadow-soft">
+          <div className="inline-flex rounded-2xl border border-biscuit bg-crumpet p-1">
             <button
               onClick={() => setOnlyMine(false)}
-              className={`px-4 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3.5 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                 !onlyMine
-                  ? "bg-paprika text-white"
-                  : "text-ink/60 hover:text-ink"
+                  ? "bg-cacao text-[#F9F6F0] shadow-soft"
+                  : "text-muted hover:text-ink"
               }`}
             >
               Todas
             </button>
             <button
               onClick={() => setOnlyMine(true)}
-              className={`px-4 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3.5 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                 onlyMine
-                  ? "bg-paprika text-white"
-                  : "text-ink/60 hover:text-ink"
+                  ? "bg-cacao text-[#F9F6F0] shadow-soft"
+                  : "text-muted hover:text-ink"
               }`}
             >
               Solo las mías
             </button>
           </div>
 
-          <div className="inline-flex rounded-full border border-black/[0.07] bg-white p-1 shadow-soft">
+          <div className="inline-flex rounded-2xl border border-biscuit bg-crumpet p-1">
             <button
               onClick={() => setGroupBy("estado")}
-              className={`px-4 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3.5 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                 groupBy === "estado"
-                  ? "bg-ink text-white"
-                  : "text-ink/60 hover:text-ink"
+                  ? "bg-cacao text-[#F9F6F0] shadow-soft"
+                  : "text-muted hover:text-ink"
               }`}
             >
               Por estado
             </button>
             <button
               onClick={() => setGroupBy("departamento")}
-              className={`px-4 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3.5 py-1.5 text-[13px] font-medium rounded-[10px] transition-colors ${
                 groupBy === "departamento"
-                  ? "bg-ink text-white"
-                  : "text-ink/60 hover:text-ink"
+                  ? "bg-cacao text-[#F9F6F0] shadow-soft"
+                  : "text-muted hover:text-ink"
               }`}
             >
               Por departamento
@@ -193,13 +193,13 @@ export default function Board({
             className="flex items-center gap-2 text-sm font-medium text-ink/70"
           >
             <span
-              className={`w-9 h-5 rounded-full relative transition-colors ${
-                showDone ? "bg-paprika" : "bg-black/15"
+              className={`w-[38px] h-[22px] rounded-full relative transition-colors border ${
+                showDone ? "bg-good border-transparent" : "bg-sand border-biscuit"
               }`}
             >
               <span
-                className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all ${
-                  showDone ? "left-[18px]" : "left-0.5"
+                className={`absolute top-[2px] w-4 h-4 rounded-full bg-white shadow transition-all ${
+                  showDone ? "left-[18px]" : "left-[2px]"
                 }`}
               />
             </span>
@@ -209,7 +209,7 @@ export default function Board({
           {isAdmin && (
             <button
               onClick={openNew}
-              className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-5 py-2 rounded-full text-sm shadow-soft transition-colors"
+              className="bg-paprika hover:bg-paprika-dark text-white font-medium px-5 py-2 rounded-xl text-sm shadow-soft transition-colors"
             >
               + Nueva tarea
             </button>
@@ -224,7 +224,7 @@ export default function Board({
           return (
             <div
               key={col.key}
-              className="min-w-0"
+              className="min-w-0 rounded-3xl bg-crumpet border border-biscuit p-2.5 flex flex-col"
               onDragOver={(e) => {
                 if (dragId) {
                   e.preventDefault();
@@ -236,28 +236,32 @@ export default function Board({
               }
               onDrop={() => drop(col.key)}
             >
-              <div className="flex items-center gap-2 mb-3 px-1">
+              <div className="flex items-center gap-2 px-1.5 pt-1 pb-2">
                 <span
-                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                  className="w-2 h-2 rounded-full flex-shrink-0"
                   style={{ backgroundColor: col.color }}
                 />
-                <span className="text-sm font-semibold text-ink tracking-tight">
+                <span className="text-sm font-medium text-ink">
                   {col.label}
                 </span>
-                <span className="text-xs text-ink/40 font-medium bg-black/[0.04] px-1.5 py-0.5 rounded-full">
+                <span className="ml-auto text-xs text-muted tabular-nums">
                   {items.length}
                 </span>
               </div>
+              <div
+                className="h-1 rounded-full mx-1.5 mb-2.5 opacity-80"
+                style={{ backgroundColor: col.color }}
+              />
 
               <div
-                className={`space-y-3 rounded-2xl min-h-[60px] transition-colors ${
+                className={`space-y-2 rounded-2xl min-h-[60px] transition-colors ${
                   dragOver === col.key
-                    ? "bg-paprika/5 ring-2 ring-paprika/30 ring-dashed p-2"
+                    ? "bg-paprika-soft ring-2 ring-paprika/30 p-1.5"
                     : ""
                 }`}
               >
                 {items.length === 0 && (
-                  <p className="text-sm text-ink/40 px-1 py-2">Sin tareas</p>
+                  <p className="text-[13px] text-faint px-1.5 py-2">Sin tareas</p>
                 )}
 
                 {items.map((t) => {
@@ -275,28 +279,28 @@ export default function Board({
                         setDragOver(null);
                       }}
                       onClick={() => setDetail(t)}
-                      className={`bg-white rounded-2xl border border-black/[0.06] p-4 shadow-soft hover:shadow-card transition-shadow cursor-pointer ${
+                      className={`bg-white rounded-xl border border-transparent p-3 shadow-soft hover:border-biscuit transition-colors cursor-pointer ${
                         canEdit ? "active:cursor-grabbing" : ""
                       } ${dragId === t.id ? "opacity-50" : ""}`}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-bold text-ink leading-snug min-w-0 break-words">
+                        <h3 className="font-sans font-medium text-ink leading-snug min-w-0 break-words">
                           {t.title}
                         </h3>
                         <span
-                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap ${PRIORITY_STYLE[t.priority]}`}
+                          className={`text-[10px] font-semibold tracking-wide px-2 py-0.5 rounded-full whitespace-nowrap ${PRIORITY_STYLE[t.priority]}`}
                         >
                           {t.priority.toUpperCase()}
                         </span>
                       </div>
 
                       {t.description && (
-                        <p className="text-sm text-ink/70 mt-1.5 line-clamp-3 break-words">
+                        <p className="text-[13px] text-muted mt-1 line-clamp-3 break-words">
                           {t.description}
                         </p>
                       )}
 
-                      <div className="mt-3 space-y-1 text-xs text-ink/70">
+                      <div className="mt-2.5 space-y-1 text-xs text-muted">
                         <p>
                           📅 <b>{formatDate(t.due_date)}</b>
                           {days !== null && !t.done && (
@@ -319,7 +323,7 @@ export default function Board({
                         </p>
                         <p className="flex items-center gap-1.5 pt-0.5">
                           <span>👤</span>
-                          <span className="text-base font-bold text-ink">
+                          <span className="text-[13px] font-medium text-ink">
                             {t.assignee ? t.assignee.full_name : "Sin asignar"}
                           </span>
                         </p>
@@ -332,12 +336,12 @@ export default function Board({
 
                       {/* Acciones */}
                       <div
-                        className="mt-3 flex flex-wrap gap-2"
+                        className="mt-3 pt-2.5 border-t border-biscuit flex flex-wrap gap-1.5"
                         onClick={(e) => e.stopPropagation()}
                       >
                         <button
                           onClick={() => setDetail(t)}
-                          className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                          className="text-xs px-3 py-1 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70"
                         >
                           💬 Abrir
                         </button>
@@ -349,7 +353,7 @@ export default function Board({
                               )
                             }
                             disabled={pending}
-                            className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                            className="text-xs px-3 py-1 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70"
                           >
                             {t.done ? "↩︎ Reabrir" : "✓ Hecha"}
                           </button>
@@ -358,7 +362,7 @@ export default function Board({
                           <>
                             <button
                               onClick={() => setDetail(t)}
-                              className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                              className="text-xs px-3 py-1 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70"
                             >
                               ✎ Editar
                             </button>
@@ -369,7 +373,7 @@ export default function Board({
                                 )
                               }
                               disabled={pending}
-                              className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                              className="text-xs px-3 py-1 rounded-[10px] border border-biscuit bg-white hover:border-faint text-ink/70"
                             >
                               ⧉ Duplicar
                             </button>
@@ -381,7 +385,7 @@ export default function Board({
                                   );
                               }}
                               disabled={pending}
-                              className="text-xs px-3 py-1 rounded-full border border-paprika/30 text-paprika hover:bg-paprika/10"
+                              className="text-xs px-2.5 py-1 rounded-lg border border-bad/30 bg-bad-soft text-bad hover:border-bad"
                             >
                               🗑
                             </button>
