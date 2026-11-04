@@ -31,10 +31,14 @@ export default async function RRSSPage({
     .select("*")
     .order("publish_date", { ascending: true });
 
-  const { data: profiles } = await supabase
+  // Solo personas activas (los usuarios ocultos no aparecen en las listas).
+  const { data: allProfiles } = await supabase
     .from("profiles")
-    .select("id, full_name")
+    .select("*")
     .order("full_name");
+  const profiles = (allProfiles ?? [])
+    .filter((p) => p.active !== false)
+    .map(({ id, full_name }) => ({ id, full_name }));
 
   return (
     <div className="min-h-screen">

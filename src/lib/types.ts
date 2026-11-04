@@ -8,6 +8,8 @@ export type Profile = {
   department: string | null;
   is_admin: boolean;
   can_manage_tasks: boolean;
+  // false = usuario oculto (no aparece en listas ni puede entrar)
+  active?: boolean;
 };
 
 export type Task = {
