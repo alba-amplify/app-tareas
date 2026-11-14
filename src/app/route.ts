@@ -20,12 +20,9 @@ export async function GET(request: Request) {
   let panel: Awaited<ReturnType<typeof loadPanel>>;
   try {
     panel = await loadPanel(supabase);
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : "Error al cargar el panel";
-    return new NextResponse(`<!DOCTYPE html><meta charset="utf-8"><p style="font:16px sans-serif;padding:40px">${msg}</p>`, {
-      status: 500,
-      headers: { "content-type": "text/html; charset=utf-8" },
-    });
+  } catch {
+    // Si aún no existe la tabla panel_state (falta ejecutar el SQL), se abre el tablero anterior.
+    return NextResponse.redirect(`${origin}/tablero-anterior`);
   }
 
   const json = (v: unknown) => JSON.stringify(v).replace(/</g, "\\u003c");
