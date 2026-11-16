@@ -14,3 +14,12 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+
+/* Páginas mostradas dentro del panel de tareas */
+html.embedded body > div > header,
+html.embedded body > div > nav {
+  display: none !important;
+}
+html.embedded body {
+  background: transparent;
+}

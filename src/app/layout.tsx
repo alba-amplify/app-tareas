@@ -12,7 +12,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        {/* Dentro del panel (iframe) las páginas se muestran sin su cabecera ni pestañas. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(window.self!==window.top||new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('embedded')}catch(e){document.documentElement.classList.add('embedded')}",
+          }}
+        />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );
