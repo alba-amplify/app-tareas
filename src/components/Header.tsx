@@ -17,7 +17,7 @@ export default function Header({ profile }: { profile: Profile }) {
   }
 
   return (
-    <header className="sticky top-0 z-40 bg-cream/80 backdrop-blur-md border-b border-black/[0.06]">
+    <header className="app-header sticky top-0 z-40 bg-cream/80 backdrop-blur-md border-b border-black/[0.06]">
       <div className="w-full px-6 lg:px-10 py-3.5 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <span className="bg-paprika text-white font-extrabold px-3 py-1 rounded-full text-sm tracking-tight">

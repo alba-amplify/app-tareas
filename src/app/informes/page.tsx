@@ -8,7 +8,12 @@ import type { Profile } from "@/lib/types";
 export const dynamic = "force-dynamic";
 
 // Informes de funnels (Meta Ads + GoHighLevel). Dentro del panel se muestra sin cabecera.
-export default async function InformesPage() {
+export default async function InformesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ embed?: string }>;
+}) {
+  const embedded = (await searchParams).embed === "1";
   const supabase = await createClient();
   const {
     data: { user },
@@ -24,8 +29,13 @@ export default async function InformesPage() {
 
   return (
     <div className="min-h-screen">
-      <Header profile={profile} />
-      <Nav />
+      {/* Dentro del panel no se muestra el menú antiguo */}
+      {embedded ? null : (
+        <>
+          <Header profile={profile} />
+          <Nav />
+        </>
+      )}
       <main className="w-full">
         <Informes />
       </main>

@@ -15,7 +15,7 @@ const TABS = [
 export default function Nav() {
   const pathname = usePathname();
   return (
-    <nav className="w-full px-6 lg:px-10 pt-5">
+    <nav className="app-nav w-full px-6 lg:px-10 pt-5">
       <div className="inline-flex rounded-full border border-black/[0.07] bg-white p-1 shadow-soft">
         {TABS.map((t) => {
           const active = pathname === t.href;

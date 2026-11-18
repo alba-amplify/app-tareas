@@ -20,7 +20,9 @@ body {
 
 /* Páginas mostradas dentro del panel de tareas */
 html.embedded body > div > header,
-html.embedded body > div > nav {
+html.embedded body > div > nav,
+html.embedded .app-header,
+html.embedded .app-nav {
   display: none !important;
 }
 html.embedded body {
