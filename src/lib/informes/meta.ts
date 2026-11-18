@@ -7,7 +7,7 @@
 
 const VERSION = process.env.META_API_VERSION || "v26.0";
 const DEFAULT_ACCOUNT = "act_1232179058699666"; // cuenta publicitaria de Amplify (ID público, no secreto)
-export const PROXY_URL = process.env.INFORMES_PROXY_URL || "https://amp.amplifyesp.com/api/informes-proxy";
+export const PROXY_URL = process.env.INFORMES_PROXY_URL || "https://amp.amplifyesp.com/api/panel";
 const viaProxy = () => !process.env.META_ACCESS_TOKEN && Boolean(process.env.INFORMES_PROXY_SECRET);
 
 export function metaConfigured() {
