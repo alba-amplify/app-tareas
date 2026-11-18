@@ -87,7 +87,7 @@ const BASE_FIELDS = "spend,impressions,clicks,inline_link_clicks,reach,ctr,actio
 
 // Filtro por nombre de campaña: Meta solo admite un CONTAIN por campo, así que se usa
 // la primera palabra como filtro grueso y el resto se afina al leer.
-function campaignFilter(keywords: string[]) {
+function campaignFilter(keywords: string[]): Record<string, string> {
   return keywords.length
     ? {
         filtering: JSON.stringify([
@@ -103,7 +103,7 @@ export async function fetchMeta(w: MetaWindow, keywords: string[]) {
   const matches = (name?: string) => !kw.length || kw.some((k) => (name || "").toLowerCase().includes(k));
 
   // Con varias palabras no se filtra en Meta (se filtra aquí), para no perder campañas.
-  const filter = kw.length === 1 ? campaignFilter(kw) : {};
+  const filter: Record<string, string> = kw.length === 1 ? campaignFilter(kw) : {};
   const act = account();
 
   const [campaigns, daily, ads, countries, audience, adStatus] = await Promise.all([
