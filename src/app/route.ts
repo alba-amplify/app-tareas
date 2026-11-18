@@ -30,6 +30,10 @@ export async function GET(request: Request) {
     '<!DOCTYPE html>\n<html lang="es">\n<head>\n<meta charset="utf-8">\n' +
     '<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
     "<title>Panel de tareas · Amplify</title>\n" +
+    // Idioma (es / en)
+    "<style>html.i18n-pending body{visibility:hidden}</style>\n" +
+    "<script>try{if(/(?:^|;\\s*)amplify_lang=en/.test(document.cookie)){document.documentElement.classList.add('i18n-pending');document.documentElement.lang='en'}}catch(e){}</script>\n" +
+    '<script src="/i18n.js"></script>\n' +
     PANEL_HEAD +
     "\n</head>\n<body>\n<div id=\"root\"></div>\n" +
     `<script>window.__PANEL__=${json({ me: profile.id, rev: panel.rev })};</script>\n` +

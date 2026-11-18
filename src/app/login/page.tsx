@@ -67,6 +67,7 @@ export default function LoginPage() {
           </div>
           <h1 className="text-xl font-bold text-ink tracking-tight">Panel de Tareas</h1>
           <p className="text-sm text-ink/50 mt-1">Entra con tu cuenta de Google del equipo</p>
+          <div className="mt-3" data-lang-switch="" />
         </div>
 
         <button

@@ -29,6 +29,7 @@ export default function Header({ profile }: { profile: Profile }) {
         </div>
 
         <div className="flex items-center gap-3">
+          <span data-lang-switch="" />
           <NotificationBell />
           <Link
             href="/cuenta"

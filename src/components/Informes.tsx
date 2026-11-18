@@ -4,17 +4,20 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { FunnelConfig, InformesConfig, Range, Report } from "@/lib/informes/types";
 
 /* ---------- formato ---------- */
+// Idioma elegido en el selector (cookie amplify_lang): formatos en inglés o en español
+const LOC = typeof document !== "undefined" && /(?:^|;\s*)amplify_lang=en/.test(document.cookie) ? "en-IE" : "es-ES";
+const DEC = LOC === "es-ES" ? "," : ".";
 // "always": 2.485 € en vez de 2485 € (en español el punto de miles se omite por defecto con 4 cifras)
 const GROUP = "always" as unknown as boolean;
 const eur = (v: number, dec = 0) =>
-  new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: dec, minimumFractionDigits: dec, useGrouping: GROUP }).format(v || 0);
-const int = (v: number) => new Intl.NumberFormat("es-ES", { useGrouping: GROUP }).format(Math.round(v || 0));
-const pct = (v: number, dec = 1) => (Number.isFinite(v) ? `${(v * 100).toFixed(dec).replace(".", ",")} %` : "—");
+  new Intl.NumberFormat(LOC, { style: "currency", currency: "EUR", maximumFractionDigits: dec, minimumFractionDigits: dec, useGrouping: GROUP }).format(v || 0);
+const int = (v: number) => new Intl.NumberFormat(LOC, { useGrouping: GROUP }).format(Math.round(v || 0));
+const pct = (v: number, dec = 1) => (Number.isFinite(v) ? `${(v * 100).toFixed(dec).replace(".", DEC)} %` : "—");
 const ratio = (a: number, b: number) => (b > 0 ? a / b : NaN);
 const money = (a: number, b: number, dec = 2) => (b > 0 ? eur(a / b, dec) : "—");
 const regionName = (() => {
   try {
-    const dn = new Intl.DisplayNames(["es"], { type: "region" });
+    const dn = new Intl.DisplayNames([LOC.slice(0, 2)], { type: "region" });
     return (c: string) => (c && c.length === 2 ? dn.of(c) || c : c === "??" ? "Sin país" : c);
   } catch {
     return (c: string) => c;
@@ -439,7 +442,7 @@ export default function Informes() {
               ["CPL real", money(r.totals.spend, registros)],
               ["Citas", int(r.totals.citas)],
               ["Ventas", int(r.totals.compras)],
-              ["ROAS", r.totals.spend > 0 ? `${ratio(r.totals.ingresos, r.totals.spend).toFixed(2).replace(".", ",")}x` : "—"],
+              ["ROAS", r.totals.spend > 0 ? `${ratio(r.totals.ingresos, r.totals.spend).toFixed(2).replace(".", DEC)}x` : "—"],
             ].map(([l, v]) => (
               <div key={l} className="kpi">
                 <span>{l}</span>
@@ -483,7 +486,7 @@ export default function Informes() {
                   ["Coste por cita", money(r.totals.spend, r.totals.citas), "gasto ÷ citas reservadas"],
                   ["CPA", money(r.totals.spend, r.totals.compras), "gasto ÷ ventas"],
                   ["Ingresos", eur(r.totals.ingresos), "oportunidades ganadas en GHL"],
-                  ["ROAS", r.totals.spend > 0 ? `${ratio(r.totals.ingresos, r.totals.spend).toFixed(2).replace(".", ",")}x` : "—", "ingresos ÷ gasto"],
+                  ["ROAS", r.totals.spend > 0 ? `${ratio(r.totals.ingresos, r.totals.spend).toFixed(2).replace(".", DEC)}x` : "—", "ingresos ÷ gasto"],
                   ["CPL Meta", money(r.totals.spend, r.totals.metaLeads), "gasto ÷ leads que cuenta Meta"],
                 ].map(([l, v, d]) => (
                   <div key={l} className="pm">
@@ -562,7 +565,7 @@ export default function Informes() {
                           <td><div className="tn">{a.active ? <i className="live" title="Activo" /> : null}<div><b>{a.name}</b><span>{a.campaign}</span></div></div></td>
                           <td className="r num">{eur(a.spend)}</td>
                           <td className="r num">{int(a.impressions)}</td>
-                          <td className="r num">{a.ctr.toFixed(2).replace(".", ",")} %</td>
+                          <td className="r num">{a.ctr.toFixed(2).replace(".", DEC)} %</td>
                           <td className="r num">{int(a.leads)}</td>
                           <td className="r num"><span className={`cpl ${cplClass(cpl)}`}>{Number.isFinite(cpl) ? eur(cpl, 2) : "—"}</span></td>
                         </tr>
@@ -637,7 +640,7 @@ export default function Informes() {
                         <td className="r num">{eur(c.spend)}</td>
                         <td className="r num">{int(c.leads)}</td>
                         <td className="r num"><span className={`cpl ${cplClass(ratio(c.spend, c.leads))}`}>{money(c.spend, c.leads)}</span></td>
-                        <td className="r num">{c.ctr.toFixed(2).replace(".", ",")} %</td>
+                        <td className="r num">{c.ctr.toFixed(2).replace(".", DEC)} %</td>
                         <td className="r num">{int(c.reach)}</td>
                       </tr>
                     ))}
