@@ -10,6 +10,7 @@ const TABS = [
   { href: "/accesos", label: "Accesos" },
   { href: "/updates", label: "Updates" },
   { href: "/rrss", label: "RRSS" },
+  { href: "/informes", label: "Informes" },
 ];
 
 export default function Nav() {
