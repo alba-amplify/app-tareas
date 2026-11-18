@@ -34,11 +34,11 @@ export default function ChangePasswordForm() {
   }
 
   const field =
-    "w-full rounded-xl border border-black/10 bg-black/[0.02] px-3 py-2 text-ink outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15";
+    "w-full rounded-xl border border-[#ebebe8] bg-white px-3 py-2 text-ink outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15";
 
   return (
-    <div className="max-w-md bg-white rounded-2xl border border-black/[0.06] shadow-soft p-6">
-      <h2 className="text-lg font-bold text-ink tracking-tight">
+    <div className="max-w-md bg-white rounded-xl border border-[#ebebe8] p-6">
+      <h2 className="text-lg font-semibold text-ink tracking-tight">
         Cambiar contraseña
       </h2>
       <p className="text-sm text-ink/50 mt-1 mb-4">
@@ -83,7 +83,7 @@ export default function ChangePasswordForm() {
         <button
           type="submit"
           disabled={loading}
-          className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-5 py-2 rounded-full disabled:opacity-60"
+          className="bg-ink hover:bg-ink/85 text-white font-semibold px-5 py-2 rounded-lg disabled:opacity-60"
         >
           {loading ? "Guardando…" : "Cambiar contraseña"}
         </button>

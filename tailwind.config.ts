@@ -9,20 +9,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Paleta Amplify (minimalista)
-        paprika: { DEFAULT: "#B53324", dark: "#8f2419" },
+        // Paleta del panel de tareas (blanco roto, tinta y rojo Amplify)
+        paprika: { DEFAULT: "#B5402F", dark: "#8f2f22" },
         honeycomb: { DEFAULT: "#E5A657", dark: "#9a6a1f" },
-        biscuit: "#E8E2D8", // borde suave
-        crumpet: "#F4EFE8", // tinte muy sutil
-        cream: "#FAF8F3", // fondo crema casi blanco
-        ink: "#2a2320",
+        biscuit: "#EBEBE8", // borde suave
+        crumpet: "#F3F3F1", // tinte muy sutil
+        cream: "#FAFAF9", // fondo
+        ink: "#18181B",
       },
       boxShadow: {
-        soft: "0 1px 3px rgba(42,35,32,0.06), 0 1px 2px rgba(42,35,32,0.04)",
-        card: "0 4px 20px rgba(42,35,32,0.06)",
+        soft: "0 1px 2px rgba(24,24,27,0.04)",
+        card: "0 8px 30px rgba(24,24,27,0.08)",
       },
       fontFamily: {
-        sans: ['"Helvetica Neue"', "Helvetica", "Arial", "sans-serif"],
+        sans: ["Geist", "Inter", "system-ui", "-apple-system", "sans-serif"],
       },
     },
   },

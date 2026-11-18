@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { getActiveProfile, loadPanel } from "@/lib/panel";
+import { getActiveProfile, loadPanel, savePanel } from "@/lib/panel";
+import { importLegacy } from "@/lib/legacy";
 import { PANEL_HEAD, PANEL_SCRIPT } from "@/panel/template";
 
 export const dynamic = "force-dynamic";
@@ -23,6 +24,25 @@ export async function GET(request: Request) {
   } catch {
     // Si aún no existe la tabla panel_state (falta ejecutar el SQL), se abre el tablero anterior.
     return NextResponse.redirect(`${origin}/tablero-anterior`);
+  }
+
+  // Una sola vez: volcar las tareas del tablero anterior al panel.
+  if (!panel.state.legacyImport) {
+    try {
+      for (let i = 0; i < 3; i++) {
+        const state = (await importLegacy(supabase, panel.state)).state as typeof panel.state;
+        const r = await savePanel(supabase, user.id, state, panel.rev);
+        if (!r.conflict) {
+          panel = { state, rev: r.rev };
+          break;
+        }
+        panel = await loadPanel(supabase);
+        if (panel.state.legacyImport) break;
+      }
+    } catch (e) {
+      // Si falla, el panel se abre igual y se reintenta la próxima vez.
+      console.error("importLegacy", e);
+    }
   }
 
   const json = (v: unknown) => JSON.stringify(v).replace(/</g, "\\u003c");
