@@ -214,7 +214,7 @@
     "No hay campañas que coincidan con este funnel. Revisa las palabras clave en Ajustes.": "No campaigns match this funnel. Check the keywords in Settings.",
     "Amplify · Datos de GoHighLevel y Meta Ads · Se actualizan cada 5 minutos · Sin datos personales": "Amplify · Data from GoHighLevel and Meta Ads · Updated every 5 minutes · No personal data",
     "Landing": "Landing page", "Ventas en Meta": "Meta sales", "Leads Meta": "Meta leads", "Ajustes de informes": "Report settings", 
-    "Panel de tareas · Amplify": "Task panel · Amplify", "registro": "sign-up", "asistió": "attended", "cita": "call", "compra": "purchase", "Amplify Tareas": "Amplify Tasks", "Hola": "Hi",
+    "Panel de tareas · Amplify": "Task panel · Amplify", "registro": "sign-up", "registros": "sign-ups", "gasto": "spend", "ninguna": "none", "asistió": "attended", "cita": "call", "compra": "purchase", "Amplify Tareas": "Amplify Tasks", "Hola": "Hi",
     "7 d": "7 d", "14 d": "14 d", "30 d": "30 d", "Idioma": "Language"
   };
   // Textos que empiezan o acaban igual pero llevan un dato (nombre, número…)
@@ -226,11 +226,6 @@
     ["Actualizado ", "Updated "], ["Coinciden: ", "Matching: "],
     ["Cada servicio contratado tiene su lista de subtareas del mes. Márcalas al hacerlas; al cambiar de mes empiezan de cero. Progreso total de ", "Each contracted service has its monthly subtask list. Tick them off as you go; they reset every month. Overall progress for "]
   ];
-  var IN = [
-    [" · vencida hace ", " · overdue by "], [" · en ", " · in "], [" · día antes de la reunión (", " · day before the meeting ("],
-    [" para este proyecto.", " for this project."], [" del paso anterior", " of the previous step"], [" registros", " sign-ups"], [" gasto", " spend"],
-    [" por registro", " per sign-up"], ["ninguna", "none"]
-  ];
   var MON = { ene: "Jan", feb: "Feb", mar: "Mar", abr: "Apr", may: "May", jun: "Jun", jul: "Jul", ago: "Aug", sep: "Sep", sept: "Sep", oct: "Oct", nov: "Nov", dic: "Dec" };
   var DOW = { lunes: "Monday", martes: "Tuesday", "miércoles": "Wednesday", jueves: "Thursday", viernes: "Friday", "sábado": "Saturday", domingo: "Sunday" };
   var PAT = [
@@ -238,7 +233,14 @@
     [/^hace (\d+) min$/, "$1 min ago"],
     [/^vencida hace (\d+)d$/, "overdue by $1d"],
     [/^(Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre) (\d{4})$/i, function (m, mo, y) { return (D[mo] || D[mo.toLowerCase()] || mo) + " " + y; }],
-    [/^Ver (\d+)/, "View $1"]
+    [/^Ver (\d+)$/, "View $1"],
+    // Etiquetas de fecha del panel ("16 nov · vencida hace 2d", "20 nov · en 3d", "18 nov · 21:30")
+    [/^(\d{1,2} [a-z]{3,4}(?: \d{4})?) · vencida hace (\d+)d$/, function (m, d, n) { return dates(d) + " · overdue by " + n + "d"; }],
+    [/^(\d{1,2} [a-z]{3,4}(?: \d{4})?) · en (\d+)d$/, function (m, d, n) { return dates(d) + " · in " + n + "d"; }],
+    [/^(\d{1,2} [a-z]{3,4}(?: \d{4})?)( · \d{1,2}:\d{2})?$/, function (m, d, h) { return dates(d) + (h || ""); }],
+    [/^Mañana · (\d{1,2} [a-z]{3,4}(?: \d{4})?)$/, function (m, d) { return "Tomorrow · " + dates(d); }],
+    [/^Aún no hay notas de (.+) para este proyecto\.$/, "No $1 notes for this project yet."],
+    [/^(Semanal|Mensual · semana (\d)) · día antes de la reunión \((lunes|martes|miércoles|jueves|viernes|sábado|domingo)\)$/, function (m, f, w, d) { return (w ? "Monthly · week " + w : "Weekly") + " · day before the meeting (" + DOW[d] + ")"; }]
   ];
   function dates(s) {
     return s
@@ -248,19 +250,11 @@
   function tr(core) {
     if (Object.prototype.hasOwnProperty.call(D, core)) return D[core];
     for (var i = 0; i < PAT.length; i++) if (PAT[i][0].test(core)) return core.replace(PAT[i][0], PAT[i][1]);
-    var out = core, hit = false;
+    // Textos de la interfaz que llevan un nombre o un número detrás ("Hola, Alba", "Comentarios (2)")
     for (var j = 0; j < PRE.length; j++) {
-      if (out.indexOf(PRE[j][0]) === 0) { out = PRE[j][1] + out.slice(PRE[j][0].length); hit = true; break; }
+      if (core.indexOf(PRE[j][0]) === 0) return PRE[j][1] + core.slice(PRE[j][0].length);
     }
-    for (var k = 0; k < IN.length; k++) {
-      if (out.indexOf(IN[k][0]) >= 0 && out.length < 140) { out = out.split(IN[k][0]).join(IN[k][1]); hit = true; }
-    }
-    // Fechas solo en etiquetas cortas de la interfaz ("16 nov · overdue by 2d"), nunca dentro de textos del equipo
-    var dateLabel = out.length <= 48 && (/^\d{1,2} (ene|feb|mar|abr|may|jun|jul|ago|sept?|oct|nov|dic)\b/.test(out) || /^(Tomorrow|Monthly|Weekly) · /.test(out));
-    var dd = dateLabel ? dates(out) : out;
-    if (dd !== out) { out = dd; hit = true; }
-    // lo que queda tras quitar el prefijo puede ser un texto exacto ("Mañana · 19 nov")
-    return hit ? out : null;
+    return null;
   }
   function translate(s) {
     if (!s || !/[A-Za-zÁÉÍÓÚáéíóúñÑ]/.test(s)) return null;
@@ -275,6 +269,11 @@
   var SKIP = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1, CODE: 1, PRE: 1, NOSCRIPT: 1 };
   var ATTRS = ["placeholder", "title", "aria-label", "alt"];
   var done = new WeakMap();
+  // Contenido escrito por el equipo: títulos, descripciones, comentarios, notas, nombres de proyecto…
+  var USER = ".c-title,.c-desc,.lt,.ld,.st,.note,.desc,.nm,.db>h2,.mh>h2,.c-proj,[data-user-content]";
+  function userText(parent) {
+    try { return !!(parent.closest && parent.closest(USER)) || (parent.matches && parent.matches(".t1")); } catch (e) { return false; }
+  }
   function skipEl(el) {
     for (var e = el; e && e.nodeType === 1; e = e.parentNode) {
       if (SKIP[e.tagName] || e.isContentEditable || e.hasAttribute("data-noi18n")) return true;
@@ -283,7 +282,7 @@
   }
   function doText(n) {
     if (done.get(n) === n.nodeValue) return;
-    if (n.parentNode && skipEl(n.parentNode)) return;
+    if (n.parentNode && (skipEl(n.parentNode) || userText(n.parentNode))) return;
     var t = translate(n.nodeValue);
     if (t != null) n.nodeValue = t;
     done.set(n, n.nodeValue);
