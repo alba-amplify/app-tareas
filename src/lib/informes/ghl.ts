@@ -97,7 +97,7 @@ export type GhlOpportunity = {
   status?: string;
   createdAt?: string;
   contactId?: string;
-  contact?: { phone?: string | null; tags?: string[] };
+  contact?: { id?: string; phone?: string | null; tags?: string[] };
 };
 
 const mdy = (d: string) => {

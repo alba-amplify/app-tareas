@@ -26,6 +26,15 @@ const num = (v: unknown) => Number(v) || 0;
 const normName = (s: string) =>
   String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
 
+// Varias etiquetas separadas por comas: contactos con cualquiera de ellas (sin repetir)
+async function contactsWithTags(list: string, since: string | null, until: string) {
+  const tags = list.split(",").map((t) => t.trim()).filter(Boolean);
+  const all = await Promise.all(tags.map((t) => contactsWithTag(t, since, until)));
+  const byId = new Map<string, GhlContact>();
+  for (const c of all.flat()) byId.set(c.id, c);
+  return [...byId.values()];
+}
+
 // Caché de 5 minutos por funnel y rango (igual que el panel de referencia).
 const cache = new Map<string, { at: number; data: Report }>();
 const TTL = 5 * 60 * 1000;
@@ -82,15 +91,20 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
               pls.find((p) => normName(p.name) === normName(f.pipelineName)) ||
               null;
             if (!pl) throw new Error(`GHL: no encuentro el pipeline «${f.pipelineName || f.pipelineId}». Elígelo en Ajustes.`);
-            return { pl, opps: await opportunities(pl.id, w.since, w.until), tagged: null };
+            // Si el pipeline lo comparten varios funnels, la etiqueta de registro filtra los del funnel
+            const [opps, reg] = await Promise.all([
+              opportunities(pl.id, w.since, w.until),
+              f.tags.registro ? contactsWithTags(f.tags.registro, w.since, w.until) : Promise.resolve(null),
+            ]);
+            return { pl, opps, reg, tagged: null };
           }
           const tagged = await Promise.all([
-            contactsWithTag(f.tags.registro, w.since, w.until),
-            contactsWithTag(f.tags.asistio, w.since, w.until),
-            contactsWithTag(f.tags.cita, w.since, w.until),
-            contactsWithTag(f.tags.compra, w.since, w.until),
+            contactsWithTags(f.tags.registro, w.since, w.until),
+            contactsWithTags(f.tags.asistio, w.since, w.until),
+            contactsWithTags(f.tags.cita, w.since, w.until),
+            contactsWithTags(f.tags.compra, w.since, w.until),
           ]);
-          return { pl: null, opps: [] as GhlOpportunity[], tagged };
+          return { pl: null, opps: [] as GhlOpportunity[], reg: null, tagged };
         })()
       : Promise.resolve(null),
   ]);
@@ -164,7 +178,8 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
   if (ghl.status === "rejected") r.sources.ghl.error = String(ghl.reason?.message || ghl.reason);
   else if (ghl.value) {
     r.sources.ghl.ok = true;
-    const { pl, opps, tagged } = ghl.value;
+    const { pl, reg: regContacts, tagged } = ghl.value;
+    let opps = ghl.value.opps;
     const status = (soloReg: number, hastaAsis: number, hastaCita: number, hastaCompra: number) => [
       { key: "registro", label: "Solo registrado", count: soloReg },
       { key: "asistio", label: "Asistió", count: hastaAsis },
@@ -176,13 +191,24 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
       // Orden de etapas y a partir de cuál se considera cada paso
       const idx = new Map(pl.stages.map((s, i) => [s.id, i]));
       const find = (re: RegExp) => pl.stages.findIndex((s) => re.test(normName(s.name)));
-      let buyAt = f.purchaseStage ? pl.stages.findIndex((s) => normName(s.name) === normName(f.purchaseStage)) : -1;
-      if (buyAt < 0) buyAt = find(/compra|ganad|acceso/);
+      // Compra: con una sola etapa, esa y las siguientes (pipeline lineal, como el del Intensivo);
+      // con varias separadas por comas, solo esas etapas (pipelines con ramas, como el de Marketing).
+      const buyNames = f.purchaseStage.split(",").map(normName).filter(Boolean);
+      const buySet = new Set(pl.stages.filter((s) => buyNames.includes(normName(s.name))).map((s) => s.id));
+      let buyAt = buyNames.length === 1 ? pl.stages.findIndex((s) => normName(s.name) === buyNames[0]) : -1;
+      if (buyAt < 0 && !buySet.size) buyAt = find(/compra|ganad|acceso/);
       const citaAt = find(/cita|llamada|agend/);
       const asisAt = find(/asist/);
+      const stageName = (o: GhlOpportunity) => normName(pl.stages[idx.get(o.pipelineStageId || "") ?? -1]?.name || "");
+      const lost = (o: GhlOpportunity) => o.status === "lost" || /perdid|no cualific|no contesta|no show/.test(stageName(o));
       const reached = (o: GhlOpportunity, at: number) => at >= 0 && (idx.get(o.pipelineStageId || "") ?? -1) >= at;
-      const bought = (o: GhlOpportunity) => o.status === "won" || reached(o, buyAt);
-      const lost = (o: GhlOpportunity) => o.status === "lost" || /perdid|no cualific/.test(normName(pl.stages[idx.get(o.pipelineStageId || "") ?? -1]?.name || ""));
+      const bought = (o: GhlOpportunity) => o.status === "won" || buySet.has(o.pipelineStageId || "") || reached(o, buyAt);
+
+      // Solo las oportunidades de los contactos del funnel (si el pipeline es compartido)
+      if (regContacts) {
+        const ids = new Set(regContacts.map((c) => c.id));
+        opps = opps.filter((o) => ids.has(o.contactId || "") || ids.has(o.contact?.id || ""));
+      }
 
       let soloReg = 0, hastaAsis = 0, hastaCita = 0, hastaCompra = 0, ingresos = 0;
       for (const o of opps) {
@@ -194,16 +220,30 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
         else if (isAsis) hastaAsis++;
         else soloReg++;
         const d = o.createdAt ? ymd(new Date(o.createdAt)) : "";
-        if (d) day(d).registros += 1;
         if (d === today) {
-          r.today.registros += 1;
           if (isBuy) r.today.compras += 1;
           if (isCita) r.today.citas += 1;
         }
-        const cc = countryOfPhone(o.contact?.phone);
-        if (cc) cty(cc).inscritos += 1;
+        if (!regContacts) {
+          if (d) day(d).registros += 1;
+          if (d === today) r.today.registros += 1;
+          const cc = countryOfPhone(o.contact?.phone);
+          if (cc) cty(cc).inscritos += 1;
+        }
       }
-      r.totals.registros = opps.length;
+      // Registros: los contactos con la etiqueta del funnel, o las oportunidades del pipeline
+      if (regContacts) {
+        for (const c of regContacts) {
+          const d = c.dateAdded ? ymd(new Date(c.dateAdded)) : "";
+          if (d) day(d).registros += 1;
+          if (d === today) r.today.registros += 1;
+          const cc = countryOfPhone(c.phone) || (c.country ? c.country.toUpperCase() : null);
+          if (cc) cty(cc).inscritos += 1;
+        }
+        // Los que aún no tienen oportunidad en el pipeline cuentan como "solo registrado"
+        soloReg += Math.max(0, regContacts.length - opps.length);
+      }
+      r.totals.registros = regContacts ? Math.max(regContacts.length, opps.length) : opps.length;
       r.totals.compras = hastaCompra;
       r.totals.citas = hastaCita + hastaCompra; // quien compra pasó por la cita
       r.totals.asistio = asisAt >= 0 ? hastaAsis + r.totals.citas : 0;

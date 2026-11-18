@@ -20,12 +20,14 @@ export const DEFAULT_FUNNELS: FunnelConfig[] = [
     id: "amplify-20",
     name: "Amplify 2.0",
     landing: "https://amp.amplifyesp.com/amplify-20",
-    campaignKeywords: ["amplify 2.0", "amplify 2", "amplify-20", "amplify20"],
-    tags: { registro: "", asistio: "", cita: "", compra: "" },
+    // Campañas de la landing high ticket (las oportunidades de GHL llevan el prefijo "HT - ")
+    campaignKeywords: ["amplify 2", "amplify-20", "amplify20", "high ticket", "highticket", "ht -", "ht_"],
+    // Pipeline compartido con otros funnels: solo cuentan los contactos con estas etiquetas
+    tags: { registro: "landing-20, landing-20-vsl", asistio: "", cita: "", compra: "" },
     pipelineId: "",
-    pipelineName: "",
-    purchaseStage: "Acceso Amplify 2.0",
-    price: 997,
+    pipelineName: "Marketing Pipeline Funnel Q4",
+    purchaseStage: "Acceso Amplify 2.0, Ganado",
+    price: 0,
   },
 ];
 
