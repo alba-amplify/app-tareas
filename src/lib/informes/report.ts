@@ -1,6 +1,7 @@
 import type { FunnelConfig, Range, Report } from "./types";
 import { fetchMeta, leadsOf, metaConfigured, visitsOf, type InsightRow } from "./meta";
 import {
+  type GhlOpportunity,
   contactsWithTag,
   countryOfPhone,
   ghlConfigured,
@@ -22,6 +23,8 @@ export function windowFor(range: Range) {
 }
 
 const num = (v: unknown) => Number(v) || 0;
+const normName = (s: string) =>
+  String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
 
 // Caché de 5 minutos por funnel y rango (igual que el panel de referencia).
 const cache = new Map<string, { at: number; data: Report }>();
@@ -70,13 +73,25 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
   const [meta, ghl] = await Promise.allSettled([
     r.sources.meta.configured ? fetchMeta(w, f.campaignKeywords) : Promise.resolve(null),
     r.sources.ghl.configured
-      ? Promise.all([
-          contactsWithTag(f.tags.registro, w.since, w.until),
-          contactsWithTag(f.tags.asistio, w.since, w.until),
-          contactsWithTag(f.tags.cita, w.since, w.until),
-          contactsWithTag(f.tags.compra, w.since, w.until),
-          f.pipelineId ? Promise.all([opportunities(f.pipelineId, w.since, w.until), pipelines()]) : Promise.resolve(null),
-        ])
+      ? (async () => {
+          // Con pipeline: los pasos se cuentan por sus etapas. Sin pipeline: por etiquetas.
+          if (f.pipelineId || f.pipelineName) {
+            const pls = await pipelines();
+            const pl =
+              pls.find((p) => p.id === f.pipelineId) ||
+              pls.find((p) => normName(p.name) === normName(f.pipelineName)) ||
+              null;
+            if (!pl) throw new Error(`GHL: no encuentro el pipeline «${f.pipelineName || f.pipelineId}». Elígelo en Ajustes.`);
+            return { pl, opps: await opportunities(pl.id, w.since, w.until), tagged: null };
+          }
+          const tagged = await Promise.all([
+            contactsWithTag(f.tags.registro, w.since, w.until),
+            contactsWithTag(f.tags.asistio, w.since, w.until),
+            contactsWithTag(f.tags.cita, w.since, w.until),
+            contactsWithTag(f.tags.compra, w.since, w.until),
+          ]);
+          return { pl: null, opps: [] as GhlOpportunity[], tagged };
+        })()
       : Promise.resolve(null),
   ]);
 
@@ -149,56 +164,87 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
   if (ghl.status === "rejected") r.sources.ghl.error = String(ghl.reason?.message || ghl.reason);
   else if (ghl.value) {
     r.sources.ghl.ok = true;
-    const [reg, asis, cita, compra, pipe] = ghl.value;
-    const ids = (cs: GhlContact[]) => new Set(cs.map((c) => c.id));
-    const sAsis = ids(asis), sCita = ids(cita), sCompra = ids(compra);
-    r.totals.registros = reg.length;
-    r.totals.asistio = asis.length;
-    r.totals.citas = cita.length;
-    r.totals.compras = compra.length;
-    for (const c of reg) {
-      const d = c.dateAdded ? ymd(new Date(c.dateAdded)) : "";
-      if (d) day(d).registros += 1;
-      if (d === today) r.today.registros += 1;
-      const cc = countryOfPhone(c.phone) || (c.country ? c.country.toUpperCase() : null);
-      if (cc) cty(cc).inscritos += 1;
-    }
-    const todayCount = (cs: GhlContact[]) => cs.filter((c) => c.dateAdded && ymd(new Date(c.dateAdded)) === today).length;
-    r.today.citas = todayCount(cita);
-    r.today.compras = todayCount(compra);
-
-    // Dónde está cada registro: el paso más avanzado al que ha llegado.
-    let soloReg = 0, hastaAsis = 0, hastaCita = 0, hastaCompra = 0;
-    for (const c of reg) {
-      if (sCompra.has(c.id)) hastaCompra++;
-      else if (sCita.has(c.id)) hastaCita++;
-      else if (sAsis.has(c.id)) hastaAsis++;
-      else soloReg++;
-    }
-    r.leadStatus = [
+    const { pl, opps, tagged } = ghl.value;
+    const status = (soloReg: number, hastaAsis: number, hastaCita: number, hastaCompra: number) => [
       { key: "registro", label: "Solo registrado", count: soloReg },
       { key: "asistio", label: "Asistió", count: hastaAsis },
       { key: "cita", label: "Cita reservada", count: hastaCita },
       { key: "compra", label: "Compró", count: hastaCompra },
     ];
 
-    if (pipe) {
-      const [opps, pls] = pipe;
-      const pl = pls.find((p) => p.id === f.pipelineId);
-      if (pl) {
-        const stages = pl.stages.map((s) => ({ id: s.id, name: s.name, count: 0, value: 0 }));
-        for (const o of opps) {
-          const st = stages.find((s) => s.id === o.pipelineStageId);
-          if (st) {
-            st.count += 1;
-            st.value += num(o.monetaryValue);
-          }
+    if (pl) {
+      // Orden de etapas y a partir de cuál se considera cada paso
+      const idx = new Map(pl.stages.map((s, i) => [s.id, i]));
+      const find = (re: RegExp) => pl.stages.findIndex((s) => re.test(normName(s.name)));
+      let buyAt = f.purchaseStage ? pl.stages.findIndex((s) => normName(s.name) === normName(f.purchaseStage)) : -1;
+      if (buyAt < 0) buyAt = find(/compra|ganad|acceso/);
+      const citaAt = find(/cita|llamada|agend/);
+      const asisAt = find(/asist/);
+      const reached = (o: GhlOpportunity, at: number) => at >= 0 && (idx.get(o.pipelineStageId || "") ?? -1) >= at;
+      const bought = (o: GhlOpportunity) => o.status === "won" || reached(o, buyAt);
+      const lost = (o: GhlOpportunity) => o.status === "lost" || /perdid|no cualific/.test(normName(pl.stages[idx.get(o.pipelineStageId || "") ?? -1]?.name || ""));
+
+      let soloReg = 0, hastaAsis = 0, hastaCita = 0, hastaCompra = 0, ingresos = 0;
+      for (const o of opps) {
+        const isBuy = bought(o) && !lost(o);
+        const isCita = !isBuy && reached(o, citaAt) && !lost(o);
+        const isAsis = !isBuy && !isCita && reached(o, asisAt) && !lost(o);
+        if (isBuy) { hastaCompra++; ingresos += num(o.monetaryValue); }
+        else if (isCita) hastaCita++;
+        else if (isAsis) hastaAsis++;
+        else soloReg++;
+        const d = o.createdAt ? ymd(new Date(o.createdAt)) : "";
+        if (d) day(d).registros += 1;
+        if (d === today) {
+          r.today.registros += 1;
+          if (isBuy) r.today.compras += 1;
+          if (isCita) r.today.citas += 1;
         }
-        r.pipeline = { name: pl.name, stages: stages.map(({ name, count, value }) => ({ name, count, value })) };
-        const won = opps.filter((o) => o.status === "won");
-        const wonValue = won.reduce((s, o) => s + num(o.monetaryValue), 0);
-        if (wonValue > 0) r.totals.ingresos = wonValue;
+        const cc = countryOfPhone(o.contact?.phone);
+        if (cc) cty(cc).inscritos += 1;
       }
+      r.totals.registros = opps.length;
+      r.totals.compras = hastaCompra;
+      r.totals.citas = hastaCita + hastaCompra; // quien compra pasó por la cita
+      r.totals.asistio = asisAt >= 0 ? hastaAsis + r.totals.citas : 0;
+      if (ingresos > 0) r.totals.ingresos = ingresos;
+      r.leadStatus = status(soloReg, hastaAsis, hastaCita, hastaCompra);
+
+      const stages = pl.stages.map((s) => ({ id: s.id, name: s.name, count: 0, value: 0 }));
+      for (const o of opps) {
+        const st = stages.find((s) => s.id === o.pipelineStageId);
+        if (st) {
+          st.count += 1;
+          st.value += num(o.monetaryValue);
+        }
+      }
+      r.pipeline = { name: pl.name, stages: stages.map(({ name, count, value }) => ({ name, count, value })) };
+    } else if (tagged) {
+      const [reg, asis, cita, compra] = tagged;
+      const ids = (cs: GhlContact[]) => new Set(cs.map((c) => c.id));
+      const sAsis = ids(asis), sCita = ids(cita), sCompra = ids(compra);
+      r.totals.registros = reg.length;
+      r.totals.asistio = asis.length;
+      r.totals.citas = cita.length;
+      r.totals.compras = compra.length;
+      for (const c of reg) {
+        const d = c.dateAdded ? ymd(new Date(c.dateAdded)) : "";
+        if (d) day(d).registros += 1;
+        if (d === today) r.today.registros += 1;
+        const cc = countryOfPhone(c.phone) || (c.country ? c.country.toUpperCase() : null);
+        if (cc) cty(cc).inscritos += 1;
+      }
+      const todayCount = (cs: GhlContact[]) => cs.filter((c) => c.dateAdded && ymd(new Date(c.dateAdded)) === today).length;
+      r.today.citas = todayCount(cita);
+      r.today.compras = todayCount(compra);
+      let soloReg = 0, hastaAsis = 0, hastaCita = 0, hastaCompra = 0;
+      for (const c of reg) {
+        if (sCompra.has(c.id)) hastaCompra++;
+        else if (sCita.has(c.id)) hastaCita++;
+        else if (sAsis.has(c.id)) hastaAsis++;
+        else soloReg++;
+      }
+      r.leadStatus = status(soloReg, hastaAsis, hastaCita, hastaCompra);
     }
   }
   if (!r.totals.ingresos && f.price > 0) r.totals.ingresos = r.totals.compras * f.price;

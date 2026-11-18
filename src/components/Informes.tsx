@@ -238,7 +238,7 @@ function Settings({ config, onClose, onSaved }: { config: InformesConfig; onClos
           <button className="btn" onClick={onClose} type="button">Cerrar</button>
         </div>
         <p className="muted small">
-          Cada funnel se reconoce por el nombre de sus campañas en Meta y por las etiquetas que GHL pone a cada contacto en cada paso.
+          Cada funnel se reconoce por el nombre de sus campañas en Meta y por su pipeline de GHL (o, si no tiene, por las etiquetas de cada paso).
         </p>
         {opts && (!opts.meta.configured || !opts.ghl.configured) ? (
           <div className="note warn">
@@ -277,11 +277,16 @@ function Settings({ config, onClose, onSaved }: { config: InformesConfig; onClos
             <div className="g2">
               <label className="fl">
                 Pipeline GHL
-                <select className="in" value={f.pipelineId} onChange={(e) => set(i, { pipelineId: e.target.value })}>
-                  <option value="">— Sin pipeline —</option>
+                <select className="in" value={f.pipelineId} onChange={(e) => set(i, { pipelineId: e.target.value, pipelineName: e.target.value ? opts?.pipelines.find((p) => p.id === e.target.value)?.name ?? f.pipelineName : "" })}>
+                  <option value="">{f.pipelineName ? f.pipelineName : "— Sin pipeline —"}</option>
                   {opts?.pipelines.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
                   {f.pipelineId && !opts?.pipelines.some((p) => p.id === f.pipelineId) ? <option value={f.pipelineId}>{f.pipelineId}</option> : null}
                 </select>
+              </label>
+              <label className="fl">
+                Etapa de compra
+                <input className="in" value={f.purchaseStage} onChange={(e) => set(i, { purchaseStage: e.target.value })} />
+                <span className="hint">Esta etapa y las siguientes cuentan como venta.</span>
               </label>
               <label className="fl">
                 Precio de venta (€)
@@ -410,8 +415,7 @@ export default function Informes() {
           <div>
             <b>Falta conectar Meta Ads y GoHighLevel</b>
             <span>
-              Añade en Vercel (Settings → Environment Variables) <code>META_ACCESS_TOKEN</code>, <code>META_AD_ACCOUNT_ID</code>, <code>GHL_TOKEN</code> y{" "}
-              <code>GHL_LOCATION_ID</code>, y vuelve a publicar. Mientras tanto puedes ver cómo quedará con datos de ejemplo.
+              Falta la clave del puente con amplify-web (<code>INFORMES_PROXY_SECRET</code>) en Vercel. Mientras tanto puedes ver cómo quedará con datos de ejemplo.
             </span>
           </div>
           <button className="btn dark" onClick={() => setDemo(true)} type="button">Ver con datos de ejemplo</button>

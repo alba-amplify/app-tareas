@@ -10,8 +10,12 @@ export type FunnelConfig = {
   campaignKeywords: string[];
   // GHL: etiquetas que marcan cada paso del embudo
   tags: { registro: string; asistio: string; cita: string; compra: string };
-  // GHL: pipeline comercial del funnel (opcional)
+  // GHL: pipeline comercial del funnel. Si hay pipeline, los pasos del embudo se
+  // cuentan por sus etapas (registro = entra en el pipeline, cita = etapa con "cita",
+  // asistió = etapa con "asist", compra = etapa de compra o posterior / ganada).
   pipelineId: string;
+  pipelineName: string; // se usa si no hay pipelineId (p. ej. "Masterclass Pipeline Funnel - BF")
+  purchaseStage: string; // nombre de la etapa que cuenta como compra (p. ej. "Acceso compra")
   // Precio de venta para estimar ingresos si GHL no trae importe en la oportunidad
   price: number;
 };

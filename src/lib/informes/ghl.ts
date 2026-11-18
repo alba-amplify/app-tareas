@@ -1,28 +1,48 @@
 // Lectura de GoHighLevel (API v2, services.leadconnectorhq.com).
-// Variables en Vercel: GHL_TOKEN (Private Integration Token de la sub-cuenta, con
-// permisos contacts.readonly, opportunities.readonly y locations/tags.readonly) y
-// GHL_LOCATION_ID.
+// Dos formas de conectarlo:
+//  · Puente (por defecto): amplify-web hace las consultas con su GHL_TOKEN
+//    (api/informes-proxy.js). Aquí basta INFORMES_PROXY_SECRET.
+//  · Directo: GHL_TOKEN en este proyecto.
+// GHL_LOCATION_ID es opcional (por defecto la sub-cuenta de Amplify).
+import { PROXY_URL } from "./meta";
 
 const BASE = "https://services.leadconnectorhq.com";
+const DEFAULT_LOCATION = "kQUjggPAg7eMIMoRci38"; // sub-cuenta de Amplify (ID público, no secreto)
+const viaProxy = () => !process.env.GHL_TOKEN && Boolean(process.env.INFORMES_PROXY_SECRET);
 
 export function ghlConfigured() {
-  return Boolean(process.env.GHL_TOKEN && process.env.GHL_LOCATION_ID);
+  return Boolean(process.env.GHL_TOKEN || process.env.INFORMES_PROXY_SECRET);
 }
 
-const loc = () => (process.env.GHL_LOCATION_ID || "").trim();
+const loc = () => (process.env.GHL_LOCATION_ID || DEFAULT_LOCATION).trim();
 
 async function call(path: string, init: RequestInit & { version?: string } = {}) {
   const { version = "2021-07-28", ...rest } = init;
-  const res = await fetch(BASE + path, {
-    ...rest,
-    cache: "no-store",
-    headers: {
-      Authorization: `Bearer ${process.env.GHL_TOKEN || ""}`,
-      Version: version,
-      Accept: "application/json",
-      ...(rest.body ? { "Content-Type": "application/json" } : {}),
-    },
-  });
+  const ctype: Record<string, string> = rest.body ? { "Content-Type": "application/json" } : {};
+  let res: Response;
+  if (viaProxy()) {
+    const [p, qs] = path.split("?");
+    const u = new URL(PROXY_URL);
+    new URLSearchParams(qs || "").forEach((v, k) => u.searchParams.set(k, v));
+    u.searchParams.set("target", "ghl");
+    u.searchParams.set("path", p);
+    res = await fetch(u, {
+      ...rest,
+      cache: "no-store",
+      headers: { "x-informes-secret": process.env.INFORMES_PROXY_SECRET || "", "x-ghl-version": version, Accept: "application/json", ...ctype },
+    });
+  } else {
+    res = await fetch(BASE + path, {
+      ...rest,
+      cache: "no-store",
+      headers: {
+        Authorization: `Bearer ${process.env.GHL_TOKEN || ""}`,
+        Version: version,
+        Accept: "application/json",
+        ...ctype,
+      },
+    });
+  }
   const json = await res.json().catch(() => ({}));
   if (!res.ok) {
     const msg = json?.message || json?.error || `HTTP ${res.status}`;
@@ -76,6 +96,8 @@ export type GhlOpportunity = {
   pipelineStageId?: string;
   status?: string;
   createdAt?: string;
+  contactId?: string;
+  contact?: { phone?: string | null; tags?: string[] };
 };
 
 const mdy = (d: string) => {

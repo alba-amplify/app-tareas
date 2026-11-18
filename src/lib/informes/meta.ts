@@ -1,15 +1,21 @@
 // Lectura de Meta Ads (Marketing API, endpoint de insights).
-// Variables en Vercel: META_ACCESS_TOKEN, META_AD_ACCOUNT_ID (con o sin "act_"),
-// opcional META_API_VERSION (por defecto v26.0).
+// Dos formas de conectarlo:
+//  · Puente (por defecto): el proyecto amplify-web hace las consultas con su
+//    META_TOKEN (api/informes-proxy.js). Aquí basta INFORMES_PROXY_SECRET.
+//  · Directo: META_ACCESS_TOKEN en este proyecto.
+// META_AD_ACCOUNT_ID es opcional (por defecto la cuenta de Amplify).
 
 const VERSION = process.env.META_API_VERSION || "v26.0";
+const DEFAULT_ACCOUNT = "act_1232179058699666"; // cuenta publicitaria de Amplify (ID público, no secreto)
+export const PROXY_URL = process.env.INFORMES_PROXY_URL || "https://amp.amplifyesp.com/api/informes-proxy";
+const viaProxy = () => !process.env.META_ACCESS_TOKEN && Boolean(process.env.INFORMES_PROXY_SECRET);
 
 export function metaConfigured() {
-  return Boolean(process.env.META_ACCESS_TOKEN && process.env.META_AD_ACCOUNT_ID);
+  return Boolean(process.env.META_ACCESS_TOKEN || process.env.INFORMES_PROXY_SECRET);
 }
 
 function account() {
-  const id = (process.env.META_AD_ACCOUNT_ID || "").trim();
+  const id = (process.env.META_AD_ACCOUNT_ID || DEFAULT_ACCOUNT).trim();
   return id.startsWith("act_") ? id : `act_${id}`;
 }
 
@@ -33,16 +39,25 @@ export type InsightRow = {
 };
 
 async function get(path: string, params: Record<string, string>) {
-  const url = new URL(`https://graph.facebook.com/${VERSION}/${path}`);
+  let url: URL;
+  const init: RequestInit = { cache: "no-store" };
+  if (viaProxy()) {
+    url = new URL(PROXY_URL);
+    url.searchParams.set("target", "meta");
+    url.searchParams.set("path", path);
+    init.headers = { "x-informes-secret": process.env.INFORMES_PROXY_SECRET || "" };
+  } else {
+    url = new URL(`https://graph.facebook.com/${VERSION}/${path}`);
+    url.searchParams.set("access_token", process.env.META_ACCESS_TOKEN || "");
+  }
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
-  url.searchParams.set("access_token", process.env.META_ACCESS_TOKEN || "");
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, init);
   const json = await res.json().catch(() => ({}));
   if (!res.ok || json.error) {
     const msg = json?.error?.message || `HTTP ${res.status}`;
     throw new Error(`Meta: ${msg}`);
   }
-  return json as { data: unknown[]; paging?: { next?: string } };
+  return json as { data: unknown[]; paging?: { next?: string; cursors?: { after?: string } } };
 }
 
 // Lee todas las páginas (hasta un límite razonable).
@@ -50,10 +65,10 @@ async function getAll<T>(path: string, params: Record<string, string>, maxPages 
   const out: T[] = [];
   let page = await get(path, { limit: "500", ...params });
   out.push(...(page.data as T[]));
-  for (let i = 1; i < maxPages && page.paging?.next; i++) {
-    const res = await fetch(page.paging.next, { cache: "no-store" });
-    page = await res.json();
-    if (!res.ok || !Array.isArray(page.data)) break;
+  // Paginación por cursor (el puente quita las URLs "next", que llevan el token)
+  for (let i = 1; i < maxPages && page.data.length >= 500 && page.paging?.cursors?.after; i++) {
+    page = await get(path, { limit: "500", ...params, after: page.paging.cursors.after });
+    if (!Array.isArray(page.data)) break;
     out.push(...(page.data as T[]));
   }
   return out;
