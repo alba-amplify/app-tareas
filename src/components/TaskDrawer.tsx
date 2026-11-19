@@ -194,7 +194,7 @@ export default function TaskDrawer({
     return parts.map((part, i) => {
       if (/^\*\*[^*]+\*\*$/.test(part)) {
         return (
-          <strong key={i} className="font-bold text-ink">
+          <strong key={i} className="font-semibold text-ink">
             {part.slice(2, -2)}
           </strong>
         );
@@ -347,7 +347,7 @@ export default function TaskDrawer({
 
   const label = "block text-xs font-semibold text-ink/50 mb-1";
   const field =
-    "w-full rounded-xl border border-black/10 bg-black/[0.02] px-3 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15 disabled:opacity-70 disabled:cursor-default";
+    "w-full rounded-xl border border-[#ebebe8] bg-white px-3 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15 disabled:opacity-70 disabled:cursor-default";
 
   return (
     <div className="fixed inset-0 z-50">
@@ -364,12 +364,12 @@ export default function TaskDrawer({
         }`}
       >
         {/* Cabecera */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-black/[0.06]">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-[#ebebe8]">
           {isAdmin ? (
             <select
               value={statusSel}
               onChange={(e) => changeStatus(e.target.value)}
-              className="text-xs font-bold px-2.5 py-1 rounded-full text-white border-0 outline-none cursor-pointer"
+              className="text-xs font-semibold px-2.5 py-1 rounded-lg text-white border-0 outline-none cursor-pointer"
               style={{
                 backgroundColor:
                   STATUS_COLUMNS.find((c) => c.key === statusSel)?.color ??
@@ -384,7 +384,7 @@ export default function TaskDrawer({
             </select>
           ) : (
             <span
-              className="text-xs font-bold px-2.5 py-1 rounded-full text-white"
+              className="text-xs font-semibold px-2.5 py-1 rounded-lg text-white"
               style={{ backgroundColor: col.color }}
             >
               {col.label}
@@ -400,7 +400,7 @@ export default function TaskDrawer({
                 setCopied(true);
                 setTimeout(() => setCopied(false), 1500);
               }}
-              className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70 whitespace-nowrap"
+              className="text-xs px-3 py-1 rounded-lg border border-[#ebebe8] hover:bg-black/[0.04] text-ink/70 whitespace-nowrap"
             >
               {copied ? "✓ Copiado" : "🔗 Enlace"}
             </button>
@@ -416,7 +416,7 @@ export default function TaskDrawer({
         {/* Contenido scrollable */}
         <div className="flex-1 overflow-y-auto px-5 py-5 space-y-4">
           <input
-            className="w-full text-2xl font-bold text-ink tracking-tight bg-transparent outline-none disabled:opacity-100"
+            className="w-full text-2xl font-semibold text-ink tracking-tight bg-transparent outline-none disabled:opacity-100"
             value={form.title}
             disabled={!isAdmin}
             onChange={(e) => set("title", e.target.value)}
@@ -509,14 +509,14 @@ export default function TaskDrawer({
               <button
                 onClick={save}
                 disabled={saving}
-                className="bg-paprika hover:bg-paprika-dark text-white text-sm font-semibold px-5 py-2 rounded-full disabled:opacity-60"
+                className="bg-ink hover:bg-ink/85 text-white text-sm font-semibold px-5 py-2 rounded-lg disabled:opacity-60"
               >
                 {saving ? "Guardando…" : saved ? "Guardado ✓" : "Guardar cambios"}
               </button>
               <button
                 onClick={handleDelete}
                 disabled={saving}
-                className="text-sm text-paprika/80 hover:text-paprika px-3 py-2 rounded-full hover:bg-paprika/10"
+                className="text-sm text-paprika/80 hover:text-paprika px-3 py-2 rounded-lg hover:bg-paprika/10"
               >
                 Borrar
               </button>
@@ -524,7 +524,7 @@ export default function TaskDrawer({
           )}
 
           {/* Comentarios */}
-          <div className="pt-4 border-t border-black/[0.06]">
+          <div className="pt-4 border-t border-[#ebebe8]">
             <h3 className="font-semibold text-ink text-sm mb-3">
               Comentarios{" "}
               <span className="text-ink/40 font-normal">
@@ -553,12 +553,12 @@ export default function TaskDrawer({
                         value={editBody}
                         onChange={(e) => setEditBody(e.target.value)}
                         rows={3}
-                        className="w-full rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink outline-none focus:border-paprika"
+                        className="w-full rounded-lg border border-[#ebebe8] bg-white px-3 py-2 text-sm text-ink outline-none focus:border-paprika"
                       />
                       <div className="flex gap-2 mt-1">
                         <button
                           onClick={() => saveEditComment(c.id)}
-                          className="text-xs bg-paprika text-white px-3 py-1 rounded-full font-semibold"
+                          className="text-xs bg-paprika text-white px-3 py-1 rounded-lg font-semibold"
                         >
                           Guardar
                         </button>
@@ -567,7 +567,7 @@ export default function TaskDrawer({
                             setEditingComment(null);
                             setEditBody("");
                           }}
-                          className="text-xs px-3 py-1 rounded-full border border-black/10 text-ink/70"
+                          className="text-xs px-3 py-1 rounded-lg border border-[#ebebe8] text-ink/70"
                         >
                           Cancelar
                         </button>
@@ -584,10 +584,10 @@ export default function TaskDrawer({
                       <button
                         key={emoji}
                         onClick={() => toggleReaction(c.id, emoji)}
-                        className={`text-xs px-2 py-0.5 rounded-full border ${
+                        className={`text-xs px-2 py-0.5 rounded-lg border ${
                           info.mine
                             ? "border-paprika bg-paprika/10"
-                            : "border-black/10 hover:bg-black/[0.04]"
+                            : "border-[#ebebe8] hover:bg-black/[0.04]"
                         }`}
                       >
                         {emoji} {info.count}
@@ -598,12 +598,12 @@ export default function TaskDrawer({
                         onClick={() =>
                           setPickerFor((p) => (p === c.id ? null : c.id))
                         }
-                        className="text-xs px-2 py-0.5 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/50"
+                        className="text-xs px-2 py-0.5 rounded-lg border border-[#ebebe8] hover:bg-black/[0.04] text-ink/50"
                       >
                         ＋
                       </button>
                       {pickerFor === c.id && (
-                        <div className="absolute z-10 mt-1 bg-white rounded-xl border border-black/10 shadow-card p-1 flex gap-1">
+                        <div className="absolute z-10 mt-1 bg-white rounded-xl border border-[#ebebe8] shadow-card p-1 flex gap-1">
                           {EMOJIS.map((e) => (
                             <button
                               key={e}
@@ -647,9 +647,9 @@ export default function TaskDrawer({
         </div>
 
         {/* Añadir comentario (fijo abajo) */}
-        <div className="relative border-t border-black/[0.06] px-5 py-4">
+        <div className="relative border-t border-[#ebebe8] px-5 py-4">
           {suggestions.length > 0 && (
-            <div className="absolute bottom-full left-5 right-5 mb-2 bg-white rounded-xl border border-black/10 shadow-card overflow-hidden z-10">
+            <div className="absolute bottom-full left-5 right-5 mb-2 bg-white rounded-xl border border-[#ebebe8] shadow-card overflow-hidden z-10">
               {suggestions.map((p, i) => (
                 <button
                   key={p.id}
@@ -673,13 +673,13 @@ export default function TaskDrawer({
               <button
                 type="button"
                 onClick={() => setInputPicker((v) => !v)}
-                className="w-9 h-9 rounded-full border border-black/10 hover:bg-black/[0.04] text-lg flex items-center justify-center"
+                className="w-9 h-9 rounded-full border border-[#ebebe8] hover:bg-black/[0.04] text-lg flex items-center justify-center"
                 aria-label="Emojis"
               >
                 😀
               </button>
               {inputPicker && (
-                <div className="absolute bottom-full left-0 mb-2 bg-white rounded-xl border border-black/10 shadow-card p-1 flex gap-1 z-10">
+                <div className="absolute bottom-full left-0 mb-2 bg-white rounded-xl border border-[#ebebe8] shadow-card p-1 flex gap-1 z-10">
                   {EMOJIS.map((e) => (
                     <button
                       key={e}
@@ -702,12 +702,12 @@ export default function TaskDrawer({
               onKeyDown={onCommentKeyDown}
               rows={1}
               placeholder="Comentario…  (Enter = salto de línea · Cmd/Ctrl+Enter = enviar · **negrita**)"
-              className="flex-1 resize-none rounded-2xl border border-black/10 bg-black/[0.02] px-4 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15 max-h-32"
+              className="flex-1 resize-none rounded-xl border border-[#ebebe8] bg-white px-4 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15 max-h-32"
             />
             <button
               type="submit"
               disabled={sending || !body.trim()}
-              className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-5 py-2 rounded-full text-sm disabled:opacity-60"
+              className="bg-ink hover:bg-ink/85 text-white font-semibold px-5 py-2 rounded-lg text-sm disabled:opacity-60"
             >
               {sending ? "…" : "Enviar"}
             </button>

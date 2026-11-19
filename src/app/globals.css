@@ -3,14 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --background: #faf8f3; /* crema casi blanco */
-  --foreground: #2a2320; /* ink */
+  --background: #fafaf9; /* igual que el panel */
+  --foreground: #18181b; /* ink */
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Geist, Inter, system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  font-feature-settings: "tnum" 1, "cv11" 1;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+/* Páginas mostradas dentro del panel de tareas */
+html.embedded body > div > header,
+html.embedded body > div > nav,
+html.embedded .app-header,
+html.embedded .app-nav {
+  display: none !important;
+}
+html.embedded body {
+  background: transparent;
+}
+
+/* Dentro del panel: mismos márgenes que sus vistas */
+html.embedded main {
+  padding-left: 22px !important;
+  padding-right: 22px !important;
+  padding-top: 20px !important;
 }

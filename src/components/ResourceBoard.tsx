@@ -88,12 +88,12 @@ export default function ResourceBoard({
     <div>
       <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-ink tracking-tight">{title}</h1>
+          <h1 className="text-[30px] leading-tight font-semibold text-ink tracking-[-0.035em]">{title}</h1>
           <p className="text-ink/50 text-sm mt-1">{subtitle}</p>
         </div>
         <button
           onClick={openNew}
-          className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-5 py-2 rounded-full text-sm shadow-soft transition-colors"
+          className="bg-ink hover:bg-ink/85 text-white font-semibold px-5 py-2 rounded-lg text-sm transition-colors"
         >
           + Nueva tarjeta
         </button>
@@ -104,10 +104,10 @@ export default function ResourceBoard({
           <button
             key={c || "all"}
             onClick={() => setCat(c)}
-            className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${
+            className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
               cat === c
-                ? "bg-paprika text-white border-paprika"
-                : "border-black/10 text-ink/60 hover:text-ink"
+                ? "bg-[#efefec] text-ink border-transparent"
+                : "border-[#ebebe8] text-ink/60 hover:text-ink"
             }`}
           >
             {c || "Todas"}
@@ -126,11 +126,11 @@ export default function ResourceBoard({
           <div
             key={r.id}
             onClick={() => setPreview(r)}
-            className="bg-white rounded-2xl border border-black/[0.06] p-5 shadow-soft hover:shadow-card transition-shadow flex flex-col cursor-pointer"
+            className="bg-white rounded-xl border border-[#ebebe8] p-5 hover:border-[#cfcfcb] transition-shadow flex flex-col cursor-pointer"
           >
-            <h3 className="font-bold text-ink text-lg leading-snug">{r.title}</h3>
+            <h3 className="font-semibold text-ink text-lg leading-snug">{r.title}</h3>
             {r.category && (
-              <span className="inline-block self-start mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/[0.05] text-ink/60">
+              <span className="inline-block self-start mt-1.5 text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-black/[0.05] text-ink/60">
                 {r.category}
               </span>
             )}
@@ -143,7 +143,7 @@ export default function ResourceBoard({
               <img
                 src={r.image_url}
                 alt={r.title}
-                className="mt-3 w-full h-36 object-cover rounded-xl border border-black/[0.06]"
+                className="mt-3 w-full h-36 object-cover rounded-xl border border-[#ebebe8]"
               />
             )}
 
@@ -172,7 +172,7 @@ export default function ResourceBoard({
                           {r.table_data.columns.map((c, i) => (
                             <th
                               key={i}
-                              className="text-left font-semibold text-ink/70 border-b border-black/10 px-2 py-1"
+                              className="text-left font-semibold text-ink/70 border-b border-[#ebebe8] px-2 py-1"
                             >
                               {c}
                             </th>
@@ -186,7 +186,7 @@ export default function ResourceBoard({
                           {row.map((cell, ci) => (
                             <td
                               key={ci}
-                              className="border-b border-black/[0.06] px-2 py-1 text-ink/80 align-top"
+                              className="border-b border-[#ebebe8] px-2 py-1 text-ink/80 align-top"
                             >
                               {cell}
                             </td>
@@ -210,7 +210,7 @@ export default function ResourceBoard({
             >
               <button
                 onClick={() => openEdit(r)}
-                className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                className="text-xs px-3 py-1 rounded-lg border border-[#ebebe8] hover:bg-black/[0.04] text-ink/70"
               >
                 ✎ Editar
               </button>
@@ -221,7 +221,7 @@ export default function ResourceBoard({
                   )
                 }
                 disabled={pending}
-                className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                className="text-xs px-3 py-1 rounded-lg border border-[#ebebe8] hover:bg-black/[0.04] text-ink/70"
               >
                 ⧉ Duplicar
               </button>
@@ -233,7 +233,7 @@ export default function ResourceBoard({
                     );
                 }}
                 disabled={pending}
-                className="text-xs px-3 py-1 rounded-full border border-paprika/30 text-paprika hover:bg-paprika/10"
+                className="text-xs px-3 py-1 rounded-lg border border-paprika/30 text-paprika hover:bg-paprika/10"
               >
                 🗑
               </button>
@@ -283,12 +283,12 @@ function ResourcePreview({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-3xl bg-white rounded-2xl shadow-xl my-8"
+        className="w-full max-w-3xl bg-white rounded-xl shadow-xl my-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between gap-3 p-6 border-b border-black/[0.06]">
+        <div className="flex items-start justify-between gap-3 p-6 border-b border-[#ebebe8]">
           <div>
-            <h2 className="text-2xl font-bold text-ink tracking-tight">
+            <h2 className="text-2xl font-semibold text-ink tracking-tight">
               {resource.title}
             </h2>
             {resource.description && (
@@ -298,7 +298,7 @@ function ResourcePreview({
           <div className="flex items-center gap-2 flex-shrink-0">
             <button
               onClick={onEdit}
-              className="text-sm px-3 py-1.5 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+              className="text-sm px-3 py-1.5 rounded-lg border border-[#ebebe8] hover:bg-black/[0.04] text-ink/70"
             >
               ✎ Editar
             </button>
@@ -318,7 +318,7 @@ function ResourcePreview({
             <img
               src={resource.image_url}
               alt={resource.title}
-              className="w-full max-h-[65vh] object-contain rounded-xl border border-black/[0.06] bg-black/[0.02]"
+              className="w-full max-h-[65vh] object-contain rounded-xl border border-[#ebebe8] bg-white"
             />
           )}
 
@@ -345,15 +345,15 @@ function ResourcePreview({
           {hasTable && (
             <div>
               <h3 className="text-sm font-semibold text-ink/50 mb-2">Tabla</h3>
-              <div className="overflow-x-auto border border-black/10 rounded-xl">
+              <div className="overflow-x-auto border border-[#ebebe8] rounded-xl">
                 <table className="w-full text-sm border-collapse">
                   {t!.columns.some((c) => c) && (
-                    <thead className="bg-black/[0.02]">
+                    <thead className="bg-white">
                       <tr>
                         {t!.columns.map((c, i) => (
                           <th
                             key={i}
-                            className="text-left font-semibold text-ink px-3 py-2 border-b border-black/10"
+                            className="text-left font-semibold text-ink px-3 py-2 border-b border-[#ebebe8]"
                           >
                             {c}
                           </th>
@@ -367,7 +367,7 @@ function ResourcePreview({
                         {row.map((cell, ci) => (
                           <td
                             key={ci}
-                            className="px-3 py-2 border-b border-black/[0.06] text-ink/80 align-top"
+                            className="px-3 py-2 border-b border-[#ebebe8] text-ink/80 align-top"
                           >
                             {cell}
                           </td>
@@ -525,7 +525,7 @@ function ResourceModal({
   }
 
   const field =
-    "w-full rounded-xl border border-black/10 bg-black/[0.02] px-3 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15";
+    "w-full rounded-xl border border-[#ebebe8] bg-white px-3 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15";
 
   return (
     <div
@@ -533,10 +533,10 @@ function ResourceModal({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-6 my-8"
+        className="w-full max-w-2xl bg-white rounded-xl shadow-xl p-6 my-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-xl font-bold text-ink mb-4 tracking-tight">
+        <h2 className="text-xl font-semibold text-ink mb-4 tracking-tight">
           {isEdit ? "Editar tarjeta" : "Nueva tarjeta"}
         </h2>
 
@@ -599,7 +599,7 @@ function ResourceModal({
                 <img
                   src={imageUrl}
                   alt=""
-                  className="w-full max-h-56 object-contain rounded-xl border border-black/10 bg-black/[0.02]"
+                  className="w-full max-h-56 object-contain rounded-xl border border-[#ebebe8] bg-white"
                 />
                 <button
                   type="button"
@@ -610,7 +610,7 @@ function ResourceModal({
                 </button>
               </div>
             ) : (
-              <label className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full border border-black/10 hover:bg-black/[0.04] cursor-pointer text-ink/70">
+              <label className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg border border-[#ebebe8] hover:bg-black/[0.04] cursor-pointer text-ink/70">
                 {uploading ? "Subiendo…" : "📷 Subir imagen"}
                 <input
                   type="file"
@@ -689,7 +689,7 @@ function ResourceModal({
 
             {table && (
               <div className="space-y-2">
-                <div className="overflow-x-auto border border-black/10 rounded-xl p-1">
+                <div className="overflow-x-auto border border-[#ebebe8] rounded-xl p-1">
                   <table className="border-collapse">
                     <thead>
                       <tr>
@@ -699,7 +699,7 @@ function ResourceModal({
                               <input
                                 value={c}
                                 onChange={(e) => setColumn(i, e.target.value)}
-                                className="w-28 rounded-md border border-black/10 bg-black/[0.02] px-2 py-1 text-xs font-semibold text-ink outline-none focus:border-paprika"
+                                className="w-28 rounded-md border border-[#ebebe8] bg-white px-2 py-1 text-xs font-semibold text-ink outline-none focus:border-paprika"
                                 placeholder={`Col ${i + 1}`}
                               />
                               <button
@@ -732,7 +732,7 @@ function ResourceModal({
                               <input
                                 value={cell}
                                 onChange={(e) => setCell(ri, ci, e.target.value)}
-                                className="w-28 rounded-md border border-black/10 bg-black/[0.02] px-2 py-1 text-xs text-ink outline-none focus:border-paprika"
+                                className="w-28 rounded-md border border-[#ebebe8] bg-white px-2 py-1 text-xs text-ink outline-none focus:border-paprika"
                               />
                             </td>
                           ))}
@@ -768,14 +768,14 @@ function ResourceModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2 rounded-full border border-black/10 text-ink/70 hover:bg-black/[0.04]"
+              className="px-5 py-2 rounded-lg border border-[#ebebe8] text-ink/70 hover:bg-black/[0.04]"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={pending}
-              className="px-5 py-2 rounded-full bg-paprika hover:bg-paprika-dark text-white font-semibold disabled:opacity-60"
+              className="px-5 py-2 rounded-lg bg-ink hover:bg-ink/85 text-white font-semibold disabled:opacity-60"
             >
               {pending ? "Guardando…" : isEdit ? "Guardar" : "Crear tarjeta"}
             </button>

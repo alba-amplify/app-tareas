@@ -63,7 +63,7 @@ export default async function Home({
       <Nav />
       <main className="w-full px-6 lg:px-10 py-6">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-ink tracking-tight">
+          <h1 className="text-[30px] leading-tight font-semibold text-ink tracking-[-0.035em]">
             Tablero de tareas
           </h1>
           <p className="text-ink/50 text-sm mt-1">

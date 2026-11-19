@@ -58,7 +58,7 @@ export default function TaskFormModal({ profiles, task, onClose }: Props) {
   }
 
   const field =
-    "w-full rounded-xl border border-black/10 bg-black/[0.02] px-3 py-2 text-ink outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15";
+    "w-full rounded-xl border border-[#ebebe8] bg-white px-3 py-2 text-ink outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15";
   const label = "block text-sm font-semibold text-ink mb-1";
 
   return (
@@ -67,10 +67,10 @@ export default function TaskFormModal({ profiles, task, onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-6 my-8"
+        className="w-full max-w-lg bg-white rounded-xl shadow-xl p-6 my-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-xl font-bold text-ink mb-4">
+        <h2 className="text-xl font-semibold text-ink mb-4">
           {isEdit ? "Editar tarea" : "Nueva tarea"}
         </h2>
 
@@ -166,14 +166,14 @@ export default function TaskFormModal({ profiles, task, onClose }: Props) {
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2 rounded-full border border-black/10 text-ink/70 hover:bg-black/[0.04]"
+              className="px-5 py-2 rounded-lg border border-[#ebebe8] text-ink/70 hover:bg-black/[0.04]"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={pending}
-              className="px-5 py-2 rounded-full bg-paprika hover:bg-paprika-dark text-white font-semibold disabled:opacity-60"
+              className="px-5 py-2 rounded-lg bg-ink hover:bg-ink/85 text-white font-semibold disabled:opacity-60"
             >
               {pending ? "Guardando…" : isEdit ? "Guardar" : "Crear tarea"}
             </button>

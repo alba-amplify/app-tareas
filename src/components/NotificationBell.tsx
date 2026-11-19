@@ -24,7 +24,7 @@ export default function NotificationBell() {
     await markRead(n);
     setOpen(false);
     if (n.post_id) router.push(`/rrss?post=${n.post_id}`);
-    else if (n.task_id) router.push(`/?task=${n.task_id}`);
+    else if (n.task_id) router.push(`/tablero-anterior?task=${n.task_id}`);
   }
 
   async function load() {
