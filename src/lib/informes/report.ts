@@ -1,4 +1,4 @@
-import type { FunnelConfig, Range, Report } from "./types";
+import type { FunnelConfig, Origin, OriginRow, Range, Report } from "./types";
 import { fetchMeta, leadsOf, metaConfigured, visitsOf, type InsightRow } from "./meta";
 import {
   type GhlOpportunity,
@@ -39,8 +39,8 @@ async function contactsWithTags(list: string, since: string | null, until: strin
 const cache = new Map<string, { at: number; data: Report }>();
 const TTL = 5 * 60 * 1000;
 
-export async function buildReport(f: FunnelConfig, range: Range, fresh = false): Promise<Report> {
-  const key = JSON.stringify([f, range]);
+export async function buildReport(f: FunnelConfig, range: Range, fresh = false, origin: Origin = "all"): Promise<Report> {
+  const key = JSON.stringify([f, range, origin]);
   const hit = cache.get(key);
   if (!fresh && hit && Date.now() - hit.at < TTL) return hit.data;
 
@@ -49,6 +49,8 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
   const r: Report = {
     funnel: { id: f.id, name: f.name, landing: f.landing },
     range,
+    origin,
+    origins: null,
     since: w.since,
     until: w.until,
     generatedAt: new Date().toISOString(),
@@ -80,7 +82,8 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
   };
 
   const [meta, ghl] = await Promise.allSettled([
-    r.sources.meta.configured ? fetchMeta(w, f.campaignKeywords) : Promise.resolve(null),
+    // Lo orgánico no tiene gasto en anuncios: no se mira Meta
+    r.sources.meta.configured && origin !== "organico" ? fetchMeta(w, f.campaignKeywords) : Promise.resolve(null),
     r.sources.ghl.configured
       ? (async () => {
           // Con pipeline: los pasos se cuentan por sus etapas. Sin pipeline: por etiquetas.
@@ -92,11 +95,16 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
               null;
             if (!pl) throw new Error(`GHL: no encuentro el pipeline «${f.pipelineName || f.pipelineId}». Elígelo en Ajustes.`);
             // Si el pipeline lo comparten varios funnels, la etiqueta de registro filtra los del funnel
-            const [opps, reg] = await Promise.all([
+            // Origen: etiquetas origen-paid / origen-organico (como el panel de amplify-web).
+            // Se buscan contactos dados de alta hasta 90 días antes del rango, por si el lead es anterior.
+            const since90 = w.since ? ymd(new Date(new Date(w.since + "T12:00:00Z").getTime() - 90 * 86400000)) : null;
+            const [opps, reg, paidC, orgC] = await Promise.all([
               opportunities(pl.id, w.since, w.until),
               f.tags.registro ? contactsWithTags(f.tags.registro, w.since, w.until) : Promise.resolve(null),
+              contactsWithTag("origen-paid", since90, w.until).catch(() => [] as GhlContact[]),
+              contactsWithTag("origen-organico", since90, w.until).catch(() => [] as GhlContact[]),
             ]);
-            return { pl, opps, reg, tagged: null };
+            return { pl, opps, reg, tagged: null, paid: new Set(paidC.map((c) => c.id)), org: new Set(orgC.map((c) => c.id)) };
           }
           const tagged = await Promise.all([
             contactsWithTags(f.tags.registro, w.since, w.until),
@@ -104,12 +112,13 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
             contactsWithTags(f.tags.cita, w.since, w.until),
             contactsWithTags(f.tags.compra, w.since, w.until),
           ]);
-          return { pl: null, opps: [] as GhlOpportunity[], reg: null, tagged };
+          return { pl: null, opps: [] as GhlOpportunity[], reg: null, tagged, paid: null, org: null };
         })()
       : Promise.resolve(null),
   ]);
 
   // ---------- Meta ----------
+  if (origin === "organico") r.sources.meta.ok = true; // no aplica: sin anuncios
   if (meta.status === "rejected") r.sources.meta.error = String(meta.reason?.message || meta.reason);
   else if (meta.value) {
     r.sources.meta.ok = true;
@@ -205,9 +214,46 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
       const bought = (o: GhlOpportunity) => o.status === "won" || buySet.has(o.pipelineStageId || "") || reached(o, buyAt);
 
       // Solo las oportunidades de los contactos del funnel (si el pipeline es compartido)
+      let regList = regContacts;
       if (regContacts) {
         const ids = new Set(regContacts.map((c) => c.id));
         opps = opps.filter((o) => ids.has(o.contactId || "") || ids.has(o.contact?.id || ""));
+      }
+
+      // Origen de cada lead (de pago / orgánico / sin clasificar)
+      const paidSet = ghl.value.paid ?? new Set<string>(), orgSet = ghl.value.org ?? new Set<string>();
+      const originOfId = (id: string, tags?: string[]): "paid" | "organico" | "sin" => {
+        const t = (tags || []).map((x) => normName(x));
+        if (paidSet.has(id) || t.includes("origen-paid")) return "paid";
+        if (orgSet.has(id) || t.includes("origen-organico")) return "organico";
+        return "sin";
+      };
+      const originOfOpp = (o: GhlOpportunity) => originOfId(o.contactId || o.contact?.id || "", o.contact?.tags);
+
+      // Reparto por origen (antes de aplicar el filtro de origen)
+      const rows: Record<string, OriginRow> = {
+        paid: { key: "paid", label: "De pago (Meta Ads)", registros: 0, citas: 0, compras: 0, ingresos: 0 },
+        organico: { key: "organico", label: "Orgánico", registros: 0, citas: 0, compras: 0, ingresos: 0 },
+        sin: { key: "sin", label: "Sin clasificar", registros: 0, citas: 0, compras: 0, ingresos: 0 },
+      };
+      for (const o of opps) {
+        const row = rows[originOfOpp(o)];
+        const isBuy = bought(o) && !lost(o);
+        row.registros++;
+        if (isBuy) { row.compras++; row.citas++; row.ingresos += num(o.monetaryValue) || f.price; }
+        else if (reached(o, citaAt) && !lost(o)) row.citas++;
+      }
+      if (regList) {
+        // contactos registrados que aún no tienen oportunidad
+        const withOpp = new Set(opps.map((o) => o.contactId || o.contact?.id || ""));
+        for (const c of regList) if (!withOpp.has(c.id)) rows[originOfId(c.id, c.tags)].registros++;
+      }
+      r.origins = [rows.paid, rows.organico, rows.sin];
+
+      // Filtro de origen elegido en la vista
+      if (origin !== "all") {
+        opps = opps.filter((o) => originOfOpp(o) === origin);
+        if (regList) regList = regList.filter((c) => originOfId(c.id, c.tags) === origin);
       }
 
       let soloReg = 0, hastaAsis = 0, hastaCita = 0, hastaCompra = 0, ingresos = 0;
@@ -224,7 +270,7 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
           if (isBuy) r.today.compras += 1;
           if (isCita) r.today.citas += 1;
         }
-        if (!regContacts) {
+        if (!regList) {
           if (d) day(d).registros += 1;
           if (d === today) r.today.registros += 1;
           const cc = countryOfPhone(o.contact?.phone);
@@ -232,8 +278,8 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
         }
       }
       // Registros: los contactos con la etiqueta del funnel, o las oportunidades del pipeline
-      if (regContacts) {
-        for (const c of regContacts) {
+      if (regList) {
+        for (const c of regList) {
           const d = c.dateAdded ? ymd(new Date(c.dateAdded)) : "";
           if (d) day(d).registros += 1;
           if (d === today) r.today.registros += 1;
@@ -241,9 +287,9 @@ export async function buildReport(f: FunnelConfig, range: Range, fresh = false):
           if (cc) cty(cc).inscritos += 1;
         }
         // Los que aún no tienen oportunidad en el pipeline cuentan como "solo registrado"
-        soloReg += Math.max(0, regContacts.length - opps.length);
+        soloReg += Math.max(0, regList.length - opps.length);
       }
-      r.totals.registros = regContacts ? Math.max(regContacts.length, opps.length) : opps.length;
+      r.totals.registros = regList ? Math.max(regList.length, opps.length) : opps.length;
       r.totals.compras = hastaCompra;
       r.totals.citas = hastaCita + hastaCompra; // quien compra pasó por la cita
       r.totals.asistio = asisAt >= 0 ? hastaAsis + r.totals.citas : 0;
@@ -331,6 +377,12 @@ export function demoReport(f: FunnelConfig, range: Range): Report {
     since: w.since,
     until: w.until,
     generatedAt: new Date().toISOString(),
+    origin: "all",
+    origins: [
+      { key: "paid", label: "De pago (Meta Ads)", registros: Math.round(registros * 0.72), citas: Math.round(citas * 0.7), compras: Math.round(compras * 0.68), ingresos: Math.round(compras * 0.68) * price },
+      { key: "organico", label: "Orgánico", registros: Math.round(registros * 0.24), citas: Math.round(citas * 0.27), compras: Math.round(compras * 0.3), ingresos: Math.round(compras * 0.3) * price },
+      { key: "sin", label: "Sin clasificar", registros: Math.round(registros * 0.04), citas: Math.round(citas * 0.03), compras: 0, ingresos: 0 },
+    ],
     demo: true,
     sources: { meta: { configured: false, ok: true }, ghl: { configured: false, ok: true } },
     totals: { spend, impressions: spend * 95, clicks: Math.round(spend * 1.9), reach: spend * 60, metaLeads, visits: Math.round(registros * 3.4), registros, asistio, citas, compras, ingresos: compras * price },

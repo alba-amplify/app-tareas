@@ -24,11 +24,18 @@ export type InformesConfig = { funnels: FunnelConfig[] };
 
 export type Range = "7" | "14" | "30" | "all";
 
+// Origen del lead según las etiquetas de GHL origen-paid / origen-organico
+export type Origin = "all" | "paid" | "organico";
+
+export type OriginRow = { key: "paid" | "organico" | "sin"; label: string; registros: number; citas: number; compras: number; ingresos: number };
+
 export type Row = Record<string, string | number | null>;
 
 export type Report = {
   funnel: { id: string; name: string; landing: string };
   range: Range;
+  origin: Origin;
+  origins: OriginRow[] | null; // reparto por origen (antes de filtrar)
   since: string | null; // AAAA-MM-DD
   until: string;
   generatedAt: string;

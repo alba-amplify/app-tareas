@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { FunnelConfig, InformesConfig, Range, Report } from "@/lib/informes/types";
+import type { FunnelConfig, InformesConfig, Origin, Range, Report } from "@/lib/informes/types";
 
 /* ---------- formato ---------- */
 // Idioma elegido en el selector (cookie amplify_lang): formatos en inglés o en español
@@ -34,6 +34,7 @@ const ago = (iso: string) => {
 const GENDER: Record<string, string> = { female: "Mujeres", male: "Hombres", unknown: "Sin dato" };
 
 const RANGES: [Range, string][] = [["7", "7 d"], ["14", "14 d"], ["30", "30 d"], ["all", "Todo"]];
+const ORIGINS: [Origin, string][] = [["all", "Todos"], ["paid", "De pago"], ["organico", "Orgánico"]];
 
 function cplClass(cpl: number) {
   if (!Number.isFinite(cpl)) return "";
@@ -310,6 +311,7 @@ function Settings({ config, onClose, onSaved }: { config: InformesConfig; onClos
 export default function Informes() {
   const [funnel, setFunnel] = useState<string>("");
   const [range, setRange] = useState<Range>("7");
+  const [origin, setOrigin] = useState<Origin>("all");
   const [demo, setDemo] = useState(false);
   const [adsFilter, setAdsFilter] = useState<"all" | "active">("all");
   const [data, setData] = useState<{ report: Report; config: InformesConfig } | null>(null);
@@ -325,20 +327,22 @@ export default function Informes() {
       const s = JSON.parse(localStorage.getItem("amplify-informes") || "{}");
       if (s.funnel) setFunnel(s.funnel);
       if (s.range) setRange(s.range);
+      if (s.origin) setOrigin(s.origin);
       if (s.demo) setDemo(true);
     } catch {}
   }, []);
   useEffect(() => {
     try {
-      localStorage.setItem("amplify-informes", JSON.stringify({ funnel, range, demo }));
+      localStorage.setItem("amplify-informes", JSON.stringify({ funnel, range, demo, origin }));
     } catch {}
-  }, [funnel, range, demo]);
+  }, [funnel, range, demo, origin]);
 
   const load = useCallback(
     async (fresh = false) => {
       setLoading(true);
       setError("");
       const q = new URLSearchParams({ range });
+      if (origin !== "all") q.set("origin", origin);
       if (funnel) q.set("funnel", funnel);
       if (demo) q.set("demo", "1");
       if (fresh) q.set("fresh", "1");
@@ -355,7 +359,7 @@ export default function Informes() {
         setLoading(false);
       }
     },
-    [funnel, range, demo],
+    [funnel, range, demo, origin],
   );
 
   useEffect(() => {
@@ -407,7 +411,10 @@ export default function Informes() {
             </button>
           ))}
         </div>
-        <Seg value={range} options={RANGES} onChange={setRange} />
+        <div className="fright">
+          <Seg value={origin} options={ORIGINS} onChange={setOrigin} />
+          <Seg value={range} options={RANGES} onChange={setRange} />
+        </div>
       </div>
 
       {notConfigured ? (
@@ -454,6 +461,42 @@ export default function Informes() {
               </div>
             ))}
           </div>
+
+          {r.origin === "organico" ? (
+            <div className="note">
+              <div>
+                <b>Solo orgánico</b>
+                <span>Leads con la etiqueta origen-organico en GHL. No tienen gasto en anuncios, así que no se muestran los datos de Meta.</span>
+              </div>
+            </div>
+          ) : null}
+
+          {r.origins ? (
+            <Section eyebrow="Origen" title="De pago y orgánico" right={<span className="muted small">Etiquetas origen-paid / origen-organico de GHL</span>}>
+              <div className="tw">
+                <table className="tbl">
+                  <thead><tr><th>Origen</th><th className="r">Registros</th><th className="r">Citas</th><th className="r">Ventas</th><th className="r">Registro → venta</th><th className="r">Ingresos</th><th className="r">CPL</th></tr></thead>
+                  <tbody>
+                    {(() => {
+                      const tot = r.origins!.reduce((a, o) => ({ registros: a.registros + o.registros, citas: a.citas + o.citas, compras: a.compras + o.compras, ingresos: a.ingresos + o.ingresos }), { registros: 0, citas: 0, compras: 0, ingresos: 0 });
+                      return [...r.origins!.filter((o) => o.key !== "sin" || o.registros > 0), { key: "tot", label: "Total", ...tot }].map((o) => (
+                        <tr key={o.key} className={o.key === "tot" ? "tot" : o.key === r.origin ? "sel" : ""} onClick={() => (o.key === "paid" || o.key === "organico") && setOrigin(origin === o.key ? "all" : (o.key as Origin))}>
+                          <td><span className={`orig o-${o.key}`} />{o.label}</td>
+                          <td className="r num">{int(o.registros)}</td>
+                          <td className="r num">{int(o.citas)}</td>
+                          <td className="r num">{int(o.compras)}</td>
+                          <td className="r num">{pct(ratio(o.compras, o.registros))}</td>
+                          <td className="r num">{eur(o.ingresos)}</td>
+                          <td className="r num">{o.key === "paid" && r.origin !== "organico" ? money(r.totals.spend, o.registros) : "—"}</td>
+                        </tr>
+                      ));
+                    })()}
+                  </tbody>
+                </table>
+              </div>
+              <p className="foot">Pulsa «De pago» u «Orgánico» para ver todo el informe solo con ese origen. El CPL de pago es el gasto de Meta entre los registros de pago.</p>
+            </Section>
+          ) : null}
 
           <Section eyebrow="Hoy" title="Cómo va el día">
             <div className="today">
@@ -551,6 +594,7 @@ export default function Informes() {
             </Section>
           </div>
 
+          {r.origin !== "organico" ? (
           <Section eyebrow="Nivel anuncio" title="Anuncios" right={
             <div className="ictools">
               <span className="legend sem"><i className="dot good" />≤ 4 € <i className="dot warn" />≤ 8 € <i className="dot bad" />&gt; 8 €</span>
@@ -583,6 +627,8 @@ export default function Informes() {
             )}
           </Section>
 
+          ) : null}
+
           <Section eyebrow="Geografía" title="Leads por país">
             {r.countries.length ? (
               <div className="tw">
@@ -612,6 +658,8 @@ export default function Informes() {
             <p className="foot">Los inscritos de GHL se asignan por el prefijo del teléfono: solo cuentan los registros con teléfono.</p>
           </Section>
 
+          {r.origin !== "organico" ? (
+          <>
           <div className="two">
             <Section eyebrow="Segmentación Meta" title="Audiencia por edad y género">
               <Audience rows={r.audience} />
@@ -656,6 +704,9 @@ export default function Informes() {
             )}
           </Section>
 
+          </>
+          ) : null}
+
           <p className="ifoot">Amplify · Datos de GoHighLevel y Meta Ads · Se actualizan cada 5 minutos · Sin datos personales</p>
         </div>
       )}
@@ -694,6 +745,10 @@ const CSS = `
 .inf .btn.dark{background:var(--text);border-color:var(--text);color:#fff}.inf .btn.dark:hover{background:#2c2c30}
 .inf .status{font-size:12px;color:var(--faint);display:flex;align-items:center;gap:6px;white-space:nowrap;margin-right:4px}
 .inf .status i{width:6px;height:6px;border-radius:50%;background:#d4d4d8}.inf .status.ok i{background:var(--good)}.inf .status.busy i{background:#d9a22b}.inf .status.demo i{background:var(--accent)}
+.fright{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.orig{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:1px}
+.o-paid{background:var(--accent)}.o-organico{background:var(--good)}.o-sin{background:#d4d4d8}.o-tot{display:none}
+.tbl tr.tot td{font-weight:600;background:#fafaf9}.tbl tr.sel td{background:var(--accent-soft)}
 .filters{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .inf .seg{display:inline-flex;gap:2px;flex-wrap:wrap}
 .inf .seg button{border:0;background:none;padding:6px 10px;border-radius:7px;font-weight:500;font-size:13px;color:var(--muted);cursor:pointer;font-family:inherit}
