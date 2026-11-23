@@ -16,8 +16,14 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    const code = new URLSearchParams(window.location.search).get("error");
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("error");
     if (code) setError(ERRORS[code] ?? "No se pudo iniciar sesión.");
+    // Enlace que se quería abrir (p. ej. /tareas/AMP-73): se abre al entrar
+    const next = params.get("next");
+    try {
+      if (next && /^\/[^/\\]/.test(next)) localStorage.setItem("amplify_next", next);
+    } catch {}
   }, []);
 
   async function handleGoogle() {
@@ -54,8 +60,9 @@ export default function LoginPage() {
       return;
     }
 
-    // Navegación completa: "/" es el panel (route handler).
-    window.location.href = "/";
+    // Navegación completa: "/" es el panel (route handler); si venía de un enlace, se abre ese.
+    const next = new URLSearchParams(window.location.search).get("next");
+    window.location.href = next && /^\/[^/\\]/.test(next) ? next : "/";
   }
 
   return (
