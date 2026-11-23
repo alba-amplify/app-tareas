@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveProfile, loadPanel, savePanel } from "@/lib/panel";
 import { importLegacy } from "@/lib/legacy";
 import { importMeetings } from "@/panel/meetings";
+import { applyOps } from "@/panel/ops";
 import { PANEL_HEAD, PANEL_SCRIPT } from "@/panel/template";
 
 export const dynamic = "force-dynamic";
@@ -61,6 +62,24 @@ export async function GET(request: Request) {
       }
     } catch (e) {
       console.error("importMeetings", e);
+    }
+  }
+
+  // Cambios puntuales pendientes (src/panel/ops.ts): una sola vez.
+  if (applyOps(panel.state).applied.length) {
+    try {
+      for (let i = 0; i < 3; i++) {
+        const r0 = applyOps(panel.state);
+        if (!r0.applied.length) break;
+        const r = await savePanel(supabase, user.id, r0.state as typeof panel.state, panel.rev);
+        if (!r.conflict) {
+          panel = { state: r0.state as typeof panel.state, rev: r.rev };
+          break;
+        }
+        panel = await loadPanel(supabase);
+      }
+    } catch (e) {
+      console.error("applyOps", e);
     }
   }
 
