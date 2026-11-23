@@ -10,7 +10,7 @@
 -- ============================================================
 
 insert into public.profiles (id, full_name, email, role, department, is_admin, active)
-select u.id, 'Florencia', u.email, 'Desarrollo', 'Equipo Desarrollo', false, true
+select u.id, 'Flor', u.email, 'Desarrollo', 'Equipo Desarrollo', false, true
 from auth.users u
 where lower(u.email) = 'sanchez.florenciadaniela@gmail.com'
 on conflict (id) do update
@@ -19,7 +19,7 @@ on conflict (id) do update
       department = excluded.department,
       active     = true;
 
--- Comprobación: debe salir una fila con Florencia
+-- Comprobación: debe salir una fila con Flor
 select full_name, email, role, department, active
 from public.profiles
 where lower(email) = 'sanchez.florenciadaniela@gmail.com';

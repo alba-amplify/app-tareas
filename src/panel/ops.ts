@@ -25,6 +25,24 @@ export const OPS: Op[] = [
       return n;
     },
   },
+  {
+    // 23/11/2026 · Alba: «todas las tareas que sean de desarrollo pónselas a ella» (Florencia).
+    // Tareas abiertas del departamento Desarrollo → responsable única: Florencia.
+    id: "2026-11-23-desarrollo-a-florencia",
+    apply: (state) => {
+      const norm = (x: string) => String(x || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+      const flo = (state.members || []).find((m: any) => ["flor", "florencia"].includes(norm(m.name).split(/\s+/)[0]));
+      if (!flo) throw new Error("florencia-no-esta");
+      let n = 0;
+      for (const t of state.tasks) {
+        if (t.done || norm(t.dept) !== "desarrollo") continue;
+        if (Array.isArray(t.assignees) && t.assignees.length === 1 && t.assignees[0] === flo.id) continue;
+        t.assignees = [flo.id];
+        n++;
+      }
+      return n;
+    },
+  },
 ];
 
 export function applyOps(state: State): { state: State; applied: string[]; changed: number } {
@@ -33,7 +51,16 @@ export function applyOps(state: State): { state: State; applied: string[]; chang
   if (!pending.length) return { state, applied: [], changed: 0 };
   const next: State = JSON.parse(JSON.stringify(state));
   let changed = 0;
-  for (const o of pending) changed += o.apply(next);
-  next.appliedOps = [...done, ...pending.map((o) => o.id)];
-  return { state: next, applied: pending.map((o) => o.id), changed };
+  const applied: string[] = [];
+  for (const o of pending) {
+    try {
+      changed += o.apply(next);
+      applied.push(o.id);
+    } catch {
+      // si falta algo (p. ej. la persona aún no está en el equipo) se reintenta la próxima vez
+    }
+  }
+  if (!applied.length) return { state, applied: [], changed: 0 };
+  next.appliedOps = [...done, ...applied];
+  return { state: next, applied, changed };
 }
