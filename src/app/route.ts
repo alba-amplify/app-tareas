@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveProfile, loadPanel, savePanel } from "@/lib/panel";
 import { importLegacy } from "@/lib/legacy";
+import { importMeetings } from "@/panel/meetings";
 import { PANEL_HEAD, PANEL_SCRIPT } from "@/panel/template";
 
 export const dynamic = "force-dynamic";
@@ -42,6 +43,24 @@ export async function GET(request: Request) {
     } catch (e) {
       // Si falla, el panel se abre igual y se reintenta la próxima vez.
       console.error("importLegacy", e);
+    }
+  }
+
+  // Reuniones nuevas (src/panel/meetings.ts) con sus tareas: se añaden una sola vez.
+  if (importMeetings(panel.state).added) {
+    try {
+      for (let i = 0; i < 3; i++) {
+        const { state, added } = importMeetings(panel.state);
+        if (!added) break;
+        const r = await savePanel(supabase, user.id, state as typeof panel.state, panel.rev);
+        if (!r.conflict) {
+          panel = { state: state as typeof panel.state, rev: r.rev };
+          break;
+        }
+        panel = await loadPanel(supabase);
+      }
+    } catch (e) {
+      console.error("importMeetings", e);
     }
   }
 
