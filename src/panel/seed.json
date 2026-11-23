@@ -1,0 +1,1858 @@
+{
+ "rev": 1,
+ "seq": 70,
+ "members": [
+  {
+   "id": "o5ftgoi",
+   "name": "Alba",
+   "color": "#b5402f"
+  },
+  {
+   "id": "al3ss10",
+   "name": "Alessio",
+   "color": "#2f8a57"
+  },
+  {
+   "id": "s4r4n1v",
+   "name": "Sara",
+   "color": "#7c3aed"
+  },
+  {
+   "id": "l4ur4cb",
+   "name": "Laura",
+   "color": "#db2777"
+  },
+  {
+   "id": "f3rn4nd",
+   "name": "Fernando",
+   "color": "#d97706"
+  },
+  {
+   "id": "c4rl0sg",
+   "name": "Carlos",
+   "color": "#0e7490"
+  },
+  {
+   "id": "z4km4ck",
+   "name": "Zak",
+   "color": "#4f6889"
+  },
+  {
+   "id": "r4qu3lv",
+   "name": "Raquel",
+   "color": "#9c7a48"
+  }
+ ],
+ "projects": [
+  {
+   "id": "p1ntbf0",
+   "name": "Intensivo + Black Friday",
+   "color": "#b5402f",
+   "type": "cliente",
+   "services": [],
+   "desc": "Lanzamiento del Intensivo (validación a ticket bajo) antes de abrir los programas principales en Black Friday.",
+   "notes": {
+    "Producto": "Precios hablados en las dailies (van cambiando, confirmar el definitivo):\n- 04/11: 997 como oferta de Black Friday y 300 para el intensivo.\n- 10/11: intensivo a 297 $ como validación previa, antes de ofrecer los programas principales de 1.497 $ y 2.500 $.\nEl 11/11 Sara compartió la estrategia del intensivo. Alessio vuelve en 5 días para preparar el evento de 15 días.\nClases en directo por Zoom o Google Meet para mantener la interacción (Alessio evalúa coste y viabilidad).",
+    "Funnels": "Documentación del funnel del intensivo:\n[Funnel completo y mensajes · Intensivo Amplify (12 nov – 10 dic)](https://claude.ai/artifact/ADWbtiVzCwpqZq45EbY7Rq)\n[Presentación · Estrategia y funnel del Intensivo](https://claude.ai/artifact/U8r5hd7CHjWDEppYQUxfq6)\n[Estrategia y funnel · Intensivo Marca Personal con Alessio (9-10 dic)](https://claude.ai/artifact/LmpBzx6LB7L8gLk3UG3T3B)\nEl 12/11 se aplazó la presentación por motivos de salud (Laura): falta poner fecha nueva.",
+    "Comunidad": "Comunidad de WhatsApp del intensivo con Sara como administradora. Pendiente: que Alessio verifique el número de teléfono.\nLos vídeos recientes están en la carpeta compartida de Google Drive."
+   }
+  },
+  {
+   "id": "pr0dlin",
+   "name": "Nueva línea de productos",
+   "color": "#d9822b",
+   "type": "cliente",
+   "services": [],
+   "desc": "Reestructuración de la oferta: Amplify Marca Personal, Amplify Plus/Pro, Starter, LTO y niveles de precio.",
+   "notes": {
+    "Producto": "Evolución de la oferta según las reuniones:\n- 20/10 (Ticket): rehacer el producto medium y el Starter; crear un low ticket. Pruebas entre páginas de pago directo y de agendamiento.\n- 22/10: se pausa la inversión en Starter para adaptarlo a un nuevo formato de pago.\n- 27/10 (Update proyecto): baja conversión del programa gratuito. Se consolidan Amplify Marca Personal y Amplify Plus para diferenciar la oferta.\n- 28/10: línea en niveles de 49, 1.000 y 2.500, cada uno con su embudo.\n- 03/11: tarifas de 2.500 € y opción intermedia de 1.000 €.\n- 04/11: crear dos versiones nuevas de los productos Amplify; rehacer los vídeos de Amplify y Amplify Pro con los nuevos tickets.\n- 10/11: productos listos para coordinar fechas de embudos.",
+    "Contenido": "Definir la estrategia de contenidos y las promesas de cada nivel para alinear el copy de venta (Alessio + Alba)."
+   }
+  },
+  {
+   "id": "funl4nd",
+   "name": "Funnels y landings",
+   "color": "#1f6fb5",
+   "type": "cliente",
+   "services": [],
+   "desc": "Páginas de venta, de producto y de agenda, funnels nuevos y medición de conversión.",
+   "notes": {
+    "Funnels": "[Landings Amplify](https://claude.ai/artifact/A8nD2mjQERgbnypdh5552p)\n[Funnel completo y mensajes · Intensivo Amplify (12 nov – 10 dic)](https://claude.ai/artifact/ADWbtiVzCwpqZq45EbY7Rq)\nDecisiones:\n- 21/10: quitar los formularios obligatorios en la nutrición gratuita (generaban fricción).\n- 20/10: test A/B entre landing con pago directo y landing de reserva de llamada.\n- 28/10: se pausa la publicidad y se reinicia con los nuevos embudos.\n- 26/10 (WIP): reestructurar la cualificación de leads y el paso de triaje a llamada de venta."
+   }
+  },
+  {
+   "id": "crmd4t0",
+   "name": "CRM Amplify, datos y pagos",
+   "color": "#0f766e",
+   "type": "cliente",
+   "services": [],
+   "desc": "CRM a medida, migración desde Airtable, Go High Level, Wop, Make y control de pagos.",
+   "notes": {
+    "CRM": "[Amplify CRM](https://claude.ai/artifact/TA47M8DhiMR1PcEHBnck57)\n[Leads y agendas · Marketing Pipeline Funnel Q4](https://claude.ai/artifact/XWmHtVRUwnCqtEhpVEqbH9)\nHerramientas: Go High Level (pipeline y citas), Airtable (base actual, se migra), ManyChat (etiquetas de Instagram), Make (contratos).\n27/10: se presentó un CRM a medida para centralizar bases de datos y anuncios. Pendiente: accesos del proveedor de la cuenta (Alessio).\n05/11: integrar gestión de tareas y automatizaciones con la API de WhatsApp.",
+    "Operaciones": "Pagos con Wop (enlaces de pago y financiación). Carlos sigue los pagos a mano hasta que se arregle la automatización.\nAlertas de pagos fallidos en Slack.\n12/11: revisar las discrepancias en los registros de pagos.\nContraseñas de Wop y Make: coordinar con Alba si hay cambios de personal."
+   }
+  },
+  {
+   "id": "v3nt4s0",
+   "name": "Ventas: setting, triaje y closers",
+   "color": "#5f8a35",
+   "type": "cliente",
+   "services": [],
+   "desc": "Proceso comercial: triaje de leads, setters, closers, llamadas y seguimiento.",
+   "notes": {
+    "Ventas": "07/10: 114 leads y 50 agendas a la semana, con baja conversión a venta.\n19/10 (WIP): recordatorios de WhatsApp para reducir cancelaciones, limitando la ventana de agendamiento.\n20/10 (Ticket): reestructurar el equipo conservando a SAC y Sara; buscar setter.\n03/11: reunión semanal fija para revisar ventas y dudas del programa; nuevo proceso de triaje para cuidar el tiempo de los closers.\nHábito acordado: revisar el estado de las citas en High Level antes de cada llamada."
+   }
+  },
+  {
+   "id": "4dsm3t4",
+   "name": "Publicidad (Meta Ads)",
+   "color": "#a3477a",
+   "type": "cliente",
+   "services": [],
+   "desc": "Campañas, guiones, creatividades y presupuesto.",
+   "notes": {
+    "Ads": "20/10 (Ticket): Laura propone enfocar los 3.000 €/mes de anuncios en la oferta de bajo coste.\n28/10: pausa de publicidad hasta tener los nuevos embudos.\n04/11: reorientar los reels y las llamadas a la acción hacia el intensivo.\n10/11: modificar los anuncios para bajar el coste de adquisición.\nLaura apunta el seguimiento semanal de la campaña en las notas compartidas."
+   }
+  },
+  {
+   "id": "c0nty7b",
+   "name": "Contenido orgánico y YouTube",
+   "color": "#7c3aed",
+   "type": "cliente",
+   "services": [],
+   "desc": "YouTube, reels, historias, CTAs y nutrición por email.",
+   "notes": {
+    "Contenido": "19/10 (WIP): vídeos de YouTube que resuelvan problemas concretos que detectan setters y closers, con formatos cortos para ganar alcance.\n21/10: vídeo de YouTube con la metodología de trabajo con los alumnos.\n27/10: nutrición por email con contenido de YouTube; Alessio pasa el calendario semanal de vídeos.\nCTAs por palabra clave con ManyChat (Sara monta los flujos)."
+   }
+  },
+  {
+   "id": "c0mun1d",
+   "name": "Comunidad: Circle, WhatsApp y Starter",
+   "color": "#0891b2",
+   "type": "cliente",
+   "services": [],
+   "desc": "Comunidad en Circle, grupos de WhatsApp, Starter y accesos de alumnos.",
+   "notes": {
+    "Comunidad": "[Mapa del producto en Circle](https://claude.ai/artifact/JXfdL5dumdU5ou8Q7mDjpa)\n20/10: contenido semanal para WhatsApp y retos semanales.\n11/11: automatizaciones en Circle y permisos manuales; comunidad de WhatsApp con Sara de administradora.\n12/11: acceso limitado de 30 días a los módulos propuestos. Hubo problemas de inicio de sesión y de permisos de administrador."
+   }
+  },
+  {
+   "id": "3qu1p00",
+   "name": "Organización del equipo",
+   "color": "#6b7280",
+   "type": "interno",
+   "services": [],
+   "desc": "Reuniones, roles, compensación y coordinación interna de Amplify.",
+   "notes": {
+    "Operaciones": "Reuniones fijas (Google Calendar):\n- AMPLIFY ES – WIP: lunes de 9:30 a 10:15 (Otter).\n- Daily Amplify Team: de martes a jueves de 9:30 a 9:45 (notas de Gemini).\n10/11: llamada semestral para unificar roles y cubrir ausencias."
+   }
+  }
+ ],
+ "departments": [
+  "Funnels",
+  "CRM",
+  "Ads",
+  "Contenido",
+  "Ventas",
+  "Comunidad",
+  "Producto",
+  "Operaciones"
+ ],
+ "services": [],
+ "serviceTemplates": {},
+ "svcChecks": {},
+ "svcExtra": {},
+ "tasks": [
+  {
+   "id": "t00001",
+   "num": 1,
+   "title": "Terminar las landings de entrega del intensivo",
+   "desc": "Completar los procesos de entrega con los vídeos que se han pasado y montar la página de agradecimiento con el enlace a la comunidad. Las landings se cierran con un producto de prueba.\n\nDe la reunión: [Daily Amplify Team · 12/11](https://docs.google.com/document/d/17GYcV0zyF0HYvgS7NC4EVSr-YM5Gj5Lcuiynm_-7a-I/edit)",
+   "project": "p1ntbf0",
+   "dept": "Funnels",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "alta",
+   "due": "2026-11-16",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794475800000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0000100",
+     "title": "Procesos de entrega con los vídeos",
+     "done": false
+    },
+    {
+     "id": "s0000101",
+     "title": "Página de gracias con enlace a la comunidad",
+     "done": false
+    },
+    {
+     "id": "s0000102",
+     "title": "Probar con el producto de prueba",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00002",
+   "num": 2,
+   "title": "Revisar pagos fallidos y discrepancias en los registros",
+   "desc": "Investigar las diferencias en los registros de pagos y comprobar el estado de los pagos pendientes. Se revisó la configuración del sistema de pagos y los datos de citas y registros.\n\nDe la reunión: [Daily Amplify Team · 12/11](https://docs.google.com/document/d/17GYcV0zyF0HYvgS7NC4EVSr-YM5Gj5Lcuiynm_-7a-I/edit)",
+   "project": "crmd4t0",
+   "dept": "Operaciones",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "alta",
+   "due": "2026-11-17",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794475800000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00003",
+   "num": 3,
+   "title": "Pedir a Carlos la información pendiente por el grupo",
+   "desc": "Solicitar a Carlos lo que falta a través del grupo de comunicación. Aprovechar para preguntarle por la configuración de las automatizaciones del producto (11/11) y por el funcionamiento de Wop (04/11).\n\nDe la reunión: [Daily Amplify Team · 12/11](https://docs.google.com/document/d/17GYcV0zyF0HYvgS7NC4EVSr-YM5Gj5Lcuiynm_-7a-I/edit)",
+   "project": "crmd4t0",
+   "dept": "Operaciones",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": "2026-11-16",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794475800000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0000300",
+     "title": "Información pendiente (12/11)",
+     "done": false
+    },
+    {
+     "id": "s0000301",
+     "title": "Automatizaciones del producto (11/11)",
+     "done": false
+    },
+    {
+     "id": "s0000302",
+     "title": "Funcionamiento de Wop (04/11)",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00004",
+   "num": 4,
+   "title": "Dar acceso limitado de 30 días a los módulos propuestos",
+   "desc": "Se acordó otorgar un acceso de 30 días a los módulos propuestos después de los problemas de inicio de sesión y de permisos de administrador en la comunidad.\n\nDe la reunión: [Daily Amplify Team · 12/11](https://docs.google.com/document/d/17GYcV0zyF0HYvgS7NC4EVSr-YM5Gj5Lcuiynm_-7a-I/edit)",
+   "project": "c0mun1d",
+   "dept": "Comunidad",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": "2026-11-17",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794475800000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00005",
+   "num": 5,
+   "title": "Extraer del calendario los emails del mes actual y del anterior",
+   "desc": "Sacar la lista completa de correos de las citas de octubre y noviembre desde el calendario para actualizar los datos.\n\nDe la reunión: [Daily Amplify Team · 12/11](https://docs.google.com/document/d/17GYcV0zyF0HYvgS7NC4EVSr-YM5Gj5Lcuiynm_-7a-I/edit)",
+   "project": "crmd4t0",
+   "dept": "CRM",
+   "assignees": [
+    "f3rn4nd"
+   ],
+   "priority": "media",
+   "due": "2026-11-17",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794475800000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00006",
+   "num": 6,
+   "title": "Programar la llamada grupal cuando haya noticias de Laura",
+   "desc": "La presentación se aplazó por motivos de salud. Coordinar una hora para la reunión grupal en cuanto haya noticias sobre la salud de Laura y fijar fecha nueva para la presentación.\n\nDe la reunión: [Daily Amplify Team · 12/11](https://docs.google.com/document/d/17GYcV0zyF0HYvgS7NC4EVSr-YM5Gj5Lcuiynm_-7a-I/edit)",
+   "project": "p1ntbf0",
+   "dept": "Operaciones",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "espera",
+   "done": false,
+   "createdAt": 1794475800000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00007",
+   "num": 7,
+   "title": "Probar una herramienta de IA para actualizar datos desde los correos",
+   "desc": "Se propuso usar una herramienta de inteligencia artificial que extraiga y actualice la información de los correos electrónicos (citas, registros).\n\nDe la reunión: [Daily Amplify Team · 12/11](https://docs.google.com/document/d/17GYcV0zyF0HYvgS7NC4EVSr-YM5Gj5Lcuiynm_-7a-I/edit)",
+   "project": "crmd4t0",
+   "dept": "CRM",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794475800000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00008",
+   "num": 8,
+   "title": "Compartir la presentación del funnel por Slack",
+   "desc": "Compartir con el equipo la presentación del funnel del intensivo por el grupo de Slack.\n[Presentación · Estrategia y funnel del Intensivo](https://claude.ai/artifact/U8r5hd7CHjWDEppYQUxfq6)\n\nDe la reunión: [Daily Amplify Team · 11/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881551723038120403)",
+   "project": "p1ntbf0",
+   "dept": "Funnels",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "alta",
+   "due": "2026-11-16",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794389400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00009",
+   "num": 9,
+   "title": "Integrar automatizaciones en Circle y revisar permisos manuales",
+   "desc": "Alba integra las automatizaciones del embudo en Circle y deja configurados los permisos manuales que hacen falta.\n\nDe la reunión: [Daily Amplify Team · 11/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881551723038120403)",
+   "project": "c0mun1d",
+   "dept": "Comunidad",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": "2026-11-18",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794389400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00010",
+   "num": 10,
+   "title": "Verificar el número de teléfono de la comunidad de WhatsApp",
+   "desc": "Comprobar el estado del número que se va a usar en la comunidad de WhatsApp del intensivo.\n\nDe la reunión: [Daily Amplify Team · 11/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881551723038120403)",
+   "project": "p1ntbf0",
+   "dept": "Comunidad",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "alta",
+   "due": "2026-11-16",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794389400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00011",
+   "num": 11,
+   "title": "Configurar la comunidad de WhatsApp como administradora",
+   "desc": "La comunidad de WhatsApp se configura con Sara como administradora.\n\nDe la reunión: [Daily Amplify Team · 11/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881551723038120403)",
+   "project": "p1ntbf0",
+   "dept": "Comunidad",
+   "assignees": [
+    "s4r4n1v"
+   ],
+   "priority": "media",
+   "due": "2026-11-17",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794389400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00012",
+   "num": 12,
+   "title": "Evaluar Zoom o Google Meet para las clases del intensivo",
+   "desc": "Valorar coste y viabilidad técnica de cada opción para mantener la interacción en directo durante las clases.\n\nDe la reunión: [Daily Amplify Team · 11/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881551723038120403)",
+   "project": "p1ntbf0",
+   "dept": "Producto",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "alta",
+   "due": "2026-11-17",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794389400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00013",
+   "num": 13,
+   "title": "Coordinar la fecha de la próxima reunión con el primo",
+   "desc": "De la reunión: [Daily Amplify Team · 11/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881551723038120403)",
+   "project": "3qu1p00",
+   "dept": "Operaciones",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794389400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00014",
+   "num": 14,
+   "title": "Crear los productos Intensivo y Amplify en la plataforma",
+   "desc": "Configurar los nuevos productos en la plataforma de gestión. Intensivo de 297 $ como validación; programas principales de 1.497 $ y 2.500 $.\n\nDe la reunión: [Daily Amplify Team · 10/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881462458349143393)",
+   "project": "p1ntbf0",
+   "dept": "Producto",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "alta",
+   "due": "2026-11-16",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794303000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00015",
+   "num": 15,
+   "title": "Terminar las páginas de venta y compartir la estrategia con Laura",
+   "desc": "Cerrar las páginas de venta y de producto, crear los enlaces y pasar la estrategia a Laura para el brief de publicidad. Viene de la daily del 28/10 (páginas de producto y funnels para el brief).\n\nDe la reunión: [Daily Amplify Team · 10/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881462458349143393)",
+   "project": "funl4nd",
+   "dept": "Funnels",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "alta",
+   "due": "2026-11-17",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794303000000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0001500",
+     "title": "Páginas de venta terminadas",
+     "done": false
+    },
+    {
+     "id": "s0001501",
+     "title": "Enlaces creados",
+     "done": false
+    },
+    {
+     "id": "s0001502",
+     "title": "Estrategia y funnels enviados a Laura",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00016",
+   "num": 16,
+   "title": "Terminar la edición de anuncios y vídeos y pasárselos a Alba",
+   "desc": "De la reunión: [Daily Amplify Team · 10/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881462458349143393)",
+   "project": "4dsm3t4",
+   "dept": "Ads",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "alta",
+   "due": "2026-11-16",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794303000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00017",
+   "num": 17,
+   "title": "Enviar a Alba el PDF con el desglose de valor de los productos",
+   "desc": "De la reunión: [Daily Amplify Team · 10/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881462458349143393)",
+   "project": "pr0dlin",
+   "dept": "Producto",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": "2026-11-16",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794303000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00018",
+   "num": 18,
+   "title": "Escribir a Chiara por Instagram por sus dudas de acceso",
+   "desc": "Resolver sus dudas sobre el acceso al programa.\n\nDe la reunión: [Daily Amplify Team · 10/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881462458349143393)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": "2026-11-16",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794303000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00019",
+   "num": 19,
+   "title": "Dar acceso en Circle al cliente que pagó la LTO",
+   "desc": "De la reunión: [Daily Amplify Team · 10/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881462458349143393)",
+   "project": "c0mun1d",
+   "dept": "Comunidad",
+   "assignees": [
+    "z4km4ck"
+   ],
+   "priority": "alta",
+   "due": "2026-11-16",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794303000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00020",
+   "num": 20,
+   "title": "Ajustar anuncios para bajar el coste de adquisición",
+   "desc": "Propuesta de la daily: modificar los anuncios para reducir el coste por adquisición.\n\nDe la reunión: [Daily Amplify Team · 10/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881462458349143393)",
+   "project": "4dsm3t4",
+   "dept": "Ads",
+   "assignees": [
+    "l4ur4cb"
+   ],
+   "priority": "media",
+   "due": "2026-11-18",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1794303000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00021",
+   "num": 21,
+   "title": "Preparar la VSL y los guiones de anuncios de la masterclass",
+   "desc": "Alba se lo pide a Laura (05/11). El 04/11 ya se había pedido redactar los guiones de la campaña.\n\nDe la reunión: [Daily Amplify Team · 05/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881007648086562723)",
+   "project": "4dsm3t4",
+   "dept": "Ads",
+   "assignees": [
+    "l4ur4cb"
+   ],
+   "priority": "alta",
+   "due": "2026-11-18",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793871000000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0002100",
+     "title": "VSL de la masterclass",
+     "done": false
+    },
+    {
+     "id": "s0002101",
+     "title": "Guiones de anuncios",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00022",
+   "num": 22,
+   "title": "Probar con Claude la edición de los vídeos nuevos de la landing",
+   "desc": "Comprobar si los resultados de editar los vídeos de la landing de marca personal con Claude son buenos.\n\nDe la reunión: [Daily Amplify Team · 05/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881007648086562723)",
+   "project": "funl4nd",
+   "dept": "Contenido",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": "2026-11-18",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793871000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00023",
+   "num": 23,
+   "title": "Integrar tareas y automatizaciones con la API de WhatsApp en el CRM",
+   "desc": "De la reunión: [Daily Amplify Team · 05/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881007648086562723)",
+   "project": "crmd4t0",
+   "dept": "CRM",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793871000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00024",
+   "num": 24,
+   "title": "Desarrollar el CRM a medida de Amplify",
+   "desc": "Pasar a desarrollo el sistema de tareas y el nuevo CRM para controlar el flujo de trabajo. Arrastra varias reuniones: CRM exclusivo para Amplify (22/10), CRM a medida con fuentes de datos integradas (27/10).\n[Amplify CRM](https://claude.ai/artifact/TA47M8DhiMR1PcEHBnck57)\n\nDe la reunión: [Daily Amplify Team · 04/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880917838275462963)",
+   "project": "crmd4t0",
+   "dept": "CRM",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "alta",
+   "due": "2026-11-20",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793784600000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0002400",
+     "title": "Limpiar la base de datos de Airtable",
+     "done": false
+    },
+    {
+     "id": "s0002401",
+     "title": "Migrar la información al nuevo CRM",
+     "done": false
+    },
+    {
+     "id": "s0002402",
+     "title": "Integrar las fuentes de datos",
+     "done": false
+    },
+    {
+     "id": "s0002403",
+     "title": "Montar los nuevos funnels en el CRM",
+     "done": false
+    },
+    {
+     "id": "s0002404",
+     "title": "Enviar a Alessio la arquitectura del CRM y el ejemplo de lanzamiento",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00025",
+   "num": 25,
+   "title": "Rehacer los vídeos explicativos de Amplify y Amplify Pro",
+   "desc": "Explicar en los vídeos los nuevos tickets.\n\nDe la reunión: [Daily Amplify Team · 04/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880917838275462963)",
+   "project": "pr0dlin",
+   "dept": "Contenido",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "alta",
+   "due": "2026-11-18",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793784600000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00026",
+   "num": 26,
+   "title": "Configurar el sistema de setting para los funnels actuales",
+   "desc": "De la reunión: [Daily Amplify Team · 04/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880917838275462963)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "s4r4n1v"
+   ],
+   "priority": "media",
+   "due": "2026-11-18",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793784600000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00027",
+   "num": 27,
+   "title": "Enseñar a Alba a generar enlaces de pago y financiación en Wop",
+   "desc": "De la reunión: [Daily Amplify Team · 04/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880917838275462963)",
+   "project": "crmd4t0",
+   "dept": "Operaciones",
+   "assignees": [
+    "f3rn4nd"
+   ],
+   "priority": "media",
+   "due": "2026-11-17",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793784600000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00028",
+   "num": 28,
+   "title": "Crear las dos versiones nuevas de los productos Amplify",
+   "desc": "De la reunión: [Daily Amplify Team · 04/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880917838275462963)",
+   "project": "pr0dlin",
+   "dept": "Producto",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "alta",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793784600000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00029",
+   "num": 29,
+   "title": "Montar la landing para la gestión de la agenda",
+   "desc": "De la reunión: [Daily Amplify Team · 04/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880917838275462963)",
+   "project": "funl4nd",
+   "dept": "Funnels",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": "2026-11-19",
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793784600000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00030",
+   "num": 30,
+   "title": "Pedir a Claude los resultados de los últimos meses",
+   "desc": "Recopilar la información sobre resultados de los últimos meses.\n\nDe la reunión: [Daily Amplify Team · 04/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880917838275462963)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793784600000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00031",
+   "num": 31,
+   "title": "Registrar las tareas pendientes en el panel",
+   "desc": "Hecho con este panel: todas las tareas de las reuniones desde el 19/10 están aquí, y el historial completo desde agosto en las tarjetas de «Resumen de reuniones». También cubre «Actualizar tareas» (22/10) y «Crear lista de tareas» (20/10).\n\nDe la reunión: [Daily Amplify Team · 04/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880917838275462963)",
+   "project": "3qu1p00",
+   "dept": "Operaciones",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": "2026-11-14",
+   "mode": "auto",
+   "done": true,
+   "createdAt": 1793784600000,
+   "comments": [],
+   "subtasks": [],
+   "doneAt": 1794679200000
+  },
+  {
+   "id": "t00032",
+   "num": 32,
+   "title": "Fijar una reunión semanal de ventas y dudas del programa",
+   "desc": "Buscar hueco después de la daily o a final de semana.\n\nDe la reunión: [Daily Amplify Team · 03/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880826783201953755)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793698200000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00033",
+   "num": 33,
+   "title": "Actualizar con Carlos la estructura salarial y de comisiones",
+   "desc": "Por el aumento de la carga de trabajo.\n\nDe la reunión: [Daily Amplify Team · 03/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880826783201953755)",
+   "project": "3qu1p00",
+   "dept": "Operaciones",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793698200000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00034",
+   "num": 34,
+   "title": "Definir un nuevo proceso de triaje de leads",
+   "desc": "Mejorar la cualificación y optimizar el tiempo de los closers. Relacionado con la WIP del 26/10: reestructurar el customer journey y el routing de producto con Alba y Claudio.\n\nDe la reunión: [Daily Amplify Team · 03/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880826783201953755)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "alta",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793698200000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0003400",
+     "title": "Nuevo proceso de triaje",
+     "done": false
+    },
+    {
+     "id": "s0003401",
+     "title": "Customer journey y a qué producto va cada lead (WIP 26/10)",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00035",
+   "num": 35,
+   "title": "Apuntar por escrito las dudas del programa que salen en las llamadas",
+   "desc": "Para revisarlas después con Alessio.\n\nDe la reunión: [Daily Amplify Team · 03/11](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880826783201953755)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "f3rn4nd"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "update",
+   "done": false,
+   "createdAt": 1793698200000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00036",
+   "num": 36,
+   "title": "Pedir a Sid el código de acceso del correo de Amplify",
+   "desc": "Para terminar de configurar la cuenta genérica.\n\nDe la reunión: [Daily Amplify Team · 29/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880374219307905666)",
+   "project": "3qu1p00",
+   "dept": "Operaciones",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793266200000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00037",
+   "num": 37,
+   "title": "Montar con Laura el dashboard y las conexiones",
+   "desc": "Reunión para montar juntas el dashboard y las conexiones de las herramientas. Dashboard actual: [Leads y agendas · Marketing Pipeline Funnel Q4](https://claude.ai/artifact/XWmHtVRUwnCqtEhpVEqbH9)\n\nDe la reunión: [Daily Amplify Team · 29/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880374219307905666)",
+   "project": "crmd4t0",
+   "dept": "CRM",
+   "assignees": [
+    "o5ftgoi",
+    "l4ur4cb"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793266200000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00038",
+   "num": 38,
+   "title": "Preparar la lista de leads para ofrecerles una beca de Amplify",
+   "desc": "De la reunión: [Daily Amplify Team · 28/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880282231033263275)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "s4r4n1v"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793179800000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00039",
+   "num": 39,
+   "title": "Enviar el estado de Airtable y los emails de clientes ganados",
+   "desc": "Captura del estado actual de Airtable al canal de Slack y correos de clientes ganados a Alba para sincronizar la base de datos.\n\nDe la reunión: [Daily Amplify Team · 28/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880282231033263275)",
+   "project": "crmd4t0",
+   "dept": "CRM",
+   "assignees": [
+    "f3rn4nd"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793179800000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0003900",
+     "title": "Captura de Airtable en Slack",
+     "done": false
+    },
+    {
+     "id": "s0003901",
+     "title": "Emails de clientes ganados a Alba",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00040",
+   "num": 40,
+   "title": "Mover la reunión de los lunes a las 9:30",
+   "desc": "Acordado en la WIP del 26/10 y en la daily del 28/10. En el calendario ya figura a las 9:30.\n\nDe la reunión: [Daily Amplify Team · 28/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880282231033263275)",
+   "project": "3qu1p00",
+   "dept": "Operaciones",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "baja",
+   "due": "2026-10-28",
+   "mode": "auto",
+   "done": true,
+   "createdAt": 1793179800000,
+   "comments": [],
+   "subtasks": [],
+   "doneAt": 1794679200000
+  },
+  {
+   "id": "t00041",
+   "num": 41,
+   "title": "Compartir el documento de lanzamiento con el equipo",
+   "desc": "Para analizar la estructura de productos y las necesidades del mercado.\n\nDe la reunión: [Update proyecto · 27/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880196146534551918)",
+   "project": "pr0dlin",
+   "dept": "Producto",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793093400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00042",
+   "num": 42,
+   "title": "Definir estrategia de contenidos y promesas de cada nivel",
+   "desc": "Alinear el copy de venta de cada nivel de producto.\n\nDe la reunión: [Update proyecto · 27/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880196146534551918)",
+   "project": "pr0dlin",
+   "dept": "Contenido",
+   "assignees": [
+    "al3ss10",
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793093400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00043",
+   "num": 43,
+   "title": "Planificar la nutrición por email con contenido de YouTube",
+   "desc": "De la reunión: [Update proyecto · 27/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880196146534551918)",
+   "project": "c0nty7b",
+   "dept": "Contenido",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793093400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00044",
+   "num": 44,
+   "title": "Enviar a Alba el calendario semanal de vídeos de YouTube",
+   "desc": "De la reunión: [Update proyecto · 27/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880196146534551918)",
+   "project": "c0nty7b",
+   "dept": "Contenido",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793093400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00045",
+   "num": 45,
+   "title": "Definir beneficios y acceso de los niveles de 1.000 y 2.500 €",
+   "desc": "Incluye documentar la estructura del nuevo programa Amplify y la estrategia comercial, y adaptar la presentación al ejemplo de arquitectura de lanzamiento.\n\nDe la reunión: [Update proyecto · 27/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880196146534551918)",
+   "project": "pr0dlin",
+   "dept": "Producto",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "alta",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793093400000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0004500",
+     "title": "Beneficios y acceso de cada nivel",
+     "done": false
+    },
+    {
+     "id": "s0004501",
+     "title": "Documento con la estructura del programa y la estrategia comercial",
+     "done": false
+    },
+    {
+     "id": "s0004502",
+     "title": "Presentación adaptada a la arquitectura de lanzamiento",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00046",
+   "num": 46,
+   "title": "Grabar los dos módulos que faltan del producto de monetización",
+   "desc": "De la reunión: [Update proyecto · 27/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880196146534551918)",
+   "project": "pr0dlin",
+   "dept": "Producto",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793093400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00047",
+   "num": 47,
+   "title": "Conseguir del proveedor los accesos de la cuenta del CRM",
+   "desc": "De la reunión: [Update proyecto · 27/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880196146534551918)",
+   "project": "crmd4t0",
+   "dept": "CRM",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "espera",
+   "done": false,
+   "createdAt": 1793093400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00048",
+   "num": 48,
+   "title": "Cerrar los diagramas del funnel y de nutrición de leads",
+   "desc": "Refinar y terminar los diagramas para que los revise el equipo.\n\nDe la reunión: [AMPLIFY ES – WIP · 26/10 (Otter)](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880113790544166866)",
+   "project": "funl4nd",
+   "dept": "Funnels",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1793007000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00049",
+   "num": 49,
+   "title": "Buscar herramientas para automatizar las comunidades",
+   "desc": "Gestión de accesos y mensajes automáticos en comunidades de WhatsApp, integradas con el CRM. Pedido en la daily del 20/10 y del 22/10.\n\nDe la reunión: [Daily Amplify Team · 22/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879736222113648475)",
+   "project": "c0mun1d",
+   "dept": "Comunidad",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792657800000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00050",
+   "num": 50,
+   "title": "Analizar los funnels de la competencia",
+   "desc": "Estrategia, contenido en vídeo y automatizaciones.\n\nDe la reunión: [Daily Amplify Team · 22/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879736222113648475)",
+   "project": "funl4nd",
+   "dept": "Funnels",
+   "assignees": [
+    "s4r4n1v"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792657800000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00051",
+   "num": 51,
+   "title": "Enviar el guion nuevo de ads y comentarios del presupuesto",
+   "desc": "Nuevo guion para las campañas y sugerencias sobre cómo repartir la inversión.\n\nDe la reunión: [Daily Amplify Team · 22/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879736222113648475)",
+   "project": "4dsm3t4",
+   "dept": "Ads",
+   "assignees": [
+    "l4ur4cb"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792657800000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00052",
+   "num": 52,
+   "title": "Medir tráfico y conversión de los formularios de la landing",
+   "desc": "Encontrar dónde se pierden leads. Incluye comprobar cuántos de los que vieron el vídeo Amplify reservaron llamada estratégica (Ticket 20/10).\n\nDe la reunión: [Daily Amplify Team · 21/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879645188210715706)",
+   "project": "funl4nd",
+   "dept": "Funnels",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792571400000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0005200",
+     "title": "Tráfico y conversión del formulario",
+     "done": false
+    },
+    {
+     "id": "s0005201",
+     "title": "Vídeo Amplify → reservas de llamada",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00053",
+   "num": 53,
+   "title": "Mejorar la nutrición de leads antes de la llamada de venta",
+   "desc": "De la reunión: [Daily Amplify Team · 21/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879645188210715706)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "al3ss10",
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792571400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00054",
+   "num": 54,
+   "title": "Implementar la estrategia de comunidad del Starter",
+   "desc": "Cuando se aclare la propuesta de ticket bajo.\n\nDe la reunión: [Daily Amplify Team · 21/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879645188210715706)",
+   "project": "c0mun1d",
+   "dept": "Comunidad",
+   "assignees": [
+    "s4r4n1v",
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "espera",
+   "done": false,
+   "createdAt": 1792571400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00055",
+   "num": 55,
+   "title": "Grabar un vídeo de YouTube con la metodología con alumnos",
+   "desc": "De la reunión: [Daily Amplify Team · 21/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879645188210715706)",
+   "project": "c0nty7b",
+   "dept": "Contenido",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792571400000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00056",
+   "num": 56,
+   "title": "Test A/B: landing de pago directo vs reserva de llamada",
+   "desc": "Medir la conversión de cada una. El 22/10 se pidió también preparar landings con opción de pago directo.\n\nDe la reunión: [Ticket · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879559200776538806)",
+   "project": "funl4nd",
+   "dept": "Funnels",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00057",
+   "num": 57,
+   "title": "Pasar enlaces de acceso y detalles para el producto low ticket",
+   "desc": "De la reunión: [Ticket · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879559200776538806)",
+   "project": "pr0dlin",
+   "dept": "Producto",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00058",
+   "num": 58,
+   "title": "Hablar con SAC y con Sara sobre su rol en el equipo",
+   "desc": "Permanencia de SAC y disponibilidad de Sara para trabajar sola en el proyecto.\n\nDe la reunión: [Ticket · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879559200776538806)",
+   "project": "3qu1p00",
+   "dept": "Operaciones",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": [
+    {
+     "id": "s0005800",
+     "title": "Conversación con SAC",
+     "done": false
+    },
+    {
+     "id": "s0005801",
+     "title": "Conversación con Sara",
+     "done": false
+    }
+   ]
+  },
+  {
+   "id": "t00059",
+   "num": 59,
+   "title": "Preguntar en el grupo del programa si alguien busca trabajo de setter",
+   "desc": "De la reunión: [Ticket · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879559200776538806)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00060",
+   "num": 60,
+   "title": "Coordinar contraseñas de Wop y Make cuando cambie el personal",
+   "desc": "De la reunión: [Ticket · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879559200776538806)",
+   "project": "crmd4t0",
+   "dept": "Operaciones",
+   "assignees": [
+    "al3ss10",
+    "o5ftgoi"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "update",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00061",
+   "num": 61,
+   "title": "Revisar el estado de las citas en High Level antes de llamar",
+   "desc": "Comprobar en el buscador de oportunidades si hace falta seguimiento. Todo el equipo registra a tiempo confirmaciones y cancelaciones.\n\nDe la reunión: [Daily Amplify Team · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879555059109800030)",
+   "project": "v3nt4s0",
+   "dept": "Ventas",
+   "assignees": [
+    "f3rn4nd"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "update",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00062",
+   "num": 62,
+   "title": "Apuntar el seguimiento semanal de la campaña en las notas",
+   "desc": "De la reunión: [Daily Amplify Team · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879555059109800030)",
+   "project": "4dsm3t4",
+   "dept": "Ads",
+   "assignees": [
+    "l4ur4cb"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "update",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00063",
+   "num": 63,
+   "title": "Seguir los pagos a mano hasta que funcione la automatización",
+   "desc": "De la reunión: [Daily Amplify Team · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879555059109800030)",
+   "project": "crmd4t0",
+   "dept": "Operaciones",
+   "assignees": [
+    "c4rl0sg"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "update",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00064",
+   "num": 64,
+   "title": "Plantear la nueva propuesta de valor y el embudo de la LTO",
+   "desc": "De la reunión: [Daily Amplify Team · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879555059109800030)",
+   "project": "pr0dlin",
+   "dept": "Producto",
+   "assignees": [
+    "al3ss10"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00065",
+   "num": 65,
+   "title": "Calendario de mensajes, retos y nutrición de la comunidad",
+   "desc": "Incluye la estrategia de WhatsApp para nutrir la comunidad con mensajes extra para quien no responde (WIP 19/10).\n\nDe la reunión: [Daily Amplify Team · 20/10](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879555059109800030)",
+   "project": "c0mun1d",
+   "dept": "Comunidad",
+   "assignees": [
+    "o5ftgoi",
+    "s4r4n1v"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792485000000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00066",
+   "num": 66,
+   "title": "Identificar a los alumnos «calientes» del Starter",
+   "desc": "Ver si se puede sacar del sistema quién ha completado al menos un módulo del Starter y está más interesado.\n\nDe la reunión: [AMPLIFY ES – WIP · 19/10 (Otter)](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879465908174544343)",
+   "project": "c0mun1d",
+   "dept": "CRM",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "media",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792398600000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00067",
+   "num": 67,
+   "title": "Enviar los vídeos pendientes para corregir lo que falte",
+   "desc": "De la reunión: [AMPLIFY ES – WIP · 19/10 (Otter)](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879465908174544343)",
+   "project": "c0nty7b",
+   "dept": "Contenido",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "auto",
+   "done": false,
+   "createdAt": 1792398600000,
+   "comments": [],
+   "subtasks": []
+  },
+  {
+   "id": "t00068",
+   "num": 68,
+   "title": "Resumen · Daily Amplify Team",
+   "desc": "Resumen vivo de las reuniones. Notas de Gemini de la daily (de martes a jueves, 9:30). Arriba va la última reunión y en los comentarios queda el historial.\n\nÚltima reunión · 12/11\nReunión 12/11: presentación aplazada por salud; landings con los vídeos y producto de prueba. Problemas de inicio de sesión y permisos en la comunidad: acceso limitado de 30 días. Revisión de pagos y métricas; propuesta de IA para actualizar datos desde los correos.\nPróximos pasos: Alessio: llamada grupal cuando haya noticias de Laura · Alba: terminar páginas, contactar a Carlos, revisar pagos fallidos · Fernando: emails del calendario.\n\nNotas: [Daily Amplify Team](https://docs.google.com/document/d/17GYcV0zyF0HYvgS7NC4EVSr-YM5Gj5Lcuiynm_-7a-I/edit)",
+   "project": "3qu1p00",
+   "dept": "",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "update",
+   "done": false,
+   "createdAt": 1794679200000,
+   "comments": [
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 27/08: cambio de dominio de la página de ventas; fugas en pagos; encuestas en redes; pasarela de pago alternativa.\nPróximos pasos: Alba: aviso a Sara, roadmap, calculadora, IA unificada · Alessio: historias, anuncios · Laura: guion · Carlos y Sara: prospección por encuesta · Carlos: Hotmart o Secura.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1874662592964120444)",
+     "at": 1787817600000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 01/09: vídeo antes del formulario de cualificación; enlaces a la comunidad por correo; asignación dinámica de calendarios; testimonios en anuncios.\nPróximos pasos: Alessio: vídeos high ticket, número de setters, recordatorio WhatsApp · Alba: documento de los 3 programas, calendarios, landing Starter, dashboard, Airtable, URL a Laura, Fathom, CRM · Laura: UTMs y llamadas.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1875117143418206062)",
+     "at": 1788249600000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 02/09: mejoras visuales del gestor; UTMs; más de 2.300 leads gestionados a mano.\nPróximos pasos: Alba: colores, embudo con correo de comunidad, UTMs de YouTube, informe · Alessio: recortar vídeo, QR, bio, pago de Airtable · Equipo: mapear etiquetas ManyChat.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1875206072827619655)",
+     "at": 1788336000000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 03/09: vídeos de 10 min y palabras clave; venta en 3 escenarios para high ticket; reactivar no-shows.\nPróximos pasos: Alessio: automatizar reels, contenido, anuncios, WhatsApp · Laura: estrategia de 3 escenarios, landings, seguimiento · Carlos y Alba: plan de ventas.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1875296588556046851)",
+     "at": 1788422400000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 08/09: flujo del embudo inicial con emails y comunidad; errores del píxel y SMS; formato educativo con PDFs.\nPróximos pasos: Alessio: magnet e historias · Laura: código del píxel, token de insights · Alba: píxel en servidor, WhatsApp, UTMs.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1875749250454043694)",
+     "at": 1788854400000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 09/09: etiquetas y automatizaciones de calendarios; mensaje a 2.000 contactos antiguos con programa gratuito.\nPróximos pasos: Alba: leads en Slack, UTMs, acceso CRM de Sara, notas en GHL, píxel con Lau · Alessio: Instagram a Raquel, anuncios, historias, estrategia sep-oct.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1875840655347544484)",
+     "at": 1788940800000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 10/09: resultados de publicidad, enlaces para CTAs, automatización en GHL, prioridad al embudo de España.\nPróximos pasos: Alba: tareas de CTA, CRM en Airtable de Raquel, revisar PDFs, automatizaciones, Instagram, UTM en Canva · Alessio: PDFs, avisos de Slack.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1875931762007737323)",
+     "at": 1789027200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 15/09: ManyChat no actualiza etiquetas de 2.532 contactos; se descarta la landing de closer; 67 opt-ins y 14 triajes (≈25 %).\nPróximos pasos: Carlos y Alba: ManyChat ↔ High Level · Alba: contactos nuevos, PDF de historias, opt-ins · Alessio: calendario, número, anuncios · Fernando: pagos y limpieza CRM · Sara: migrar al Starter.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1876383786238896043)",
+     "at": 1789459200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 16/09: fallos del calendario orgánico; percepción de valor del low cost; píxel duplicado; llamada de orientación de 15 min.\nPróximos pasos: Alba: enlaces rotos, enlaces de venta, etiquetas del pipeline · Raquel y Sara: exportar ManyChat · Sara: guía de ventas · Alessio: investigar programas · Alba y Laura: landing.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1876474990677628876)",
+     "at": 1789545600000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 17/09: problemas del número de WhatsApp en High Level; campañas a audiencias frías; anuncios con retraso.\nPróximos pasos: Sara: exportar automatización · Alessio: anuncios high ticket, borrador de la llamada estratégica.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1876564536041306568)",
+     "at": 1789632000000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 22/09: píxel y lanzamiento de vídeos; agendas de venta; estrategia high ticket con caso de éxito.\nPróximos pasos: Laura: perfil de marca, métricas, brief con UTMs · Alba: PDFs · Sara: automatización, LTO, ManyChat, tiempo hasta reserva · Alessio: documentos a Pedro.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1877017520378042875)",
+     "at": 1790064000000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 23/09: salida de personal y redirección de prospectos; CTAs estándar en vídeos; palabras clave y conversiones de pago.\nPróximos pasos: Alessio: estrategia de septiembre y PDFs · Alba: calendario de automatización · Laura: métricas de anuncios 2 días.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1877108739931832340)",
+     "at": 1790150400000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 24/09: calendario de Fernando con enlace antiguo; pagos fallidos en Wop; guía LTO con descuento; objetivo de 20.000 € en el mes.\nPróximos pasos: Carlos: enlaces de pago, onboarding del nuevo triaje · Sara: flujos CTA, guía LTO · Alessio: palabra clave, historias del mes · Fernando: notas de cualificación.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1877199807267147935)",
+     "at": 1790236800000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 29/09: reorganización de llamadas y fallos en la derivación de leads; volumen comercial.\nPróximos pasos: Carlos: triajes en el calendario de Fernando · Alba: calendario, contraseñas GHL a Sara y Raquel, plantilla de WhatsApp en Meta · Alba y Carlos: flujo de leads.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1877652714187117778)",
+     "at": 1790668800000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 30/09: CPC en Meta y pruebas de landing; contratos con HighLevel y Make; recordatorios de WhatsApp; orgánico en Instagram y eventos presenciales.\nPróximos pasos: Alba: redirigir la landing sin reiniciar el aprendizaje, tutorial para Flor · Equipo: técnico externo 10 h · Alessio: logos AmplifyHouse.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1877743598065157714)",
+     "at": 1790755200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 01/10: la automatización de reels genera llamadas; calidad baja en el embudo Starter. Plantillas de WhatsApp con mucha participación.\nPróximos pasos: Sara y Alba: duplicidades del seguimiento · Alessio y Sara: rendimiento de CTAs · Raquel: conteo diario de leads · Alba: competencia, recordatorios de WhatsApp, comunidad · Alessio: vídeo como primer módulo · Carlos: pipeline y accesos a Make.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1877835708173504401)",
+     "at": 1790841600000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 06/10: cuellos de botella en automatizaciones, contratos que caen en spam, diferenciación de registros.\nPróximos pasos: Alba: plantillas de seguimiento, entregabilidad de correos · Alba y Carlos: llamada con Flor · Carlos: contrato a Fernando.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1878287025091970806)",
+     "at": 1791273600000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 07/10: 114 leads y 50 agendas semanales con baja conversión. Go High Level para trazabilidad.\nPróximos pasos: Alba: reasignar leads al embudo 4, formar a Sara en el CRM, plantillas · Carlos: tutorial para closers · Sara: protocolo de triaje.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1878379705648452287)",
+     "at": 1791360000000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 08/10: calendario de closer y accesos; propuesta de infoproducto de bajo coste; contratos pendientes.\nPróximos pasos: Alba: calendario y automatizaciones de WhatsApp · Fernando: contratos con Carlos, comentar en tareas · Sara: conectar la landing Amplify a los CTAs.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1878467159296290140)",
+     "at": 1791446400000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 13/10: fallos en plantillas de llamadas, sincronización de estados, alertas de pagos fallidos en Slack.\nPróximos pasos: Alba: plantillas, instrucciones de estados a Fernando · Fernando: actualizar leads en GHL · Carlos: Loom del panel de ventas · Raquel: update de seguimientos los viernes.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1878920025169732414)",
+     "at": 1791878400000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 14/10: reservas duplicadas (prioridad a la primera persona que contactó). CSV de Airtable y estado temporal de seguimiento. La mayoría de triajes va al Starter.\nPróximos pasos: Fernando: avisar a Zac, copiar citas desde el 14/09 a Go High Level, reasignar contactos a Alessio · Alba: contratación de dev con Sid, nuevo estado de seguimiento.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879011008192480856)",
+     "at": 1791964800000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 15/10: plantillas del equipo y ventas en la plataforma. Monetización en historias con documentos y flujos automáticos.\nPróximos pasos: Alba: WhatsApp a los que no se presentan, estrategia comunidad Starter · Alessio: avisar a Sara antes de subir (ManyChat) · Sara: historia con documento y landing Amplify, revisar la propuesta.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879101223892378505)",
+     "at": 1792051200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 20/10: Claude para revisar tareas en Go High Level. Centralizar permisos y pausar CTAs. Contenido semanal para WhatsApp y replantear la LTO.\nPróximos pasos: Fernando: citas en High Level · Equipo: estados de citas · Laura: notas de publicidad · Carlos: pagos a mano · Alba: automatizar comunidades · Alessio: estrategia LTO · Alba y Sara: contenido de comunidad.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879555059109800030)",
+     "at": 1792483200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 21/10: llamadas de triaje sin nutrición previa; se quitan los formularios obligatorios de la nutrición gratuita. Formatos de contenido y casos de éxito.\nPróximos pasos: Alessio y Alba: nutrición de leads · Alba: datos de la landing · Sara y Alba: estrategia Starter · Alessio: vídeo de metodología.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879645188210715706)",
+     "at": 1792569600000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 22/10: planificación del mes centrada en captación. Se pausa la inversión en Starter para pasarlo a un nuevo formato de pago. Problemas de acceso a plataformas.\nPróximos pasos: Alba: Carlos, CRM Amplify y migración, landings con pago directo, automatizar comunidades, panel de tareas y plan · Sara: funnels de la competencia · Laura: guion ads y presupuesto.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879736222113648475)",
+     "at": 1792656000000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 28/10: los lunes se mantiene a las 9:30. Productos en niveles 49, 1.000 y 2.500 con embudos propios. Se pausa la publicidad hasta tener los embudos nuevos.\nPróximos pasos: Sara: lista de becas · Alba: funnels, enviarlos a Laura, páginas de producto, presentación · Fernando: Airtable y emails de ganados.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880282231033263275)",
+     "at": 1793178000000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 29/10: pruebas de traducción de voz, plataforma con IA para anuncios y WhatsApp, paneles hechos con Claude para sustituir software.\nPróximos pasos: Alba: código del correo de Amplify a Sid · Alba y Laura: montar el dashboard.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880374219307905666)",
+     "at": 1793264400000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 03/11: dudas del programa y llamadas de venta con IA. Tarifas de 2.500 € y opción de 1.000 €. Accesos diferenciados en la comunidad y nuevo triaje.\nPróximos pasos: Alessio: reunión semanal, estructura salarial con Carlos, nuevo triaje · Fernando: documentar dudas.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880826783201953755)",
+     "at": 1793696400000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 04/11: reels y CTAs hacia el intensivo. Precios: 997 Black Friday y 300 intensivo. Registrar tareas en el sistema.\nPróximos pasos: Alba: CRM y sistema de tareas, vídeos Amplify/Pro, landing de agenda, Carlos y Wop · Alessio: resultados, dos versiones de producto · Laura: guiones · Sara: setting · Fernando: enseñar Wop.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880917838275462963)",
+     "at": 1793782800000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 05/11: CRM con gestión de tareas y API de WhatsApp. Revisión de vídeos de las landings de marca personal y plazos de entrega.\nPróximos pasos: Alessio: probar edición con Claude · Laura: VSL y guiones de la masterclass · Alba: pedírselos a Laura.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881007648086562723)",
+     "at": 1793869200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 10/11: productos listos para coordinar embudos. Black Friday: intensivo de 297 $ como validación antes de los programas de 1.497 $ y 2.500 $. Llamada semestral de roles. Ajustar anuncios para bajar el CPA.\nPróximos pasos: Alessio: Chiara, anuncios y vídeos, PDF de valor · Alba: crear productos, landings y estrategia a Laura · Zak: acceso Circle del pago LTO.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881462458349143393)",
+     "at": 1794301200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 11/11: Sara comparte la estrategia del intensivo; Alessio vuelve en 5 días para preparar el evento de 15 días. Alba integra automatizaciones en Circle. Clases por Zoom o Meet. Vídeos en Drive. Comunidad de WhatsApp con Sara como admin.\nPróximos pasos: Alessio: reunión con el primo, verificar número, evaluar plataforma · Alba: presentación del funnel por Slack, hablar con Carlos.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1881551723038120403)",
+     "at": 1794387600000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 12/11: presentación aplazada por salud; landings con los vídeos y producto de prueba. Problemas de inicio de sesión y permisos en la comunidad: acceso limitado de 30 días. Revisión de pagos y métricas; propuesta de IA para actualizar datos desde los correos.\nPróximos pasos: Alessio: llamada grupal cuando haya noticias de Laura · Alba: terminar páginas, contactar a Carlos, revisar pagos fallidos · Fernando: emails del calendario.\n[Notas de la reunión](https://docs.google.com/document/d/17GYcV0zyF0HYvgS7NC4EVSr-YM5Gj5Lcuiynm_-7a-I/edit)",
+     "at": 1794474000000
+    }
+   ],
+   "subtasks": [],
+   "meetingLog": true
+  },
+  {
+   "id": "t00069",
+   "num": 69,
+   "title": "Resumen · AMPLIFY ES – WIP",
+   "desc": "Resumen vivo de las reuniones. Notas de Otter de la WIP de los lunes. Arriba va la última reunión y en los comentarios queda el historial.\n\nÚltima reunión · 26/10\nReunión 26/10: reestructurar la cualificación de leads y el paso del triaje a la llamada de venta.\nPróximos pasos: Alba: diagramas del funnel y nutrición, mover la reunión a las 9:30 · Alessio: customer journey y routing de producto con Alba y Claudio.\n\nNotas: [AMPLIFY ES – WIP](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880113790544166866)",
+   "project": "3qu1p00",
+   "dept": "",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "update",
+   "done": false,
+   "createdAt": 1794679200000,
+   "comments": [
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 31/08: coordinación de lanzamientos; Alba presenta el avance de las nuevas landings.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1875027696628916541)",
+     "at": 1788163200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 07/09: rendimiento de los CTAs y optimización del embudo; se apuesta por los PDFs.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1875661933484047037)",
+     "at": 1788768000000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 28/09: optimización de procesos; plantillas para las conversaciones de WhatsApp.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1877563621100044861)",
+     "at": 1790582400000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 19/10: recordatorios de WhatsApp para reducir cancelaciones, ventana de agendamiento más corta. Detectar alumnos calientes del Starter. Vídeos de YouTube a partir de problemas que ven setters y closers.\nPróximos pasos: Alba: alumnos calientes, estrategia de WhatsApp para la comunidad, vídeos pendientes.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879465908174544343)",
+     "at": 1792396800000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Reunión 26/10: reestructurar la cualificación de leads y el paso del triaje a la llamada de venta.\nPróximos pasos: Alba: diagramas del funnel y nutrición, mover la reunión a las 9:30 · Alessio: customer journey y routing de producto con Alba y Claudio.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880113790544166866)",
+     "at": 1793005200000
+    }
+   ],
+   "subtasks": [],
+   "meetingLog": true
+  },
+  {
+   "id": "t00070",
+   "num": 70,
+   "title": "Resumen · Updates y reuniones puntuales",
+   "desc": "Resumen vivo de las reuniones. Update proyecto, Ticket, Update IT, Update Setter, Update ads y meets rápidos. Arriba va la última reunión y en los comentarios queda el historial.\n\nÚltima reunión · 27/10\nUpdate proyecto 27/10: baja conversión del programa gratuito; Amplify Marca Personal y Amplify Plus; CRM a medida.\nPróximos pasos: Alba: documento de lanzamiento, nutrición por email, funnels y CRM, migración de Airtable · Alessio: calendario de YouTube, niveles de 1.000 y 2.500 €, dos módulos, documento y presentación, accesos del CRM.\n\nNotas: [Updates y reuniones puntuales](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880196146534551918)",
+   "project": "3qu1p00",
+   "dept": "",
+   "assignees": [
+    "o5ftgoi"
+   ],
+   "priority": "baja",
+   "due": null,
+   "mode": "update",
+   "done": false,
+   "createdAt": 1794679200000,
+   "comments": [
+    {
+     "by": "o5ftgoi",
+     "text": "Update ads 03/08: productos iniciales y de alto valor con páginas propias; GoHighLevel para leads y WhatsApp; acceso solo tras registro.\nPróximos pasos: Alba: copys downsell y high ticket, WhatsApp Business, ManyChat con Sara, GHL, calendarios, vídeos, revisión · Laura: Miro y embudo de llamadas.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1872521628505492062)",
+     "at": 1785744000000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Update Setter 05/08: todo el seguimiento en GoHighLevel; un SDR filtra antes de los closers; procesos en Miro.\nPróximos pasos: Sara: embudo en Miro, calendarios y UTMs, landing, ManyChat, preguntas de cualificación · Alba: acceso a ManyChat, tareas comerciales, Miro, landings.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1872699596543194292)",
+     "at": 1785916800000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Update IT 06/08: integrar formularios de GoHighLevel con Airtable por webhooks; se mantiene Typeform para las UTMs; se pospone la sincronización bidireccional.\nPróximos pasos: Miguel: viabilidad y horas con Carlos · Alba: plan de marketing con Carlos, registro de pruebas a Miguel.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1872784466725275850)",
+     "at": 1786003200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Meet rápido 26/08: estrategia de contenidos centralizada y un panel unificado de base de datos, publicidad y orgánico.\nPróximos pasos: Alba: biblioteca de Claude, documentos de reels e historias, llamada con Carlos, guion del Starter, etiquetas · Alessio: guiones, revisar ediciones de Pedro.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1874584843451671118)",
+     "at": 1787731200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Update 07/09: innovar el formato de publicaciones; token de Meta; GoHighLevel para enlaces; PDFs para agendar llamadas.\nPróximos pasos: Alba: token, PDF del jueves, WhatsApp · Alessio: conectar HighLevel.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1875684095966559728)",
+     "at": 1788768000000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Ticket 20/10: reestructurar el equipo (SAC y Sara); 3.000 €/mes de ads en la oferta low cost; test pago directo vs agendamiento.\nPróximos pasos: Alessio: SAC, Sara, setter, enlaces low ticket, contraseñas · Alba: test A/B, datos del vídeo, lista de tareas, plan · Equipo: funnel y rediseño medium y Starter.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1879559200776538806)",
+     "at": 1792483200000
+    },
+    {
+     "by": "o5ftgoi",
+     "text": "Update proyecto 27/10: baja conversión del programa gratuito; Amplify Marca Personal y Amplify Plus; CRM a medida.\nPróximos pasos: Alba: documento de lanzamiento, nutrición por email, funnels y CRM, migración de Airtable · Alessio: calendario de YouTube, niveles de 1.000 y 2.500 €, dos módulos, documento y presentación, accesos del CRM.\n[Notas de la reunión](https://mail.google.com/mail/?authuser=alba@amplifyesp.com#all/thread-f:1880196146534551918)",
+     "at": 1793091600000
+    }
+   ],
+   "subtasks": [],
+   "meetingLog": true
+  }
+ ],
+ "processedMeetings": [
+  "1a1cf00baf3cd03e",
+  "1a1c9d52be3619d3",
+  "1a1c4c2330224561",
+  "1a1aae7d6bfe17a3",
+  "1a1a5ccef21ac733",
+  "1a1a09fe88cb07db",
+  "1a186e63caa67282",
+  "1a181aba1a3774ab",
+  "1a17cc6efe40116e",
+  "1a178187feb2bfd2",
+  "1a162a227e84cf5b",
+  "1a15d75703126c3a",
+  "1a158922809a4ab6",
+  "1a15855e3207285e",
+  "1a15344920335dd7",
+  "1a13e89b731b6389",
+  "1a13968e785c8658",
+  "1a1343ced59c233e",
+  "1a11a7edc817ad5c",
+  "1a115863e47a92bf",
+  "1a11041904d506f6",
+  "1a0f69a09c39cf91",
+  "1a0f15da8df00652",
+  "1a0ec33200abd4d2",
+  "1a0e722a66dd423d",
+  "1a0d27476497109f",
+  "1a0cd474206b0014",
+  "1a0c817d6b5159fb",
+  "1a0ae580c8d679c8",
+  "1a0a940fe13e97cc",
+  "1a0a411cb11267ab",
+  "1a08a5ff995803eb",
+  "1a0853232d39f1a4",
+  "1a0800015104bc2e",
+  "1a07c4bf5aefbdf0",
+  "1a07b0974009fabd",
+  "1a06644fc1629203",
+  "1a0611fceb8ba947",
+  "1a05c11b6daff76e",
+  "1a056fc17995e13d",
+  "1a0423b22756cf7c",
+  "1a03dcfbaf44a24e",
+  "19fd778cd00788ca",
+  "19fd2a5c6ef974b4",
+  "19fc8880054e4a5e"
+ ]
+}

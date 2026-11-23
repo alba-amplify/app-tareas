@@ -79,7 +79,7 @@ export async function createTask(input: TaskInput) {
       cleaned.title,
     );
   }
-  revalidatePath("/");
+  revalidatePath("/tablero-anterior");
   return { ok: true };
 }
 
@@ -110,7 +110,7 @@ export async function updateTask(id: string, input: TaskInput) {
   ) {
     await notifyAssignment(supabase, user.id, cleaned.assignee_id, id, cleaned.title);
   }
-  revalidatePath("/");
+  revalidatePath("/tablero-anterior");
   return { ok: true };
 }
 
@@ -140,7 +140,7 @@ export async function duplicateTask(id: string) {
     created_by: user.id,
   });
   if (error) return { error: error.message };
-  revalidatePath("/");
+  revalidatePath("/tablero-anterior");
   return { ok: true };
 }
 
@@ -148,7 +148,7 @@ export async function deleteTask(id: string) {
   const supabase = await createClient();
   const { error } = await supabase.from("tasks").delete().eq("id", id);
   if (error) return { error: error.message };
-  revalidatePath("/");
+  revalidatePath("/tablero-anterior");
   return { ok: true };
 }
 
@@ -198,7 +198,7 @@ export async function moveTask(id: string, target: string) {
 
   const { error } = await supabase.from("tasks").update(patch).eq("id", id);
   if (error) return { error: error.message };
-  revalidatePath("/");
+  revalidatePath("/tablero-anterior");
   return { ok: true };
 }
 
@@ -212,7 +212,7 @@ export async function setDepartment(id: string, department: string) {
     })
     .eq("id", id);
   if (error) return { error: error.message };
-  revalidatePath("/");
+  revalidatePath("/tablero-anterior");
   return { ok: true };
 }
 
@@ -228,6 +228,6 @@ export async function setDone(id: string, done: boolean) {
     .eq("id", id);
 
   if (error) return { error: error.message };
-  revalidatePath("/");
+  revalidatePath("/tablero-anterior");
   return { ok: true };
 }

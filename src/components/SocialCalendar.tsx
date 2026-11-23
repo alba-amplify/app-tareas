@@ -191,7 +191,7 @@ export default function SocialCalendar({
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-ink tracking-tight">
+          <h1 className="text-[30px] leading-tight font-semibold text-ink tracking-[-0.035em]">
             Calendario RRSS
           </h1>
           <p className="text-ink/50 text-sm mt-1">
@@ -199,12 +199,12 @@ export default function SocialCalendar({
           </p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
-          <div className="inline-flex rounded-full border border-black/[0.07] bg-white p-1 shadow-soft mr-1">
+          <div className="inline-flex rounded-full border border-[#ebebe8] bg-white p-1 mr-1">
             <button
               onClick={() => setMode("calendario")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
                 mode === "calendario"
-                  ? "bg-paprika text-white"
+                  ? "bg-[#efefec] text-ink"
                   : "text-ink/60 hover:text-ink"
               }`}
             >
@@ -212,9 +212,9 @@ export default function SocialCalendar({
             </button>
             <button
               onClick={() => setMode("kanban")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
                 mode === "kanban"
-                  ? "bg-paprika text-white"
+                  ? "bg-[#efefec] text-ink"
                   : "text-ink/60 hover:text-ink"
               }`}
             >
@@ -223,13 +223,13 @@ export default function SocialCalendar({
           </div>
           <button
             onClick={() => openNew(dateKey(year, month, 1), "publicacion")}
-            className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-4 py-2 rounded-full text-sm shadow-soft whitespace-nowrap"
+            className="bg-ink hover:bg-ink/85 text-white font-semibold px-4 py-2 rounded-lg text-sm whitespace-nowrap"
           >
             + Publicación
           </button>
           <button
             onClick={() => openNew(dateKey(year, month, 1), "story")}
-            className="bg-ink hover:bg-ink/80 text-white font-semibold px-4 py-2 rounded-full text-sm shadow-soft whitespace-nowrap"
+            className="bg-ink hover:bg-ink/80 text-white font-semibold px-4 py-2 rounded-lg text-sm whitespace-nowrap"
           >
             + Story
           </button>
@@ -242,22 +242,22 @@ export default function SocialCalendar({
       <div className="flex items-center gap-3 mb-4">
         <button
           onClick={prevMonth}
-          className="w-9 h-9 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink"
+          className="w-9 h-9 rounded-full border border-[#ebebe8] hover:bg-black/[0.04] text-ink"
         >
           ‹
         </button>
-        <h2 className="text-lg font-bold text-ink tracking-tight min-w-[180px] text-center">
+        <h2 className="text-lg font-semibold text-ink tracking-tight min-w-[180px] text-center">
           {MONTHS[month]} {year}
         </h2>
         <button
           onClick={nextMonth}
-          className="w-9 h-9 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink"
+          className="w-9 h-9 rounded-full border border-[#ebebe8] hover:bg-black/[0.04] text-ink"
         >
           ›
         </button>
         <button
           onClick={goToday}
-          className="text-sm px-3 py-1.5 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+          className="text-sm px-3 py-1.5 rounded-lg border border-[#ebebe8] hover:bg-black/[0.04] text-ink/70"
         >
           Hoy
         </button>
@@ -287,7 +287,7 @@ export default function SocialCalendar({
                 <div
                   key={i}
                   className={`min-h-28 rounded-xl border p-1.5 bg-white ${
-                    isToday ? "border-paprika" : "border-black/[0.06]"
+                    isToday ? "border-paprika" : "border-[#ebebe8]"
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
@@ -331,10 +331,10 @@ export default function SocialCalendar({
       {mode === "kanban" && (
       <div>
         <div className="flex flex-wrap items-center gap-3 mb-4">
-          <div className="inline-flex rounded-full border border-black/[0.07] bg-white p-1 shadow-soft">
+          <div className="inline-flex rounded-full border border-[#ebebe8] bg-white p-1">
             <button
               onClick={() => setKanbanGroup("estado")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
                 kanbanGroup === "estado"
                   ? "bg-ink text-white"
                   : "text-ink/60 hover:text-ink"
@@ -344,7 +344,7 @@ export default function SocialCalendar({
             </button>
             <button
               onClick={() => setKanbanGroup("dias")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
                 kanbanGroup === "dias"
                   ? "bg-ink text-white"
                   : "text-ink/60 hover:text-ink"
@@ -357,22 +357,22 @@ export default function SocialCalendar({
             <div className="flex items-center gap-2">
               <button
                 onClick={prevMonth}
-                className="w-8 h-8 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink"
+                className="w-8 h-8 rounded-full border border-[#ebebe8] hover:bg-black/[0.04] text-ink"
               >
                 ‹
               </button>
-              <span className="text-sm font-bold text-ink min-w-[150px] text-center">
+              <span className="text-sm font-semibold text-ink min-w-[150px] text-center">
                 {MONTHS[month]} {year}
               </span>
               <button
                 onClick={nextMonth}
-                className="w-8 h-8 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink"
+                className="w-8 h-8 rounded-full border border-[#ebebe8] hover:bg-black/[0.04] text-ink"
               >
                 ›
               </button>
               <button
                 onClick={goToday}
-                className="text-sm px-3 py-1.5 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70"
+                className="text-sm px-3 py-1.5 rounded-lg border border-[#ebebe8] hover:bg-black/[0.04] text-ink/70"
               >
                 Hoy
               </button>
@@ -403,7 +403,7 @@ export default function SocialCalendar({
                       return (
                         <div
                           key={d}
-                          className="bg-white rounded-xl border border-black/[0.06] p-3"
+                          className="bg-white rounded-xl border border-[#ebebe8] p-3"
                         >
                           <div className="text-sm font-semibold text-ink/60 mb-1.5">
                             {pad(d)}/{pad(month + 1)}
@@ -446,7 +446,7 @@ export default function SocialCalendar({
                   <span className="text-sm font-semibold text-ink tracking-tight">
                     {st}
                   </span>
-                  <span className="text-xs text-ink/40 font-medium bg-black/[0.04] px-1.5 py-0.5 rounded-full">
+                  <span className="text-xs text-ink/40 font-medium bg-black/[0.04] px-1.5 py-0.5 rounded-lg">
                     {items.length}
                   </span>
                 </div>
@@ -458,14 +458,14 @@ export default function SocialCalendar({
                     <button
                       key={p.id}
                       onClick={() => openEdit(p)}
-                      className="w-full text-left bg-white rounded-2xl border border-black/[0.06] p-4 shadow-soft hover:shadow-card transition-shadow"
+                      className="w-full text-left bg-white rounded-xl border border-[#ebebe8] p-4 hover:border-[#cfcfcb] transition-shadow"
                     >
                       <div className="flex items-center gap-1.5 mb-1 flex-wrap">
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-ink text-white">
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-ink text-white">
                           {FORMAT_EMOJI[formatOf(p)] ?? ""} {formatOf(p)}
                         </span>
                         {p.category && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/[0.05] text-ink/60">
+                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-black/[0.05] text-ink/60">
                             {p.category}
                           </span>
                         )}
@@ -718,7 +718,7 @@ function PostModal({
   }
 
   const field =
-    "w-full rounded-xl border border-black/10 bg-black/[0.02] px-3 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15";
+    "w-full rounded-xl border border-[#ebebe8] bg-white px-3 py-2 text-ink text-sm outline-none focus:border-paprika focus:ring-2 focus:ring-paprika/15";
   const label = "block text-xs font-semibold text-ink/50 mb-1";
 
   return (
@@ -734,8 +734,8 @@ function PostModal({
           show ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between px-5 py-4 border-b border-black/[0.06]">
-          <h2 className="text-xl font-bold text-ink tracking-tight">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-[#ebebe8]">
+          <h2 className="text-xl font-semibold text-ink tracking-tight">
             {isEdit ? "Editar publicación" : "Nueva publicación"}
           </h2>
           <div className="flex items-center gap-2">
@@ -749,7 +749,7 @@ function PostModal({
                   setCopied(true);
                   setTimeout(() => setCopied(false), 1500);
                 }}
-                className="text-xs px-3 py-1 rounded-full border border-black/10 hover:bg-black/[0.04] text-ink/70 whitespace-nowrap"
+                className="text-xs px-3 py-1 rounded-lg border border-[#ebebe8] hover:bg-black/[0.04] text-ink/70 whitespace-nowrap"
               >
                 {copied ? "✓ Copiado" : "🔗 Enlace"}
               </button>
@@ -936,7 +936,7 @@ function PostModal({
                 type="button"
                 onClick={remove}
                 disabled={pending}
-                className="text-sm text-paprika/80 hover:text-paprika px-3 py-2 rounded-full hover:bg-paprika/10"
+                className="text-sm text-paprika/80 hover:text-paprika px-3 py-2 rounded-lg hover:bg-paprika/10"
               >
                 Borrar
               </button>
@@ -947,21 +947,21 @@ function PostModal({
               <button
                 type="button"
                 onClick={close}
-                className="px-5 py-2 rounded-full border border-black/10 text-ink/70 hover:bg-black/[0.04]"
+                className="px-5 py-2 rounded-lg border border-[#ebebe8] text-ink/70 hover:bg-black/[0.04]"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={pending}
-                className="px-5 py-2 rounded-full bg-paprika hover:bg-paprika-dark text-white font-semibold disabled:opacity-60"
+                className="px-5 py-2 rounded-lg bg-ink hover:bg-ink/85 text-white font-semibold disabled:opacity-60"
               >
                 {pending ? "Guardando…" : isEdit ? "Guardar" : "Crear"}
               </button>
             </div>
           </div>
           {isEdit && (
-            <div className="pt-4 mt-2 border-t border-black/[0.06]">
+            <div className="pt-4 mt-2 border-t border-[#ebebe8]">
               <h3 className="font-semibold text-ink text-sm mb-3">
                 Comentarios{" "}
                 <span className="text-ink/40 font-normal">
@@ -992,7 +992,7 @@ function PostModal({
               </div>
               <div className="relative">
                 {csug.length > 0 && (
-                  <div className="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-xl border border-black/10 shadow-card overflow-hidden z-10">
+                  <div className="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-xl border border-[#ebebe8] shadow-card overflow-hidden z-10">
                     {csug.map((p, i) => (
                       <button
                         key={p.id}
@@ -1019,13 +1019,13 @@ function PostModal({
                     onKeyDown={onCKeyDown}
                     rows={1}
                     placeholder="Comentario…  (@ para mencionar · Cmd/Ctrl+Enter enviar)"
-                    className="flex-1 resize-none rounded-2xl border border-black/10 bg-black/[0.02] px-4 py-2 text-ink text-sm outline-none focus:border-paprika max-h-32"
+                    className="flex-1 resize-none rounded-xl border border-[#ebebe8] bg-white px-4 py-2 text-ink text-sm outline-none focus:border-paprika max-h-32"
                   />
                   <button
                     type="button"
                     onClick={sendComment}
                     disabled={csending || !cbody.trim()}
-                    className="bg-paprika hover:bg-paprika-dark text-white font-semibold px-5 py-2 rounded-full text-sm disabled:opacity-60"
+                    className="bg-ink hover:bg-ink/85 text-white font-semibold px-5 py-2 rounded-lg text-sm disabled:opacity-60"
                   >
                     {csending ? "…" : "Enviar"}
                   </button>
